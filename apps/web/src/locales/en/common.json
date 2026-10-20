@@ -173,7 +173,8 @@
       "home": "Home",
       "privacy": "Privacy",
       "assessments": "Self-checks",
-      "chat": "Chat"
+      "chat": "Chat",
+      "wellness": "Wellness"
     },
     "signOut": "Sign out",
     "home": {
@@ -344,5 +345,21 @@
     "saved": "Saved. Thank you for checking in.",
     "recent": "Recent check-ins",
     "row": "{{date}}: mood {{mood}}, energy {{energy}}"
+  },
+  "wellness": {
+    "title": "Wellness",
+    "intro": "Small exercises that work offline, any time.",
+    "breathingTitle": "Box breathing",
+    "groundingTitle": "5-4-3-2-1 grounding",
+    "journalTitle": "Journaling prompts",
+    "prompts": [
+      "What is one thing that went okay today?",
+      "What is weighing on you, and what part of it can you control?",
+      "Who could you talk to this week?"
+    ],
+    "timerTitle": "Mindful minutes",
+    "minutes_one": "{{count}} minute",
+    "minutes_other": "{{count}} minutes",
+    "timerDone": "Done. Notice how you feel."
   }
 }

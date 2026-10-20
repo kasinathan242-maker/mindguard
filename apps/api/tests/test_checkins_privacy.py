@@ -82,3 +82,45 @@ async def test_delete_leaves_no_user_rows(app: FastAPI, client: AsyncClient) -> 
                 assert set(users) == {None}
             else:
                 assert count == 0, f"{table.name} still has {count} rows"
+
+
+async def test_retention_removes_old_chat_and_notes_only(app: FastAPI, client: AsyncClient) -> None:
+    import uuid
+    from datetime import timedelta
+
+    from app.chat.models import ChatMessage, ChatSession
+    from app.db.types import utcnow
+    from app.privacy.retention import enforce_retention
+
+    user_id = uuid.UUID((await start_anonymous(client))["id"])
+    resources: Resources = app.state.resources
+    now = utcnow()
+    async with resources.sessionmaker() as session:
+        chat = ChatSession(user_id=user_id)
+        session.add(chat)
+        await session.flush()
+        session.add_all(
+            [
+                ChatMessage(
+                    session_id=chat.id,
+                    role="user",
+                    content_enc="v1:x",
+                    created_at=now - timedelta(days=31),
+                ),
+                ChatMessage(session_id=chat.id, role="user", content_enc="v1:y", created_at=now),
+                Checkin(
+                    user_id=user_id,
+                    mood=3,
+                    energy=3,
+                    note_enc="v1:a",
+                    created_at=now - timedelta(days=181),
+                ),
+                Checkin(user_id=user_id, mood=3, energy=3, note_enc="v1:b", created_at=now),
+            ]
+        )
+        await session.commit()
+        result = await enforce_retention(session, chat_days=30, note_days=180)
+        assert (result.chat_messages_deleted, result.checkin_notes_cleared) == (1, 1)
+        notes = sorted(str(n) for n in (await session.scalars(select(Checkin.note_enc))).all())
+        assert notes == ["None", "v1:b"]
+        assert len((await session.scalars(select(ChatMessage))).all()) == 1

@@ -1,6 +1,7 @@
 import {
   ChatsCircleIcon,
   ClipboardTextIcon,
+  FlowerLotusIcon,
   HouseIcon,
   ShieldCheckIcon,
   SignOutIcon,
@@ -26,6 +27,7 @@ const TABS: Tab[] = [
   { to: '/app', labelKey: 'app.nav.home', icon: HouseIcon, end: true },
   { to: '/app/chat', labelKey: 'app.nav.chat', icon: ChatsCircleIcon },
   { to: '/app/assessments', labelKey: 'app.nav.assessments', icon: ClipboardTextIcon },
+  { to: '/app/wellness', labelKey: 'app.nav.wellness', icon: FlowerLotusIcon },
   { to: '/app/privacy', labelKey: 'app.nav.privacy', icon: ShieldCheckIcon },
 ];
 

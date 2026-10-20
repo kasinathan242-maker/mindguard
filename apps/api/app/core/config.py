@@ -38,6 +38,8 @@ class Settings(BaseSettings):
     anthropic_api_key: SecretStr | None = None
     chat_rate_limit_per_minute: int = 20
     chat_history_turns: int = 10
+    retention_chat_days: int = 30
+    retention_note_days: int = 180
 
     # Layer 2 of the safety engine; see app/safety/engine.py.
     safety_classifier: Literal["embedding", "hashed", "none"] = "embedding"

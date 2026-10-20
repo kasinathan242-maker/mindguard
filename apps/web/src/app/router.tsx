@@ -11,6 +11,7 @@ import { LoginPage } from '@/features/onboarding/LoginPage';
 import { Under18Page } from '@/features/onboarding/Under18Page';
 import { PrivacyPage } from '@/features/privacy/PrivacyPage';
 import { StatusPage } from '@/features/status/StatusPage';
+import { WellnessPage } from '@/features/wellness/WellnessPage';
 
 export const routes = [
   { path: '/', element: <LandingPage /> },
@@ -27,6 +28,7 @@ export const routes = [
       { path: 'chat', element: <ChatPage /> },
       { path: 'assessments', element: <AssessmentsPage /> },
       { path: 'assessments/:type', element: <QuestionnairePage /> },
+      { path: 'wellness', element: <WellnessPage /> },
       { path: 'privacy', element: <PrivacyPage /> },
     ],
   },

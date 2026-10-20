@@ -58,3 +58,12 @@ test('people can export their data and delete their account for good', async ({ 
   await expect(page).toHaveURL(/\/$/);
   expect((await page.request.get('/api/v1/auth/me')).status()).toBe(401);
 });
+
+test('the wellness toolkit works and is accessible', async ({ page }) => {
+  await startAnonymously(page);
+  await page.getByRole('link', { name: 'Wellness' }).first().click();
+  await expect(page.getByRole('heading', { name: '5-4-3-2-1 grounding' })).toBeVisible();
+  await page.getByRole('button', { name: '1 minute' }).click();
+  await expect(page.getByRole('timer')).toHaveText(/0:5\d|1:00/);
+  await expectAccessible(page);
+});
