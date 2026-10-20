@@ -172,7 +172,8 @@
       "label": "Main",
       "home": "Home",
       "privacy": "Privacy",
-      "assessments": "Self-checks"
+      "assessments": "Self-checks",
+      "chat": "Chat"
     },
     "signOut": "Sign out",
     "home": {
@@ -201,7 +202,18 @@
     "upgraded": "Your account is saved. You can now sign in with {{email}}.",
     "signedInAs": "Signed in as {{email}}",
     "emailTaken": "An account with this email already exists.",
-    "invalid": "Please check your email and use a password of at least 10 characters."
+    "invalid": "Please check your email and use a password of at least 10 characters.",
+    "dataTitle": "Your data",
+    "exportTitle": "Download your data",
+    "exportBody": "Get everything MindGuard stores about you as one file.",
+    "exportButton": "Download my data",
+    "deleteTitle": "Delete your account",
+    "deleteBody": "Permanently erases your account and everything in it. This cannot be undone.",
+    "deleteButton": "Delete my account",
+    "deleteConfirm1": "Yes, I want to delete it",
+    "deleteFinalWarning": "Last step: everything will be erased permanently.",
+    "deleteConfirm2": "Delete everything now",
+    "cancel": "Cancel"
   },
   "status": {
     "title": "Service status",
@@ -306,5 +318,31 @@
       "safetyNote": "You told us you've had thoughts of being better off dead or of hurting yourself. That matters, whatever your total score. Please talk to someone today.",
       "backToChecks": "Back to self-checks"
     }
+  },
+  "chat": {
+    "title": "Chat",
+    "intro": "A calm place to talk things through. I listen and suggest small steps; I'm not a therapist.",
+    "historyOn": "Chat history is saved for 30 days, encrypted. You can change this in Privacy.",
+    "historyOff": "This chat isn't saved. It ends when you leave the page.",
+    "empty": "Say anything that's on your mind.",
+    "logLabel": "Conversation",
+    "inputLabel": "Your message",
+    "placeholder": "Type how you're feeling",
+    "send": "Send",
+    "pinnedLabel": "Support resources",
+    "pinned": "If things feel heavy, free 24x7 support is one tap away: Tele-MANAS 14416, or 112 in an emergency. Use \"Need help now?\" at the top.",
+    "disclaimer": "MindGuard can make mistakes and does not give medical advice."
+  },
+  "checkin": {
+    "title": "Today's check-in",
+    "mood": "Mood (1 low, 5 good)",
+    "energy": "Energy (1 low, 5 high)",
+    "sleep": "Hours of sleep (optional)",
+    "note": "Note (optional)",
+    "noteHint": "Notes are encrypted before they are stored.",
+    "save": "Save check-in",
+    "saved": "Saved. Thank you for checking in.",
+    "recent": "Recent check-ins",
+    "row": "{{date}}: mood {{mood}}, energy {{energy}}"
   }
 }

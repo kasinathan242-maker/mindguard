@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import { AppLayout } from '@/app/AppLayout';
 import { AssessmentsPage } from '@/features/assessments/AssessmentsPage';
 import { QuestionnairePage } from '@/features/assessments/QuestionnairePage';
+import { ChatPage } from '@/features/chat/ChatPage';
 import { HomePage } from '@/features/home/HomePage';
 import { AgeGatePage } from '@/features/onboarding/AgeGatePage';
 import { ConsentPage } from '@/features/onboarding/ConsentPage';
@@ -23,6 +24,7 @@ export const routes = [
     element: <AppLayout />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: 'chat', element: <ChatPage /> },
       { path: 'assessments', element: <AssessmentsPage /> },
       { path: 'assessments/:type', element: <QuestionnairePage /> },
       { path: 'privacy', element: <PrivacyPage /> },

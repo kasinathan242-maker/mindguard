@@ -5,6 +5,8 @@ from pydantic import SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 DEV_JWT_SECRET = "dev-only-insecure-jwt-secret-do-not-use-in-production"  # noqa: S105
+# A fixed 32-byte key for development only; production refuses to start with it.
+DEV_FIELD_KEY = "ZGV2LW9ubHktZmllbGQta2V5LTMyLWJ5dGVzLWxvbmc="
 
 
 class Settings(BaseSettings):
@@ -28,6 +30,15 @@ class Settings(BaseSettings):
 
     auth_rate_limit_per_minute: int = 30
 
+    field_encryption_key: SecretStr = SecretStr(DEV_FIELD_KEY)
+
+    llm_provider: Literal["mock", "ollama", "anthropic"] = "mock"
+    llm_model: str = "llama3.2:3b"
+    ollama_base_url: str = "http://localhost:11434"
+    anthropic_api_key: SecretStr | None = None
+    chat_rate_limit_per_minute: int = 20
+    chat_history_turns: int = 10
+
     # Layer 2 of the safety engine; see app/safety/engine.py.
     safety_classifier: Literal["embedding", "hashed", "none"] = "embedding"
 
@@ -45,6 +56,8 @@ class Settings(BaseSettings):
         secret = self.jwt_secret.get_secret_value()
         if secret == DEV_JWT_SECRET or len(secret) < 32:
             raise ValueError("JWT_SECRET must be set to a random value of 32+ characters")
+        if self.field_encryption_key.get_secret_value() == DEV_FIELD_KEY:
+            raise ValueError("FIELD_ENCRYPTION_KEY must be set to a random 32-byte key")
         if not self.cookie_secure:
             raise ValueError("COOKIE_SECURE must be true in production (HTTPS only)")
         return self

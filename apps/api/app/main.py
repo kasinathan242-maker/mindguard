@@ -7,10 +7,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from app import health
 from app.assessments.router import router as assessments_router
 from app.auth.router import router as auth_router
+from app.chat.router import default_provider
+from app.chat.router import router as chat_router
+from app.checkins.router import router as checkins_router
 from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
+from app.privacy.router import router as privacy_router
 from app.safety import engine as safety_engine
 from app.safety.router import router as safety_router
 
@@ -40,6 +44,7 @@ def create_app(
         openapi_url=None if settings.is_production else "/api/openapi.json",
     )
     app.state.settings = settings
+    app.state.provider_factory = default_provider
 
     app.add_middleware(
         CORSMiddleware,
@@ -55,5 +60,8 @@ def create_app(
     api.include_router(consent_router)
     api.include_router(assessments_router)
     api.include_router(safety_router)
+    api.include_router(chat_router)
+    api.include_router(checkins_router)
+    api.include_router(privacy_router)
     app.include_router(api)
     return app

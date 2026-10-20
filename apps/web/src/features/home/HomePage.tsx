@@ -3,6 +3,7 @@ import { BreathingOrb } from '@/components/BreathingOrb';
 import { Bezel } from '@/components/ui/Bezel';
 import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
+import { CheckinCard } from '@/features/checkin/CheckinCard';
 import { useSession } from '@/lib/session';
 
 export function HomePage() {
@@ -15,6 +16,10 @@ export function HomePage() {
         <h1 className="font-display text-[clamp(2rem,5vw,3rem)] leading-[1.08] font-semibold tracking-tight">
           {t('app.home.greeting')}
         </h1>
+      </Reveal>
+
+      <Reveal className="md:col-span-12" delay={0.03}>
+        <CheckinCard />
       </Reveal>
 
       {user?.is_anonymous && (

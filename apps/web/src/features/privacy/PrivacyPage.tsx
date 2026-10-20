@@ -8,6 +8,7 @@ import { Field } from '@/components/ui/Field';
 import { ApiError } from '@/lib/api';
 import { useConsents, useSession, useUpdateConsents, useUpgrade } from '@/lib/session';
 import { ConsentRow } from './ConsentRow';
+import { DataControls } from './DataControls';
 
 function ConsentsSection() {
   const { t } = useTranslation();
@@ -166,6 +167,13 @@ export function PrivacyPage() {
           {t('privacyPage.accountTitle')}
         </h2>
         <AccountSection />
+      </section>
+
+      <section aria-labelledby="data-title" className="mt-12">
+        <h2 id="data-title" className="mb-5 font-display text-2xl font-semibold tracking-tight">
+          {t('privacyPage.dataTitle')}
+        </h2>
+        <DataControls />
       </section>
     </div>
   );

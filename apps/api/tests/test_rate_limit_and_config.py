@@ -36,9 +36,19 @@ def test_production_refuses_the_development_jwt_secret() -> None:
 
 def test_production_requires_secure_cookies() -> None:
     with pytest.raises(ValidationError, match="COOKIE_SECURE"):
-        Settings(app_env="production", jwt_secret=SecretStr("x" * 48), cookie_secure=False)
+        Settings(
+            app_env="production",
+            jwt_secret=SecretStr("x" * 48),
+            field_encryption_key=SecretStr("A" * 43 + "="),
+            cookie_secure=False,
+        )
 
 
 def test_production_accepts_hardened_settings() -> None:
-    settings = Settings(app_env="production", jwt_secret=SecretStr("x" * 48), cookie_secure=True)
+    settings = Settings(
+        app_env="production",
+        jwt_secret=SecretStr("x" * 48),
+        field_encryption_key=SecretStr("A" * 43 + "="),
+        cookie_secure=True,
+    )
     assert settings.is_production

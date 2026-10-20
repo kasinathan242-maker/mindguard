@@ -18,6 +18,8 @@ dependencies = [
     "pyyaml>=6.0,<7",
     "torch>=2.14,<3",
     "transformers>=5.20,<6",
+    "cryptography>=46",
+    "httpx>=0.28,<0.29",
 ]
 
 [dependency-groups]

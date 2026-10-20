@@ -40,7 +40,12 @@ async def test_health_degrades_when_redis_is_down(
 
 async def test_api_docs_are_hidden_in_production() -> None:
     prod = create_app(
-        Settings(app_env="production", jwt_secret=SecretStr("x" * 48), cookie_secure=True)
+        Settings(
+            app_env="production",
+            jwt_secret=SecretStr("x" * 48),
+            field_encryption_key=SecretStr("A" * 43 + "="),
+            cookie_secure=True,
+        )
     )
     paths = {getattr(route, "path", "") for route in prod.routes}
 

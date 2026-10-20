@@ -56,7 +56,7 @@ npm run dev
 | Web lint / format | `npm run lint` · `npm run format:check` |
 | Web types | `npm run typecheck` |
 | Web tests | `npm test` |
-| End-to-end (needs the Compose stack running) | `npx playwright install chromium` once, then `npm run e2e` |
+| End-to-end (needs the Compose stack running, with `AUTH_RATE_LIMIT_PER_MINUTE=300` in `.env`) | `npx playwright install chromium` once, then `npm run e2e` |
 
 `pre-commit install` runs the same checks before each commit. CI runs them all, plus dependency
 audits and a Docker Compose smoke test.
