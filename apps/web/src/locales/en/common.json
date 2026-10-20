@@ -1,0 +1,13 @@
+{
+  "appName": "MindGuard AI",
+  "status": {
+    "title": "Service status",
+    "checking": "Checking services…",
+    "ok": "All services are running",
+    "degraded": "Some services are unavailable",
+    "unreachable": "The API cannot be reached",
+    "database": "Database",
+    "redis": "Cache",
+    "version": "Version {{version}}"
+  }
+}

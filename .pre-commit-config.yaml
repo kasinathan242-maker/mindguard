@@ -1,0 +1,50 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: detect-private-key
+
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check (api)
+        entry: uv run --directory apps/api ruff check --fix .
+        language: system
+        files: ^apps/api/.*\.py$
+        pass_filenames: false
+      - id: ruff-format
+        name: ruff format (api)
+        entry: uv run --directory apps/api ruff format .
+        language: system
+        files: ^apps/api/.*\.py$
+        pass_filenames: false
+      - id: mypy
+        name: mypy --strict (api)
+        entry: uv run --directory apps/api mypy
+        language: system
+        files: ^apps/api/.*\.py$
+        pass_filenames: false
+      - id: eslint
+        name: eslint (web)
+        entry: npm --prefix apps/web run lint
+        language: system
+        files: ^apps/web/.*\.(ts|tsx|js)$
+        pass_filenames: false
+      - id: prettier
+        name: prettier (web)
+        entry: npm --prefix apps/web run format:check
+        language: system
+        files: ^apps/web/
+        pass_filenames: false
+      - id: tsc
+        name: tsc --noEmit (web)
+        entry: npm --prefix apps/web run typecheck
+        language: system
+        files: ^apps/web/.*\.(ts|tsx)$
+        pass_filenames: false
