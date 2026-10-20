@@ -56,6 +56,20 @@ The browser only ever talks to one origin. nginx serves the built PWA and revers
 - **Rate limiting.** Credential and session-creation endpoints share a Redis fixed-window limiter
   keyed by a hash of the client IP.
 
+## Self-checks and the crisis flow
+
+- **Scoring is deterministic.** `app/assessments/instruments.py` holds the verbatim items and
+  published bands; `scoring.py` validates answer count and range (0-3, integers only) and returns
+  total, band, next step and whether PHQ-9 item 9 is positive. No model is involved.
+- **Safety events are content-free.** `safety_events` records source, level, detector and the IDs of
+  the resources shown. It has no column that could hold an answer or a message.
+- **Crisis resources** live in the human-reviewed `app/safety/resources.yaml` and are served
+  publicly at `GET /safety/resources`. A test fails CI when any entry's `last_verified` is older
+  than 180 days or when a description claims confidentiality.
+- **The crisis card** is one fixed component (`features/crisis/CrisisCard.tsx`) used in the global
+  "Need help now?" dialog, the questionnaire and the result screen. It renders the bundled copy
+  immediately and swaps in the API's version when it arrives.
+
 ## Frontend (`apps/web`)
 
 - Feature folders under `src/features/*`, shared primitives in `src/components/ui`, and

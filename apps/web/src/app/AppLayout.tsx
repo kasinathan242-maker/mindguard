@@ -1,9 +1,16 @@
-import { HouseIcon, ShieldCheckIcon, SignOutIcon, type Icon } from '@phosphor-icons/react';
+import {
+  ClipboardTextIcon,
+  HouseIcon,
+  ShieldCheckIcon,
+  SignOutIcon,
+  type Icon,
+} from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, NavLink, Outlet, useNavigate } from 'react-router';
 import { Logo } from '@/components/Logo';
 import { MAIN_ID, SkipLink } from '@/components/SkipLink';
 import { LanguageToggle, ThemeToggle } from '@/components/Toggles';
+import { NeedHelpButton } from '@/features/crisis/NeedHelpButton';
 import { cn } from '@/lib/cn';
 import { useLogout, useSaveLocale, useSession } from '@/lib/session';
 
@@ -16,6 +23,7 @@ interface Tab {
 
 const TABS: Tab[] = [
   { to: '/app', labelKey: 'app.nav.home', icon: HouseIcon, end: true },
+  { to: '/app/assessments', labelKey: 'app.nav.assessments', icon: ClipboardTextIcon },
   { to: '/app/privacy', labelKey: 'app.nav.privacy', icon: ShieldCheckIcon },
 ];
 
@@ -99,6 +107,7 @@ export function AppLayout() {
           <Logo to="/app" />
           <DesktopTabs />
           <div className="flex items-center gap-1.5">
+            <NeedHelpButton compact />
             <LanguageToggle
               onChange={(locale) => {
                 saveLocale.mutate(locale);

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Logo } from '@/components/Logo';
 import { MAIN_ID, SkipLink } from '@/components/SkipLink';
 import { LanguageToggle } from '@/components/Toggles';
+import { NeedHelpButton } from '@/features/crisis/NeedHelpButton';
 
 export function OnboardingShell({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
@@ -11,7 +12,10 @@ export function OnboardingShell({ children }: { children: ReactNode }) {
       <SkipLink />
       <header className="mx-auto flex w-full max-w-3xl items-center justify-between px-4 pt-5 sm:px-6">
         <Logo />
-        <LanguageToggle />
+        <div className="flex items-center gap-1.5">
+          <NeedHelpButton compact />
+          <LanguageToggle />
+        </div>
       </header>
       <main
         id={MAIN_ID}

@@ -171,7 +171,8 @@
     "nav": {
       "label": "Main",
       "home": "Home",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "assessments": "Self-checks"
     },
     "signOut": "Sign out",
     "home": {
@@ -211,5 +212,99 @@
     "database": "Database",
     "redis": "Cache",
     "version": "Version {{version}}"
+  },
+  "crisis": {
+    "needHelp": "Need help now?",
+    "title": "You don't have to go through this alone.",
+    "body": "It sounds like things are really hard right now. Thank you for being honest about it. Please reach out to someone who can help, today.",
+    "callNow": "Call {{name}} now: {{number}}",
+    "alsoReachable": "Also reachable on",
+    "emergency": "In danger right now? Call {{number}}",
+    "trustedTitle": "Tell someone you trust",
+    "trustedBody": "Call or message a friend, family member, warden or teacher. You could say: \"I'm having a really hard time. Can you stay with me for a bit?\"",
+    "groundingTitle": "While you reach out, try 5-4-3-2-1",
+    "groundingSteps": [
+      "Notice 5 things you can see",
+      "Touch 4 things around you",
+      "Listen for 3 sounds",
+      "Find 2 things you can smell",
+      "Notice 1 thing you can taste"
+    ],
+    "disclaimer": "MindGuard is not an emergency service and never contacts anyone on your behalf. These services are run by others.",
+    "close": "Close"
+  },
+  "assessments": {
+    "title": "Self-checks",
+    "intro": "Two short, widely used questionnaires about how you've been feeling over the last two weeks. Your answers stay private to your account.",
+    "start": "Start",
+    "neverTaken": "Not taken yet",
+    "lastResult": "Last time: {{total}} of {{max}}, {{band}}, on {{date}}",
+    "historyTitle": "Your past results",
+    "historyEmptyTitle": "Nothing here yet",
+    "historyEmptyBody": "Your results will appear here after your first self-check.",
+    "progress": "Question {{current}} of {{total}}",
+    "progressLabel": "Progress",
+    "lastQuestion": "One last question",
+    "back": "Back",
+    "next": "Next",
+    "skip": "Skip",
+    "seeResult": "See my result",
+    "englishOnly": "These questions are shown in English. We only use officially validated translations, and a Tamil version has not been added yet.",
+    "instruments": {
+      "PHQ9": {
+        "name": "Mood check (PHQ-9)",
+        "about": "Nine questions about mood, interest and energy. About three minutes.",
+        "focus": "The PHQ-9 looks at low mood and loss of interest over the last two weeks."
+      },
+      "GAD7": {
+        "name": "Worry check (GAD-7)",
+        "about": "Seven questions about worry, tension and restlessness. About two minutes.",
+        "focus": "The GAD-7 looks at worry and anxiety over the last two weeks."
+      }
+    },
+    "bands": {
+      "minimal": {
+        "label": "Minimal",
+        "meaning": "Your answers suggest few or no symptoms right now."
+      },
+      "mild": {
+        "label": "Mild",
+        "meaning": "Your answers suggest some symptoms. Many people feel this way at times, and small daily habits can help."
+      },
+      "moderate": {
+        "label": "Moderate",
+        "meaning": "Your answers suggest symptoms that are probably affecting your days. Talking it through with someone can make a real difference."
+      },
+      "moderately_severe": {
+        "label": "Moderately severe",
+        "meaning": "Your answers suggest symptoms that are weighing on you a lot. A professional can help you understand what's going on and what might help."
+      },
+      "severe": {
+        "label": "Severe",
+        "meaning": "Your answers suggest you've been struggling a great deal. Please consider speaking with a doctor or counsellor soon."
+      }
+    },
+    "nextSteps": {
+      "self_care": {
+        "title": "Keep looking after yourself",
+        "body": "Protect your sleep, move a little each day, and spend time with people you like. The wellness tools can help, and checking in again in two weeks will show how things are going."
+      },
+      "talk_to_someone": {
+        "title": "Talk to someone",
+        "body": "Consider talking with a counsellor, your college counselling cell, or someone you trust. Tele-MANAS (14416) can also help you find support near you."
+      },
+      "consult_professional": {
+        "title": "Speak with a professional",
+        "body": "Please consider seeing a doctor, psychologist or counsellor soon. If you're not sure where to start, Tele-MANAS (14416) is free and can guide you."
+      }
+    },
+    "result": {
+      "headline": "{{band}} range",
+      "outOf": "out of {{max}}",
+      "notDiagnosis": "This is a screening result, not a diagnosis.",
+      "safetyLabel": "Support right now",
+      "safetyNote": "You told us you've had thoughts of being better off dead or of hurting yourself. That matters, whatever your total score. Please talk to someone today.",
+      "backToChecks": "Back to self-checks"
+    }
   }
 }

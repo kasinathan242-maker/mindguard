@@ -1,9 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
-import { jsonResponse } from '../../../tests/render';
+import { jsonResponse, TestProviders } from '../../../tests/render';
 import { ConsentPage } from './ConsentPage';
 
 function renderConsent(state: unknown) {
@@ -15,11 +14,10 @@ function renderConsent(state: unknown) {
     ],
     { initialEntries: [{ pathname: '/start/consent', state }] },
   );
-  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
   render(
-    <QueryClientProvider client={client}>
+    <TestProviders>
       <RouterProvider router={router} />
-    </QueryClientProvider>,
+    </TestProviders>,
   );
 }
 

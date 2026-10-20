@@ -5,11 +5,13 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app import health
+from app.assessments.router import router as assessments_router
 from app.auth.router import router as auth_router
 from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
+from app.safety.router import router as safety_router
 
 API_PREFIX = "/api/v1"
 
@@ -49,5 +51,7 @@ def create_app(
     api.include_router(health.router)
     api.include_router(auth_router)
     api.include_router(consent_router)
+    api.include_router(assessments_router)
+    api.include_router(safety_router)
     app.include_router(api)
     return app

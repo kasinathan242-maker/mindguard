@@ -20,6 +20,7 @@ import { MAIN_ID, SkipLink } from '@/components/SkipLink';
 import { LanguageToggle, ThemeToggle } from '@/components/Toggles';
 import { Bezel } from '@/components/ui/Bezel';
 import { ButtonLink } from '@/components/ui/Button';
+import { NeedHelpButton } from '@/features/crisis/NeedHelpButton';
 import { Reveal } from '@/components/ui/Reveal';
 import { cn } from '@/lib/cn';
 
@@ -50,9 +51,10 @@ function SiteHeader() {
             {t('nav.privacy')}
           </a>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1">
+          <NeedHelpButton compact className="px-3" />
           <LanguageToggle />
-          <span className="hidden sm:inline-flex">
+          <span className="hidden lg:inline-flex">
             <ThemeToggle />
           </span>
           <Link

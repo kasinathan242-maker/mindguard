@@ -1,0 +1,53 @@
+# Human-reviewed crisis resources shown on the crisis card.
+#
+# Rules for editing this file:
+# - Every entry needs a `last_verified` date. CI fails when any entry is older than 180 days.
+# - Record where the details were checked in `verified_against`.
+# - Never describe a service as confidential, anonymous or "no police involvement": we cannot
+#   guarantee how a third party handles a call.
+# - Numbers are dialled exactly as written in `dial` (digits only).
+version: 1
+resources:
+  - id: tele_manas
+    kind: helpline
+    name:
+      en: Tele-MANAS
+      ta: டெலி-மனஸ் (Tele-MANAS)
+    display_number: "14416"
+    dial: "14416"
+    alternate_display_number: "1-800-891-4416"
+    alternate_dial: "18008914416"
+    description:
+      en: >-
+        Free national mental health helpline run by the Government of India. Open 24 hours,
+        every day. Choose your language when the call connects; Tamil is available.
+      ta: >-
+        இந்திய அரசு நடத்தும் இலவச தேசிய மனநல உதவி எண். நாள்தோறும் 24 மணி நேரமும் இயங்குகிறது.
+        அழைப்பு இணைந்ததும் உங்கள் மொழியைத் தேர்ந்தெடுக்கலாம்; தமிழ் உள்ளது.
+    hours: 24x7
+    cost: free
+    verified_against:
+      - https://en.vikaspedia.in/viewcontent/health/mental-health/tele-manas
+      - https://iitk.ac.in/counsel/TeleManas.php
+    last_verified: 2026-10-20
+
+  - id: emergency_112
+    kind: emergency
+    name:
+      en: Emergency 112
+      ta: அவசர உதவி 112
+    display_number: "112"
+    dial: "112"
+    description:
+      en: >-
+        India's single emergency number for police, fire and ambulance. Call if you or someone
+        else is in immediate danger.
+      ta: >-
+        காவல், தீயணைப்பு, ஆம்புலன்ஸ் ஆகியவற்றுக்கான இந்தியாவின் ஒற்றை அவசர எண். நீங்களோ
+        வேறொருவரோ உடனடி ஆபத்தில் இருந்தால் அழைக்கவும்.
+    hours: 24x7
+    cost: free
+    verified_against:
+      - https://www.thequint.com/news/india/112-emergency-helpline-number
+      - https://onmanorama.com/news/india/2019/02/20/emergency-helpline-number-112-comes-into-effect.html
+    last_verified: 2026-10-20

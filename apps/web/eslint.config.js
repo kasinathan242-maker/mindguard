@@ -28,6 +28,11 @@ export default tseslint.config(
     },
   },
   {
+    // Test helpers are never hot-reloaded, so mixing component and helper exports is fine.
+    files: ['tests/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
+  {
     files: ['eslint.config.js'],
     extends: [js.configs.recommended],
     languageOptions: { globals: globals.node },
