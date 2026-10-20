@@ -67,3 +67,13 @@ test('the wellness toolkit works and is accessible', async ({ page }) => {
   await expect(page.getByRole('timer')).toHaveText(/0:5\d|1:00/);
   await expectAccessible(page);
 });
+
+test('the screening summary downloads as a PDF', async ({ page }) => {
+  await startAnonymously(page);
+  await page.goto('/app/assessments');
+  await expect(page.getByRole('heading', { name: 'Your screening summary' })).toBeVisible();
+  await expectAccessible(page);
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download PDF to share' }).click();
+  expect((await download).suggestedFilename()).toBe('mindguard-screening-summary.pdf');
+});

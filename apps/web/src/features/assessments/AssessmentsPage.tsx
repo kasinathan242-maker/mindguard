@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Bezel } from '@/components/ui/Bezel';
 import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
+import { SummaryCard } from './SummaryCard';
 import { useAssessmentHistory, type AssessmentResult, type InstrumentType } from './api';
 
 const CARDS: { type: InstrumentType; icon: Icon; tone: string }[] = [
@@ -114,6 +115,8 @@ export function AssessmentsPage() {
           </Reveal>
         ))}
       </div>
+
+      <SummaryCard />
 
       <section aria-labelledby="history-title">
         <h2 id="history-title" className="mb-5 font-display text-2xl font-semibold tracking-tight">

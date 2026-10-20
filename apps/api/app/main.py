@@ -15,6 +15,7 @@ from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
 from app.privacy.router import router as privacy_router
+from app.reports.router import router as reports_router
 from app.safety import engine as safety_engine
 from app.safety.router import router as safety_router
 
@@ -63,5 +64,6 @@ def create_app(
     api.include_router(chat_router)
     api.include_router(checkins_router)
     api.include_router(privacy_router)
+    api.include_router(reports_router)
     app.include_router(api)
     return app

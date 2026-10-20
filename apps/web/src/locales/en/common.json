@@ -372,5 +372,15 @@
     "mood": "Mood",
     "energy": "Energy",
     "legend": "Solid line: mood. Dashed line: energy. Patterns, not causes."
+  },
+  "summary": {
+    "title": "Your screening summary",
+    "scores": "Questionnaire scores",
+    "selfReport": "Your check-ins (30 days)",
+    "checkins_one": "{{count}} check-in, average mood {{mood}} out of 5",
+    "checkins_other": "{{count}} check-ins, average mood {{mood}} out of 5",
+    "diagnosis": "Diagnosis",
+    "noDiagnosis": "Not provided. MindGuard is a screening and support tool.",
+    "download": "Download PDF to share"
   }
 }
