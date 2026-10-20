@@ -1,0 +1,283 @@
+# MindGuard safety rules (layer 1).
+#
+# Patterns are Python regular expressions matched against NORMALISED text (see normalize.py):
+# lower-case, apostrophes removed, contractions expanded ("i am", "do not", "can not",
+# "will not", "want to", "going to"), stretched letters shortened, laughter emoji -> "lol".
+# Tamil script is matched as typed.
+#
+# Fields
+#   id           stable identifier, reported in safety evaluations (never logged with content)
+#   level        urgent | elevated
+#   category     what the pattern detects (see docs/SAFETY.md)
+#   lang         en | ta | tanglish
+#   downgradable false for plans, means, method-seeking and goodbyes: context such as jokes or
+#                quotes never softens these. Negation still applies.
+#   hyperbole    true for phrases people often use as exaggeration ("kill me"); an elevated
+#                match is dropped to none when the message has laughter or everyday-stress markers.
+#
+# Changing this file changes safety behaviour: bump `version`, re-run
+#   uv run python ../../ml/safety_eval/evaluate.py
+# and update the metrics in docs/SAFETY.md.
+version: 4
+
+rules:
+  # ---------------------------------------------------------------- English: urgent
+  - {id: en.intent.kill_myself, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:kill|killing|end|ending|off)\s+myself\b'}
+  - {id: en.intent.suicide_act, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:commit|committing|committed|attempt|attempting|attempted|do|doing|consider|considering)\s+suicide\b'}
+  - {id: en.intent.thinking_about, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:thinking|thought|think|thoughts)\s+(?:seriously\s+)?(?:about|of)\s+(?:suicide|killing\s+myself|ending\s+(?:it|it\s+all|my\s+life|everything)|taking\s+my\s+(?:own\s+)?life)\b'}
+  - {id: en.intent.suicidal_self, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:i\s+am|i\s+feel|feeling|been|getting)\s+(?:so\s+|really\s+|very\s+|kind\s+of\s+|kinda\s+|pretty\s+|super\s+|a\s+bit\s+|extremely\s+)?suicidal\b'}
+  - {id: en.intent.want_to_die, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:want|wanting|wanted|going|ready|decided|planning|plan|wish|need|deserve)\s+to\s+(?:just\s+)?die\b'}
+  - {id: en.intent.end_my_life, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:end|ending|take|taking|finish)\s+(?:my\s+(?:own\s+)?life|it\s+all)\b'}
+  - {id: en.intent.not_live, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:do\s+not|no\s+longer|never)\s+want\s+to\s+(?:live|be\s+alive|exist|be\s+here(?:\s+anymore)?|wake\s+up)\b'}
+  - {id: en.intent.not_be_here, level: urgent, category: intent, lang: en,
+     pattern: '\b(?:want|wish)\s+(?:i\s+(?:was|were)\s+)?(?:to\s+)?(?:not\s+be|was\s+not|were\s+not)\s+(?:here|alive|around)\s+anymore\b'}
+  - {id: en.intent.tried, level: urgent, category: attempt, lang: en,
+     pattern: '\b(?:tried|attempted|try|trying)\s+to\s+(?:kill\s+myself|end\s+my\s+life|end\s+it(?:\s+all)?|die|commit\s+suicide|overdose|hang\s+myself)\b'}
+  - {id: en.passive.better_off_dead, level: urgent, category: passive, lang: en,
+     pattern: '\bbetter\s+off\s+dead\b'}
+  - {id: en.passive.wish_dead, level: urgent, category: passive, lang: en,
+     pattern: '\bwish(?:ed)?\s+i\s+(?:was|were|had|could|would)\s+(?:just\s+)?(?:dead|die|died|never\s+been\s+born|not\s+been\s+born|never\s+born|disappear\s+forever|stop\s+existing|not\s+wake\s+up|never\s+wake\s+up)\b'}
+  - {id: en.passive.sleep_forever, level: urgent, category: passive, lang: en,
+     pattern: '\b(?:sleep|go\s+to\s+sleep|fall\s+asleep)\s+and\s+(?:never|not)\s+wake\s+up\b'}
+  - {id: en.passive.tired_of_living, level: urgent, category: passive, lang: en,
+     pattern: '\b(?:tired|sick|done)\s+(?:of|with)\s+(?:living|being\s+alive|life|existing)\b'}
+  - {id: en.passive.no_reason_to_live, level: urgent, category: passive, lang: en,
+     pattern: '\bno\s+(?:reason|point|purpose)\s+(?:to|in|for)\s+(?:live|living|being\s+alive|go\s+on|going\s+on|stay|staying|me\s+to\s+live)\b'}
+  - {id: en.passive.point_of_living, level: urgent, category: passive, lang: en,
+     pattern: '\bwhat\s+is\s+(?:even\s+)?the\s+point\s+(?:of|in)\s+(?:living|life|being\s+alive|going\s+on|me\s+being\s+alive)\b'}
+  - {id: en.passive.sleep_forever_or_peaceful, level: urgent, category: passive, lang: en,
+     pattern: '\b(?:want|wish|like)\s+to\s+(?:just\s+)?sleep\s+forever\b|\b(?:would\s+be|it\s+is|be)\s+(?:so\s+)?(?:peaceful|easier|better|nice|a\s+relief)\s+to\s+(?:be\s+dead|die|not\s+exist|not\s+be\s+here)\b'}
+  - {id: en.passive.stop_existing, level: urgent, category: passive, lang: en,
+     pattern: '\b(?:stop|cease)\s+existing\b|\bwant(?:ing)?\s+to\s+(?:disappear|vanish)\s+(?:forever|for\s+good|permanently)\b|\bwant\s+(?:it|everything|this|the\s+pain|my\s+life)\s+to\s+(?:end|stop)\s+(?:forever|for\s+good|permanently)\b'}
+  - {id: en.burden.better_without_me, level: urgent, category: burden, lang: en,
+     pattern: '\b(?:everyone|everybody|they|people|the\s+world|my\s+(?:family|parents|friends|mom|mum|dad|amma|appa))\s+(?:would|will|d)\s+be\s+(?:better|happier)\s+(?:off\s+)?without\s+me\b'}
+  - {id: en.burden.nobody_would_care_if_died, level: urgent, category: burden, lang: en,
+     pattern: '\b(?:nobody|no\s+one|no-one)\s+(?:would|will)\s+(?:even\s+)?(?:care|notice|miss\s+me|cry)\s+(?:if|when|once)\s+i\s+(?:am\s+)?(?:died|dead|gone|was\s+gone|were\s+gone|killed\s+myself|disappeared|was\s+dead)\b'}
+  - {id: en.self_harm.self, level: urgent, category: self_harm, lang: en,
+     pattern: '\b(?:cut|cutting|burn|burning|hurt|hurting|harm|harming|punish|punishing|hit|hitting|punch|punching|scratch|scratching|bite|biting|starve|starving)\s+myself\b'}
+  - {id: en.self_harm.wrists, level: urgent, category: self_harm, lang: en, downgradable: false,
+     pattern: '\b(?:slit|slitting|slash|slashing|cut|cutting)\s+(?:open\s+)?my\s+(?:wrists?|veins?|arms?|thighs?)\b'}
+  - {id: en.means.overdose, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:take|taking|swallow|swallowing|eat|eating|pop|popping)\s+(?:all|every|the\s+whole)\s+(?:of\s+)?(?:the\s+|my\s+|these\s+|those\s+)?(?:pills|tablets|medicines?|meds|strip|bottle)\b|\b(?:overdose|overdosing|overdosed|od\s+on)\b|\b(?:how\s+many|enough)\s+(?:of\s+my\s+|of\s+these\s+)?(?:pills|tablets|sleeping\s+pills|paracetamol|crocin|dolo)\s+(?:to|would|will|does\s+it\s+take|do\s+i\s+need)\b'}
+  - {id: en.means.hanging, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\bhang(?:ing)?\s+myself\b|\b(?:rope|noose|dupatta)\b.{0,40}\b(?:ready|tied|ceiling|fan|neck)\b'}
+  - {id: en.means.jump, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:jump|jumping|throw\s+myself|throwing\s+myself|fall|falling)\s+(?:off|from)\s+(?:\w+\s+){0,3}(?:terrace|roof|rooftop|building|bridge|balcony|cliff|floor|flyover|tower|window)\b'}
+  - {id: en.means.train, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:step|stepping|jump|jumping|lie|lying|lay|throw\s+myself|throwing\s+myself)\s+(?:down\s+)?(?:in\s+front\s+of|on|onto|under)\s+(?:a\s+|the\s+)?(?:train|bus|truck|lorry|railway\s+tracks?|train\s+tracks?|tracks?)\b'}
+  - {id: en.means.stockpile, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:saved|collected|stocked|stockpiled|stockpiling|saving|hoarding|hidden|hid|hiding|bought|ordered)\s+(?:up\s+)?(?:some\s+|my\s+|enough\s+|all\s+|a\s+lot\s+of\s+)?(?:pills|tablets|sleeping\s+pills|poison|pesticide|rat\s+poison|blades?|razors?|rope|a\s+rope|noose)\b'}
+  - {id: en.means.poison, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:drink|drinking|drank|take|taking|consume|swallow|swallowing)\s+(?:the\s+|some\s+|that\s+)?(?:poison|pesticide|rat\s+poison|bleach|acid|phenyl|kerosene)\b|\b(?:poison|pesticide|bleach|acid|phenyl|kerosene)\b.{0,60}\b(?:drink|drinking|swallow|take)\s+(?:it|that|them)\b'}
+  - {id: en.method_seeking, level: urgent, category: method_seeking, lang: en, downgradable: false,
+     pattern: '\b(?:painless|easiest|easy|quickest|quick|fastest|best|surest|least\s+painful)\s+(?:way|ways|method|methods)\s+to\s+(?:die|kill\s+myself|end\s+(?:my\s+life|it))\b|\bhow\s+(?:do\s+i|can\s+i|to|would\s+i|should\s+i|could\s+i)\s+(?:kill\s+myself|end\s+my\s+life|die\s+(?:painlessly|quickly|without\s+pain|peacefully)|commit\s+suicide)\b|\b(?:high|tall|deep|strong|enough)\s+enough\s+to\s+(?:die|kill)\b|\bdie\s+if\s+(?:you|i)\s+(?:jump|fall|drink|take)\b|\blethal\s+dose\b|\bwhat\s+(?:is|would\s+be)\s+(?:a|the)\s+(?:fatal|lethal|deadly)\s+(?:dose|amount)\b'}
+  - {id: en.goodbye.final_message, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:this\s+is|it\s+is)\s+(?:my\s+)?(?:goodbye|final\s+(?:message|goodbye|words)|last\s+message)\b|\b(?:goodbye|bye)\s+(?:forever|everyone|everybody|world|all\s+of\s+you)\b|\b(?:made\s+my\s+peace|said\s+my\s+goodbyes)\b|\bready\s+to\s+go\s+(?:tonight|now|today|forever)\b|\btonight\s+(?:it|this|everything)\s+ends\b|\b(?:it|this|everything)\s+ends\s+tonight\b'}
+  - {id: en.goodbye.quoted_phrase, level: urgent, category: goodbye, lang: en,
+     pattern: '\bgoodbye\s+cruel\s+world\b'}
+  - {id: en.indirect.not_a_problem_long, level: urgent, category: indirect, lang: en,
+     pattern: '\bnot\s+(?:going\s+to\s+)?be\s+(?:a\s+)?(?:problem|burden|bother|trouble)\s+(?:for|to)\s+(?:anyone|anybody|you|everyone|my\s+family)\s+(?:much\s+)?(?:longer|anymore|for\s+long)\b'}
+  - {id: en.goodbye.by_the_time, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\bby\s+the\s+time\s+(?:you|anyone|someone|they)\s+(?:read|reads|see|sees|find|finds)\s+this\b'}
+  - {id: en.goodbye.not_here_tomorrow, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:will\s+not|wont|may\s+not|might\s+not)\s+be\s+(?:here|around|alive)\s+(?:tomorrow|anymore|much\s+longer|by\s+(?:morning|tonight|tomorrow)|for\s+long)\b'}
+  - {id: en.goodbye.giving_away, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:giving|gave|give)\s+away\s+(?:all\s+(?:of\s+)?)?my\s+(?:stuff|things|belongings|possessions|books|clothes)\b'}
+  - {id: en.goodbye.note, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:wrote|writing|written|left|leave|leaving)\s+(?:a|my)\s+(?:suicide|goodbye)\s+(?:note|letter)\b'}
+  - {id: en.goodbye.when_gone, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:take\s+care\s+of|look\s+after|tell)\s+(?:my\s+)?(?:mom|mum|amma|appa|dad|family|cat|dog|sister|brother|parents)\b.{0,30}\b(?:when|after|once)\s+i\s+am\s+gone\b'}
+
+  # Recall-first net (added in v3 after a blind holdout showed exact phrases miss paraphrases):
+  # a desire, intent or feeling word within six words of a death or self-harm word, in either
+  # order. Benign idioms are removed first (see `benign` below) and every modifier still applies.
+  - {id: en.lexicon.desire_near_death, level: urgent, category: lexicon, lang: en,
+     pattern: '\b(?:want|wants|wanted|wanting|wish|wishing|wished|hope|hoping|rather|prefer|plan|planning|planned|going\s+to|ready|decided|deserve|need|should|easier|only\s+way|way\s+out|better|seems|feel\s+like|feels\s+like|thinking|think|thoughts|tempted|urge|urges|considering|tired|sick|keep|longing|craving|happier|relief|relieved|peaceful|looking\s+forward|can\s+not\s+wait|welcome)\b(?:\s+\S+){0,6}?\s+(?:die|dying|dead|death|suicide|suicidal|kill\s+myself|end\s+(?:it|it\s+all|things|everything|my\s+life|this)|not\s+(?:exist|existing|be\s+(?:here|alive|around)|wake\s+up|be\s+born)|stop\s+existing|disappear\s+forever|be\s+gone|gone\s+(?:soon|forever))\b|\b(?:die|dying|dead|death|suicide|suicidal|kill\s+myself|end\s+(?:it|it\s+all|things|everything|my\s+life|this)|not\s+(?:exist|existing|be\s+(?:here|alive|around)|wake\s+up|be\s+born)|stop\s+existing|disappear\s+forever|be\s+gone|gone\s+(?:soon|forever))\b(?:\s+\S+){0,6}?\s+(?:want|wants|wanted|wanting|wish|wishing|wished|hope|hoping|rather|prefer|plan|planning|planned|going\s+to|ready|decided|deserve|need|should|easier|only\s+way|way\s+out|better|seems|feel\s+like|feels\s+like|thinking|think|thoughts|tempted|urge|urges|considering|tired|sick|keep|longing|craving|happier|relief|relieved|peaceful|looking\s+forward|can\s+not\s+wait|welcome)\b'}
+  - {id: en.passive.not_worth_living, level: urgent, category: passive, lang: en,
+     pattern: '\b(?:is\s+not|not|never|no\s+longer|is\s+no\s+longer)\s+worth\s+(?:living|it\s+anymore|being\s+alive)\b'}
+  - {id: en.goodbye.gone_soon, level: urgent, category: goodbye, lang: en, downgradable: false,
+     pattern: '\b(?:i\s+will|i\s+am\s+going\s+to|i\s+would|i\s+should|i\s+might)\s+be\s+gone\s+(?:soon|forever|tomorrow|tonight|by\s+\w+)\b|\blast\s+time\s+(?:anyone|anybody|you|you\s+all|they|someone|everyone)\s+(?:will\s+)?(?:ever\s+)?(?:hear|hears|see|sees|talk\s+to)\s+(?:from\s+)?me\b|\bsorry\s+for\s+everything\b.{0,40}\b(?:bye|goodbye)\b|\b(?:do\s+not|please\s+do\s+not)\s+(?:try\s+to\s+)?(?:stop|find|save)\s+me\b.{0,60}\b(?:mind\s+is\s+made\s+up|made\s+up\s+my\s+mind|decided|it\s+is\s+time)\b'}
+  - {id: en.means.taken, level: urgent, category: means, lang: en, downgradable: false,
+     pattern: '\b(?:swallowed|took|taken|ate|popped|had)\s+(?:a\s+lot\s+of|lots\s+of|too\s+many|so\s+many|a\s+bunch\s+of|a\s+handful\s+of|all\s+(?:of\s+)?(?:my|the)|\d+|ten|twenty|thirty|fifty)\s+(?:\w+\s+)?(?:pills|tablets|meds|medicines|sleeping\s+pills)\b|\b(?:how\s+much|how\s+many|what\s+amount\s+of)\b.{0,30}\b(?:kill|kills|fatal|lethal|to\s+die)\b'}
+  - {id: en.self_harm.cutting_again, level: urgent, category: self_harm, lang: en,
+     pattern: '\b(?:started|start|been|keep|kept|began)\s+(?:cutting|burning|scratching)\b|\b(?:cutting|burning)\s+(?:myself\s+)?again\b'}
+
+  # ---------------------------------------------------------------- English: elevated
+  - {id: en.topic.suicide, level: elevated, category: topic, lang: en,
+     pattern: '\bsuicid(?:e|al|es)\b'}
+  - {id: en.topic.self_harm, level: elevated, category: topic, lang: en,
+     pattern: '\bself\s*-?\s*harm\w*\b|\bself\s*-?\s*injur\w*\b'}
+  - {id: en.hopeless.words, level: elevated, category: hopelessness, lang: en,
+     pattern: '\b(?:hopeless|worthless|empty\s+inside|numb\s+inside|dead\s+inside)\b|\b(?:no|lost\s+all|lost\s+my|have\s+no|zero)\s+hope\b'}
+  - {id: en.hopeless.cant_go_on, level: elevated, category: hopelessness, lang: en,
+     pattern: '\bcan\s+not\s+(?:go\s+on|take\s+(?:it|this|any\s+more)\s*(?:anymore)?|do\s+this\s+anymore|keep\s+going|cope|live\s+like\s+this|handle\s+(?:it|this|life)\s+anymore)\b'}
+  - {id: en.hopeless.give_up, level: elevated, category: hopelessness, lang: en,
+     pattern: '\bgiv(?:e|ing)\s+up\s+on\s+(?:life|everything|myself|living)\b'}
+  - {id: en.hopeless.never_better, level: elevated, category: hopelessness, lang: en,
+     pattern: '\bnothing\s+(?:will\s+)?(?:ever\s+)?(?:gets?|getting|going\s+to\s+get|will\s+get)\s+better\b|\bit\s+will\s+never\s+get\s+better\b'}
+  - {id: en.hopeless.point_anymore, level: elevated, category: hopelessness, lang: en,
+     pattern: '\bwhat\s+is\s+the\s+point\s+(?:of\s+anything|anymore|of\s+trying)\b'}
+  - {id: en.burden.self, level: elevated, category: burden, lang: en,
+     pattern: '\b(?:i\s+am|feel\s+like|i\s+feel\s+like)\s+(?:just\s+|such\s+)?a\s+burden\b|\b(?:nobody|no\s+one)\s+(?:would|will)\s+(?:care|notice|miss\s+me)\b'}
+  - {id: en.self_hate, level: elevated, category: hopelessness, lang: en,
+     pattern: '\bi\s+(?:hate|despise|loathe)\s+myself\b'}
+  - {id: en.hyperbole_prone.kill_me, level: elevated, category: indirect, lang: en, hyperbole: true,
+     pattern: '\b(?:just\s+|please\s+|someone\s+)?kill\s+me\b'}
+  - {id: en.indirect.disappear, level: elevated, category: indirect, lang: en,
+     pattern: '\bwant\s+to\s+(?:disappear|vanish|run\s+away\s+from\s+everything)\b|\bwhen\s+i\s+am\s+gone\b|\bthinking\s+(?:about|of)\s+(?:death|dying)\b'}
+  - {id: en.indirect.kill_yourself, level: elevated, category: indirect, lang: en,
+     pattern: '\bkill\s+yourself\b'}
+  - {id: en.third_party.self_harm, level: elevated, category: third_party, lang: en,
+     pattern: '\b(?:kill|killing|hurt|hurting|harm|harming|cut|cutting|end)\s+(?:himself|herself|themselves|themself|his\s+life|her\s+life|their\s+life)\b|\b(?:he|she|they|someone|somebody)\s+(?:wants?|wanted|is\s+going|was\s+going|keeps\s+saying\s+(?:he|she|they)\s+wants?)\s+to\s+die\b|\b(?:someone|somebody|a\s+friend|people|a\s+person)\s+(?:who|that)\s+(?:wants?|is\s+thinking\s+about|talks\s+about|is\s+talking\s+about)\s+(?:to\s+die|dying|suicide|killing\s+(?:himself|herself|themselves))\b|\b(?:cuts|hurts|harms|burns)\s+(?:himself|herself|themselves)\b|\b(?:he|she|they)\s+wish(?:es|ed)?\s+(?:he|she|they)\s+(?:was|were|had)\s+(?:dead|never\s+been\s+born)\b'}
+
+  # ---------------------------------------------------------------- Tamil script: urgent
+  - {id: ta.intent.tharkolai_act, level: urgent, category: intent, lang: ta,
+     pattern: 'தற்கொலை\s*(?:செய்|பண்ண|பண்ணி|பண்ணப்|செஞ்சு|பண்ணிக்|முயற்சி)'}
+  - {id: ta.intent.want_to_die, level: urgent, category: intent, lang: ta,
+     pattern: 'சாக(?:ப்)?\s*(?:வேண்டும்|வேணும்|போறேன்|போகிறேன்|விரும்புகிறேன்|ஆசை|தோணுது|தோன்றுகிறது|நினைக்கிறேன்)|சாக(?:ணும்|னும்)|சாகலாம்னு'}
+  - {id: ta.intent.sethu_poganum, level: urgent, category: intent, lang: ta,
+     pattern: 'செத்து\s*(?:ப்\s*)?(?:போகணும்|போகனும்|போக\s*வேண்டும்|போயிடலாம்|போயிடணும்|போறேன்|போலாம்)|செத்து(?:டலாம்|டணும்|ருவேன்|டுவேன்)'}
+  - {id: ta.intent.not_live, level: urgent, category: intent, lang: ta,
+     pattern: 'வாழ(?:வே)?\s*(?:விருப்பம்\s*இல்லை|விருப்பமில்லை|பிடிக்கல|பிடிக்கவில்லை|முடியல|முடியவில்லை|ஆசை\s*இல்லை)'}
+  - {id: ta.intent.end_life, level: urgent, category: intent, lang: ta,
+     pattern: 'உயிரை\s*(?:மாய்த்து|மாய்ச்சு|விட|விடப்|விடணும்)|(?:என்|என்னோட)\s*வாழ்க்கையை\s*(?:முடி|முடிச்சு|முடித்து)|என்னை\s*நானே\s*(?:கொல்ல|கொன்று|கொன்னு|கொல்லப்)'}
+  - {id: ta.intent.formal_die, level: urgent, category: intent, lang: ta,
+     pattern: 'இறந்து\s*(?:விட|போக|போகணும்|விடணும்|விடலாம்)|இறக்க\s*(?:வேண்டும்|விரும்புகிறேன்|ஆசை)'}
+  - {id: ta.intent.only_way, level: urgent, category: intent, lang: ta,
+     pattern: '(?:தற்கொலை|சாவு|சாவது|சாகுறது)\s*(?:தான்|தா)?\s*(?:ஒரே\s*(?:வழி|தீர்வு)|நல்லது|சரி)|வாழ\s*முடியாது'}
+  - {id: ta.passive.never_born, level: urgent, category: passive, lang: ta,
+     pattern: 'பிறந்திருக்கவே\s*கூடாது|தூங்கி\s*எழுந்திருக்க(?:ாம|க்கூடாது|ாமல்)'}
+  - {id: ta.means.hanging_poison, level: urgent, category: means, lang: ta, downgradable: false,
+     pattern: '(?:விஷம்|பூச்சி\s*மருந்து|கயிறு|மாத்திரை\w*)\s*(?:வாங்கி|வாங்கினேன்|வாங்கிட்டேன்|வச்சிருக்கேன்|ரெடி)|தூக்கு\s*(?:போட|போடப்|போட்டு|மாட்ட)|தூக்கில்\s*தொங்க|(?:விஷம்|விஷத்தை|பூச்சி\s*மருந்து|பூச்சிக்கொல்லி)\s*(?:குடி|குடிக்க|குடிச்சு|சாப்பிட)|மாத்திரை\w*\s*(?:எல்லாம்|எல்லாத்தையும்|மொத்தமா|நிறைய)\s*(?:சாப்பிட|முழுங்க|போட)'}
+  - {id: ta.self_harm.cut, level: urgent, category: self_harm, lang: ta, downgradable: false,
+     pattern: 'கையை\s*(?:அறுத்து|அறுக்க|வெட்டி|கிழித்து|அறுத்துக்)|என்னை\s*நானே\s*காயப்படுத்த'}
+  - {id: ta.goodbye, level: urgent, category: goodbye, lang: ta, downgradable: false,
+     pattern: '(?:இது|இதுதான்|இதான்)\s*(?:என்\s*)?கடைசி\s*(?:மெசேஜ்|செய்தி)|(?:எல்லாருக்கும்|எல்லோருக்கும்|உலகத்துக்கு|இந்த\s*உலகத்துக்கு)\s*(?:குட்பை|பை|விடை)|நாளைக்கு\s*நான்\s*இருக்க\s*மாட்டேன்'}
+  - {id: ta.burden.without_me, level: urgent, category: burden, lang: ta,
+     pattern: 'நான்\s*இல்லாம(?:ல்)?\s*(?:எல்லாரும்|எல்லோரும்|என்\s*குடும்பம்|வீட்டில்)\s*(?:நல்லா|சந்தோஷமா|நிம்மதியா|மகிழ்ச்சியா)'}
+
+  # ---------------------------------------------------------------- Tamil script: elevated
+  - {id: ta.topic.tharkolai, level: elevated, category: topic, lang: ta, pattern: 'தற்கொலை'}
+  - {id: ta.negated.death, level: elevated, category: negated, lang: ta,
+     pattern: '(?:சாக|செத்து\s*போக)\s*மாட்டேன்'}
+  - {id: ta.hopeless, level: elevated, category: hopelessness, lang: ta,
+     pattern: 'நம்பிக்கை(?:யே)?\s*(?:இல்லை|இல்ல|போச்சு)|எதுவும்\s*சரியாகாது|தாங்க\s*முடிய(?:ல|வில்லை)|என்னை\s*நானே\s*வெறுக்கிறேன்'}
+  - {id: ta.burden, level: elevated, category: burden, lang: ta,
+     pattern: 'நான்\s*(?:\S+\s*)?சுமை|யாருக்கும்\s*நான்\s*(?:தேவையில்லை|தேவை\s*இல்ல)'}
+
+  # ---------------------------------------------------------------- Tanglish: urgent
+  - {id: tg.intent.tharkolai, level: urgent, category: intent, lang: tanglish,
+     pattern: '\b(?:tharkolai|thatkolai|tharkola|thatkola|suicide)\s*(?:panna|pannanum|pannuven|pannidalam|pannalam|pannikka|pannikkanum|pannikalam|pannikkalam|pannikalaam|pannittu|seyya|seyyanum|try\s+panna|try\s+panninen)\b'}
+  - {id: tg.intent.saaganum, level: urgent, category: intent, lang: tanglish,
+     pattern: '\bsaa?ga(?:num|nom|anum|nu?m|laam|lam|laama)\b|\bsaa?ga\s*poradhu\b|\bsaa?ga\s*(?:poren|porean|pogiren|poghiren|venum|vendum|aasai|aasaya|thonudhu|thonuthu|thoonudhu|ninaikkiren|ninaikuren|ninaikren)\b'}
+  - {id: tg.intent.sethu_poganum, level: urgent, category: intent, lang: tanglish,
+     pattern: '\bsett?hu\s*(?:poga(?:num|nom|anum)|poren|polam|poidalam|poyidalam|poidanum|poyiralam|poyiruven|poiduven|poyiduven|poyidalam|poven)\b|\bsethu(?:dalam|dalaam|duven|ruven|danum)\b'}
+  - {id: tg.intent.not_live, level: urgent, category: intent, lang: tanglish,
+     pattern: '\bva+(?:zh|l)a(?:ve)?\s*(?:pudikala|pudikkala|pidikala|pidikkala|virupam\s*illa|virupamilla|virupame\s*illa|mudiyala|aasai\s*illa|venam|vendam)\b'}
+  - {id: tg.intent.end_life, level: urgent, category: intent, lang: tanglish,
+     pattern: '\buyir(?:a|ai|e)?\s*(?:vida|vidanum|vittudalam|vittuduven|maaichu|maaikka|maaika)\b|\b(?:ennai|enna|ennaya)\s*naane\s*(?:kolla|konnu|kollanum|kolluven|kola)\b|\blife\s*(?:ah?|a|ya)?\s*(?:mudikka|mudichu|mudichuk|mudikkanum|mudichidalam|end\s*panna|end\s*pannidalam|end\s*pannuven|end\s*pannanum|finish\s*panna)\w*\b'}
+  - {id: tg.intent.only_way, level: urgent, category: intent, lang: tanglish,
+     pattern: '\b(?:tharkolai|saavu|saavuradhu|saavaradhu|saagaradhu|saagradhu)\s*(?:dhaan|thaan|than)?\s*(?:ore|oru)\s*(?:vazhi|vali|solution|theervu)\b|\bva+(?:zh|l)a\s*mudiy?aa?dhu\b'}
+  - {id: tg.passive, level: urgent, category: passive, lang: tanglish,
+     pattern: '\bpirand?h?irukk?ave\s*koodadhu\b|\bthoongi\s*ezhundh?irukk?a(?:ma|maama|kudadhu)\b'}
+  - {id: tg.means, level: urgent, category: means, lang: tanglish, downgradable: false,
+     pattern: '\b(?:visham|vesham|pesticide|poochi\s*marunthu|rat\s*poison|rope|kayiru|tablets?|maathirai|mathirai)\s*(?:vaangi|vaanginen|vaangitten|vaangiten|vechirukken|vechiruken|ready)\b|\bthookk?u\s*(?:poda|podanum|poduven|pottu|potten|maatta|maatti)\b|\bthookk?ula\s*thonga\w*\b|\bfan\s*la\s*(?:thong\w*|thookku)\b|\b(?:visham|vesham|pesticide|poochi\s*marunthu|rat\s*poison)\s*(?:kudi|kudikka|kudichu|kudichuruven|kudichidalam|saapda)\w*\b|\b(?:tablet|tablets|pills|maathirai|mathirai)\s*(?:ellam|ellame|ellathayum|motham|niraya)\s*(?:saapda|sapda|saapdanum|sapdanum|muzhunga|potudalam|poduven|saapiduven)\w*\b'}
+  - {id: tg.self_harm, level: urgent, category: self_harm, lang: tanglish, downgradable: false,
+     pattern: '\bkai(?:ya|yai|a)?\s*(?:aruthu|arukka|aruthukka|vetti|vettikka|kizhichu)\w*\b'}
+  - {id: tg.goodbye, level: urgent, category: goodbye, lang: tanglish, downgradable: false,
+     pattern: '\bell(?:a|o)r(?:u|o)?(?:kk?um)?\s*(?:bye|goodbye|gudbye)\b|\bidhu\s*(?:dhan|thaan|than|tha)\s*en\s*(?:kadaisi|last)\s*(?:message|msg)\b|\bnaalaik?ku\s*naan\s*irukka\s*maa?tt?en\b'}
+  - {id: tg.burden, level: urgent, category: burden, lang: tanglish,
+     pattern: '\bnaan\s*illa(?:ma|mal|me)\s*(?:ellarum|ellorum|ellaarum|en\s*family|veetla|amma\s*appa)\s*(?:nalla|santhosama|happy|nimmadhiya|nimmathiya)\b'}
+
+  # ---------------------------------------------------------------- Tanglish: elevated
+  - {id: tg.negated.death, level: elevated, category: negated, lang: tanglish,
+     pattern: '\b(?:saa?ga|sethu\s*poga)\s*(?:maaten|maatten|matten|maten|mateen)\b'}
+  - {id: tg.topic, level: elevated, category: topic, lang: tanglish,
+     pattern: '\b(?:tharkolai|thatkolai|tharkola)\b'}
+  - {id: tg.hopeless, level: elevated, category: hopelessness, lang: tanglish,
+     pattern: '\b(?:nambikkai|nambikai)\s*(?:illa|illai|pochu|poyiduchu)\b|\b(?:thaanga|thanga)\s*mudiyala\b|\bennaye\s*(?:enakku\s*)?pidikala\b|\blife\s*(?:waste|wasted|veena|veenaa|mudinjudhu)\b'}
+  - {id: tg.burden.self, level: elevated, category: burden, lang: tanglish,
+     pattern: '\bnaan\s*(?:oru\s*)?(?:burden|sumai|baaram|bharam)\b|\byaarukkum\s*naan\s*(?:thevai|thevaye|vendam)\b'}
+
+# Context that changes the level of a match. All are matched against normalised text.
+modifiers:
+  # Removed from the text before any rule runs: idioms that use death words without meaning them.
+  benign:
+    - '\bdying\s+(?:to|for)\b'
+    - '\b(?:die|died|dying|dead)\s+(?:of|from|with)\s+(?:embarrassment|boredom|laughter|laughing|shame|cringe|hunger|heat|cold|curiosity|excitement)\b'
+    - '\bdead\s+(?:tired|serious|sure|battery|phone|laptop|wifi|end|beat|silent|quiet|on\s+time)\b'
+    - '\b(?:phone|laptop|battery|wifi|internet|charger|plant|plants|car|bike|scooter|torch|mic|speaker)\s+(?:is\s+|was\s+|has\s+|just\s+)?(?:dead|died|dying)\b'
+    - '\bdeadlines?\b|\bdead\s+line\b'
+    - '\bto\s+die\s+for\b'
+    - '\b(?:the\s+)?death\s+of\s+me\b'
+    - '\b(?:who|that)\s+(?:died|passed\s+away)\b'
+    - '\b(?:end|ending|cancel)\s+(?:my|the|this|our)\s+(?:subscription|membership|contract|plan|call|meeting|conversation|relationship|argument|streak|lease)\b'
+  # Within the same clause and BEFORE the match: urgent -> elevated.
+  negation_before:
+    - '\b(?:would|will|could)\s+never\b'
+    - '\bnever\s+(?:would|will|going\s+to|ever)\b'
+    - '\b(?:am|is|are)\s+not\s+(?:going\s+to|planning\s+to)\b'
+    - '\b(?:will|would)\s+not\b'
+    - '\bdo\s+not\s+(?:want|wish|plan|intend|actually\s+want|really\s+want)\b'
+    - '\bno\s+(?:intention|intentions|plan|plans|thoughts)\s+(?:of|to)\b'
+    - '\bnot\s+(?:that\s+)?i\s+(?:want|would)\b'
+    - '\bnever\s+want\s+to\b'
+    # Negation immediately before the matched phrase: "not planning to die", "not that i want to die".
+    - '\bnot\s+(?:really\s+|actually\s+|even\s+)?$'
+    - '\bnot\s+that\s+i\s*$'
+  # Directly AFTER the match (Tamil and Tanglish put negation after the verb): urgent -> elevated.
+  negation_after:
+    - '^\s*(?:மாட்டேன்|மாட்டேன|மாட்டோம்)'
+    - '^\s*(?:maaten|maatten|matten|maten|mateen|maatom)\b'
+    - '^\s*(?:னு|ன்னு)\s*(?:இல்ல|இல்லை)'
+    - '^\s*(?:nu|nnu)\s*(?:illa|illai)\b'
+  # Within the same clause and BEFORE the match: someone else is the subject. urgent -> elevated.
+  third_party:
+    - '\b(?:my|a|our|his|her|their)\s+(?:friend|friends|best\s+friend|roommate|room\s+mate|brother|sister|cousin|classmate|batchmate|mom|mum|mother|dad|father|amma|appa|anna|akka|thambi|thangachi|girlfriend|boyfriend|bf|gf|colleague|neighbou?r|student|junior|senior|uncle|aunt)\b'
+    - '\b(?:he|she|they|someone|somebody|people|a\s+person|a\s+guy|a\s+girl)(?:\s+\w+){0,4}?\s+(?:said|says|say|told|tells|wants?|wanted|is|was|were|keeps|kept|posted|texted|messaged|might|tried|has\s+been|talking|talked)\b'
+    - '\bhow\s+(?:do|can|should)\s+i\s+help\b'
+    - '\bif\s+(?:someone|somebody|a\s+friend|a\s+person)\b'
+    - '(?:என்\s*(?:நண்பன்|நண்பி|தோழி|தோழன்|தம்பி|தங்கை|அக்கா|அண்ணா|அண்ணன்|அம்மா|அப்பா)|அவன்|அவள்|அவங்க)'
+    - '\b(?:en\s+(?:friend|nanban|nanbi|thozhi|thambi|akka|anna|thangachi|roommate)|avan|aval|avanga|avaru)\b'
+  # Directly AFTER the match: reported speech ("...-nu sonnan", "...னு சொன்னான்"). urgent -> elevated.
+  reported_speech_after:
+    - '^\s*(?:னு|ன்னு)\s*(?:சொல்றான்|சொன்னான்|சொல்றா|சொன்னா|சொல்றாங்க|சொன்னாங்க|சொல்லுறான்)'
+    - '^\s*(?:nu|nnu)\s*(?:sonnan|sonnaan|sonna|solran|solraan|solra|sollura|solluran|sonnanga|solranga|text\s+panna|text\s+pannan|post\s+pannan)\b'
+  # Anywhere in the message: the words belong to a song, film, book or story. urgent -> elevated.
+  quotation:
+    - '\b(?:lyrics?|song|songs|singing|sang|sings|chorus|verse|quote|quoting|quoted|movie|film|scene|dialogue|dialog|book|novel|poem|poetry|character|episode|series|web\s+series|story|anime|manga|meme|rap|bgm)\b'
+    - '(?:பாடல்|பாட்டு|படம்|படத்துல|வசனம்|கதை)'
+    - '\b(?:paattu|paatu|padam|padathula|vasanam)\b'
+  # Anywhere in the message: the subject is research, news or study. urgent -> elevated, and
+  # elevated "topic" matches -> none.
+  informational:
+    # Deliberately excludes "study", "exam", "assignment" and "project": students in real
+    # distress talk about those, and they must never soften an urgent message.
+    - '\b(?:rates?|statistics?|stats|research|studies|article|articles|news|essay\s+on|seminar\s+on|awareness|prevention|helpline\s+numbers?|psychology\s+(?:class|lecture|paper)|psych\s+class|data\s+on|report\s+on|survey|ncrb|who\s+report|journalism|documentary)\b'
+  # Anywhere in the message: laughter or joking. urgent -> elevated, and elevated matches of
+  # `hyperbole: true` rules -> none.
+  hyperbole:
+    - '\b(?:lol|lmao|lmfao|rofl|haha\w*|hehe\w*|jk|just\s+kidding|kidding|joking|xd|ded)\b'
+  # Anywhere in the message: the person says they are serious. Cancels `hyperbole`.
+  sincerity:
+    - '\b(?:seriously|not\s+joking|not\s+kidding|no\s+joke|i\s+mean\s+it|for\s+real|serious\s+ah|honestly\s+serious)\b'
+  # Anywhere in the message: ordinary stress that people exaggerate about. Only drops elevated
+  # `hyperbole: true` matches to none; never touches urgent ones (exam stress is a real risk).
+  everyday_stress:
+    - '\b(?:exam|exams|test|tests|class|lecture|assignment|homework|traffic|heat|boss|manager|maths?|physics|chemistry|lab|record|viva|semester|internals|deadline|meeting|monday|queue|mosquito|mosquitoes|wifi|internet|network|commute|bus|metro|power\s+cut)\b'
+    - '\b(?:saavadikk?\w*|saagadichu\w*|saagadikk?\w*|kolraanga|kollraanga|torture)\b'
+  # Within the same clause: the thought is described as past and resolved. urgent -> elevated.
+  remission:
+    - '\bused\s+to\b'
+    - '\b(?:years|months)\s+ago\b'
+    - '\bwhen\s+i\s+was\s+(?:younger|a\s+kid|a\s+child|in\s+school|in\s+(?:\d+|\w+)\s+(?:std|standard|grade|class))\b'
+    - '\b(?:i\s+am|feeling)\s+(?:doing\s+)?(?:much\s+|a\s+lot\s+)?better\s+now\b'
+    - '\bno\s+longer\s+(?:feel|think|want)\b'
+    - '\bnot\s+anymore\b'

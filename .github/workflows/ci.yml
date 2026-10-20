@@ -37,10 +37,20 @@ jobs:
           python-version: "3.12"
           enable-cache: true
       - run: uv sync --frozen
+      - name: Cache the safety classifier's sentence encoder
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-e5-small-614241f6
+      - run: uv run python -m app.safety.download_models
       - run: uv run ruff check .
       - run: uv run ruff format --check .
       - run: uv run mypy
       - run: uv run pytest
+      - name: Safety release gate (rules + embedding classifier, urgent recall >= 0.95)
+        env:
+          HF_HUB_OFFLINE: "1"
+        run: uv run python ../../ml/safety_eval/evaluate.py --gate
       - name: Migrations apply cleanly and match the models
         env:
           DATABASE_URL: postgresql+asyncpg://mindguard:mindguard@localhost:5432/mindguard

@@ -1,0 +1,338 @@
+{
+  "rules_version": 4,
+  "classifier_version": "e5s-1",
+  "examples": 70,
+  "labels": {
+    "urgent": 34,
+    "elevated": 13,
+    "none": 23
+  },
+  "languages": {
+    "en": 47,
+    "ta": 9,
+    "tanglish": 14
+  },
+  "overall": {
+    "rules": {
+      "n": 70,
+      "urgent_n": 34,
+      "urgent_recall": 0.38235294117647056,
+      "urgent_fpr": 0.05555555555555555,
+      "flag_recall": 0.46808510638297873,
+      "flag_fpr": 0.0,
+      "exact": 0.6142857142857143
+    },
+    "combined": {
+      "n": 70,
+      "urgent_n": 34,
+      "urgent_recall": 0.9117647058823529,
+      "urgent_fpr": 0.1388888888888889,
+      "flag_recall": 0.9148936170212766,
+      "flag_fpr": 0.21739130434782608,
+      "exact": 0.8142857142857143
+    },
+    "classifier": {
+      "n": 70,
+      "urgent_n": 34,
+      "urgent_recall": 0.8529411764705882,
+      "urgent_fpr": 0.1111111111111111,
+      "flag_recall": 0.8297872340425532,
+      "flag_fpr": 0.21739130434782608,
+      "exact": 0.7571428571428571
+    }
+  },
+  "by_lang": {
+    "en": {
+      "n": 47,
+      "urgent_n": 22,
+      "urgent_recall": 0.9090909090909091,
+      "urgent_fpr": 0.16,
+      "flag_recall": 0.8709677419354839,
+      "flag_fpr": 0.25,
+      "exact": 0.7659574468085106
+    },
+    "ta": {
+      "n": 9,
+      "urgent_n": 5,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.25,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.5,
+      "exact": 0.8888888888888888
+    },
+    "tanglish": {
+      "n": 14,
+      "urgent_n": 7,
+      "urgent_recall": 0.8571428571428571,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.0,
+      "exact": 0.9285714285714286
+    }
+  },
+  "by_category": {
+    "academic_news": {
+      "n": 2,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.5,
+      "exact": 0.5
+    },
+    "burden": {
+      "n": 3,
+      "urgent_n": 3,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "direct_intent": {
+      "n": 9,
+      "urgent_n": 9,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "everyday_distress": {
+      "n": 5,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "goodbye": {
+      "n": 4,
+      "urgent_n": 4,
+      "urgent_recall": 0.75,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.75
+    },
+    "hopelessness": {
+      "n": 4,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 0.75,
+      "flag_fpr": null,
+      "exact": 0.75
+    },
+    "indirect": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "joke_hyperbole": {
+      "n": 9,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.1111111111111111,
+      "flag_recall": null,
+      "flag_fpr": 0.1111111111111111,
+      "exact": 0.8888888888888888
+    },
+    "lyrics_quote": {
+      "n": 1,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "method_seeking": {
+      "n": 2,
+      "urgent_n": 2,
+      "urgent_recall": 0.5,
+      "urgent_fpr": null,
+      "flag_recall": 0.5,
+      "flag_fpr": null,
+      "exact": 0.5
+    },
+    "negation": {
+      "n": 3,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.6666666666666666,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.3333333333333333
+    },
+    "neutral": {
+      "n": 7,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.14285714285714285,
+      "flag_recall": null,
+      "flag_fpr": 0.42857142857142855,
+      "exact": 0.5714285714285714
+    },
+    "passive": {
+      "n": 7,
+      "urgent_n": 7,
+      "urgent_recall": 0.8571428571428571,
+      "urgent_fpr": null,
+      "flag_recall": 0.8571428571428571,
+      "flag_fpr": null,
+      "exact": 0.8571428571428571
+    },
+    "plan_means": {
+      "n": 7,
+      "urgent_n": 7,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "remission": {
+      "n": 1,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 1.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.0
+    },
+    "self_harm": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "third_party": {
+      "n": 4,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 0.75,
+      "flag_fpr": null,
+      "exact": 0.75
+    }
+  },
+  "confusion": {
+    "none": {
+      "none": 18,
+      "urgent": 2,
+      "elevated": 3
+    },
+    "elevated": {
+      "urgent": 3,
+      "elevated": 8,
+      "none": 2
+    },
+    "urgent": {
+      "urgent": 31,
+      "none": 2,
+      "elevated": 1
+    }
+  },
+  "misses": [
+    {
+      "id": "hc-06",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "en",
+      "category": "method_seeking"
+    },
+    {
+      "id": "hc-17",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "en",
+      "category": "passive"
+    },
+    {
+      "id": "hc-32",
+      "label": "urgent",
+      "predicted": "elevated",
+      "lang": "tanglish",
+      "category": "goodbye"
+    },
+    {
+      "id": "hc-35",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "hc-36",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "hc-38",
+      "label": "elevated",
+      "predicted": "none",
+      "lang": "en",
+      "category": "third_party"
+    },
+    {
+      "id": "hc-40",
+      "label": "elevated",
+      "predicted": "none",
+      "lang": "en",
+      "category": "hopelessness"
+    },
+    {
+      "id": "hc-42",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "remission"
+    },
+    {
+      "id": "hc-50",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "joke_hyperbole"
+    },
+    {
+      "id": "hc-55",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "academic_news"
+    },
+    {
+      "id": "hc-60",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "neutral"
+    },
+    {
+      "id": "hc-63",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "neutral"
+    },
+    {
+      "id": "hc-64",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "ta",
+      "category": "neutral"
+    }
+  ]
+}

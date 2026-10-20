@@ -17,6 +17,7 @@ def settings() -> Settings:
         database_url="sqlite+aiosqlite://",
         redis_url="redis://unused",
         cors_origins=["http://testserver"],
+        safety_classifier="hashed",
     )
 
 

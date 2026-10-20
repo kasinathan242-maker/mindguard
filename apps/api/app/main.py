@@ -11,6 +11,7 @@ from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
+from app.safety import engine as safety_engine
 from app.safety.router import router as safety_router
 
 API_PREFIX = "/api/v1"
@@ -25,6 +26,7 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
+        safety_engine.configure(settings.safety_classifier)
         async with resources_factory(settings) as resources:
             app.state.resources = resources
             yield

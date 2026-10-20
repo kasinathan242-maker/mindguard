@@ -1,0 +1,70 @@
+{"id": "hc-01", "text": "I don't think I can keep living, I want this to be over", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-02", "text": "I'm going to end my life after everyone sleeps", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-03", "text": "i just want to die quietly", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-04", "text": "my plan is to take the pills on friday", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "hc-05", "text": "I keep looking at the fan and thinking about the rope", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "hc-06", "text": "Would 30 sleeping tablets be enough", "label": "urgent", "lang": "en", "category": "method_seeking"}
+{"id": "hc-07", "text": "being dead would be better than this", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "hc-08", "text": "I pray every night that I don't wake up", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "hc-09", "text": "Everyone would move on fine if I was gone", "label": "urgent", "lang": "en", "category": "burden"}
+{"id": "hc-10", "text": "I scratched my arms with a blade again", "label": "urgent", "lang": "en", "category": "self_harm"}
+{"id": "hc-11", "text": "This is the end for me. Thank you for everything", "label": "urgent", "lang": "en", "category": "goodbye"}
+{"id": "hc-12", "text": "I've decided I'm not going to be alive by the weekend", "label": "urgent", "lang": "en", "category": "indirect"}
+{"id": "hc-13", "text": "suicide is all I think about", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-14", "text": "I'm going to walk into the sea tonight", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "hc-15", "text": "I hate my life and I want to die", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-16", "text": "what's the quickest way to stop my heart", "label": "urgent", "lang": "en", "category": "method_seeking"}
+{"id": "hc-17", "text": "I'm tired. I want to sleep and never come back", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "hc-18", "text": "i really feel like killing myself today", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "hc-19", "text": "my last wish is that my parents forgive me", "label": "urgent", "lang": "en", "category": "goodbye"}
+{"id": "hc-20", "text": "there's no way out except death", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "hc-21", "text": "I'm going to drink the acid in the lab", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "hc-22", "text": "I feel like I need to disappear permanently", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "hc-23", "text": "நான் சாகணும்னு முடிவு பண்ணிட்டேன்", "label": "urgent", "lang": "ta", "category": "direct_intent"}
+{"id": "hc-24", "text": "இனிமே உயிரோட இருக்க விருப்பமில்லை", "label": "urgent", "lang": "ta", "category": "passive"}
+{"id": "hc-25", "text": "தூக்கு மாட்டிக்கலாம்னு இருக்கேன்", "label": "urgent", "lang": "ta", "category": "plan_means"}
+{"id": "hc-26", "text": "என் கடைசி மூச்சு இன்னைக்கு தான்", "label": "urgent", "lang": "ta", "category": "goodbye"}
+{"id": "hc-27", "text": "நான் செத்தா தான் எல்லாருக்கும் நிம்மதி", "label": "urgent", "lang": "ta", "category": "burden"}
+{"id": "hc-28", "text": "naan saaga poren nu mudivu panniten", "label": "urgent", "lang": "tanglish", "category": "direct_intent"}
+{"id": "hc-29", "text": "uyiroda irukka pudikala", "label": "urgent", "lang": "tanglish", "category": "passive"}
+{"id": "hc-30", "text": "railway track la poi padukka poren", "label": "urgent", "lang": "tanglish", "category": "plan_means"}
+{"id": "hc-31", "text": "naan sethaa dhaan ellarukkum nimmadhi", "label": "urgent", "lang": "tanglish", "category": "burden"}
+{"id": "hc-32", "text": "en kadaisi naal inniku dhaan", "label": "urgent", "lang": "tanglish", "category": "goodbye"}
+{"id": "hc-33", "text": "saaganum pola irukku, enna pannuradhu nu theriyala", "label": "urgent", "lang": "tanglish", "category": "direct_intent"}
+{"id": "hc-34", "text": "sleeping pills ellam saapdalam nu yosikiren", "label": "urgent", "lang": "tanglish", "category": "plan_means"}
+{"id": "hc-35", "text": "I would never act on it, but I've been having thoughts of death", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "hc-36", "text": "I'm not suicidal, just exhausted from everything", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "hc-37", "text": "my junior keeps saying she wants to die, I'm worried", "label": "elevated", "lang": "en", "category": "third_party"}
+{"id": "hc-38", "text": "my friend's brother killed himself last week", "label": "elevated", "lang": "en", "category": "third_party"}
+{"id": "hc-39", "text": "that scene in the series where he says goodbye forever broke me", "label": "elevated", "lang": "en", "category": "lyrics_quote"}
+{"id": "hc-40", "text": "I feel like nothing matters anymore", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "hc-41", "text": "I'm such a disappointment to everyone", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "hc-42", "text": "I hurt myself a long time ago, I'm safe now", "label": "elevated", "lang": "en", "category": "remission"}
+{"id": "hc-43", "text": "I don't want to die. I just don't want to feel like this", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "hc-44", "text": "என் தம்பி தற்கொலை பத்தி பேசறான், பயமா இருக்கு", "label": "elevated", "lang": "ta", "category": "third_party"}
+{"id": "hc-45", "text": "நான் யாருக்கும் உபயோகம் இல்ல", "label": "elevated", "lang": "ta", "category": "hopelessness"}
+{"id": "hc-46", "text": "en friend tharkolai pathi pesuraan", "label": "elevated", "lang": "tanglish", "category": "third_party"}
+{"id": "hc-47", "text": "ellame waste ah pochu, nambikkai illa", "label": "elevated", "lang": "tanglish", "category": "hopelessness"}
+{"id": "hc-48", "text": "this exam timetable is going to kill me", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-49", "text": "lol i almost died when the teacher called my name", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-50", "text": "I'm dying to go home for Pongal", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-51", "text": "my roommate's snoring will be the death of me", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-52", "text": "the WiFi died again during the online test", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-53", "text": "kill me now, there's a surprise test tomorrow", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "hc-54", "text": "Can you explain how suicide prevention training works for teachers", "label": "none", "lang": "en", "category": "academic_news"}
+{"id": "hc-55", "text": "what does the WHO report say about adolescent suicide", "label": "none", "lang": "en", "category": "academic_news"}
+{"id": "hc-56", "text": "I'm upset that my friend forgot my birthday", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "hc-57", "text": "I'm stressed and can't focus on studying", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "hc-58", "text": "I feel homesick tonight", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "hc-59", "text": "I want to end my call with the bank quickly", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "hc-60", "text": "our dog died last year and I still think of him", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "hc-61", "text": "Suggest a mindfulness timer for five minutes", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "hc-62", "text": "I slept eight hours and feel good", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "hc-63", "text": "I'm taking my medicine as the doctor said", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "hc-64", "text": "பரீட்சை முடிஞ்சு வீட்டுக்கு போறேன்", "label": "none", "lang": "ta", "category": "neutral"}
+{"id": "hc-65", "text": "கொஞ்சம் கவலையா இருக்கு நாளைக்கு", "label": "none", "lang": "ta", "category": "everyday_distress"}
+{"id": "hc-66", "text": "assignment saavadikudhu da", "label": "none", "lang": "tanglish", "category": "joke_hyperbole"}
+{"id": "hc-67", "text": "semma scene, sirichu saavuren", "label": "none", "lang": "tanglish", "category": "joke_hyperbole"}
+{"id": "hc-68", "text": "inniku konjam low ah irukku", "label": "none", "lang": "tanglish", "category": "everyday_distress"}
+{"id": "hc-69", "text": "lunch ku enna saapdalam", "label": "none", "lang": "tanglish", "category": "neutral"}
+{"id": "hc-70", "text": "hostel la current illa, saavu", "label": "none", "lang": "tanglish", "category": "joke_hyperbole"}

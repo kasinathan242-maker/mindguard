@@ -1,0 +1,302 @@
+{
+  "rules_version": 4,
+  "classifier_version": "e5s-1",
+  "examples": 76,
+  "labels": {
+    "urgent": 38,
+    "elevated": 17,
+    "none": 21
+  },
+  "languages": {
+    "en": 52,
+    "ta": 9,
+    "tanglish": 15
+  },
+  "overall": {
+    "rules": {
+      "n": 76,
+      "urgent_n": 38,
+      "urgent_recall": 0.9210526315789473,
+      "urgent_fpr": 0.02631578947368421,
+      "flag_recall": 0.8727272727272727,
+      "flag_fpr": 0.047619047619047616,
+      "exact": 0.881578947368421
+    },
+    "combined": {
+      "n": 76,
+      "urgent_n": 38,
+      "urgent_recall": 0.9473684210526315,
+      "urgent_fpr": 0.13157894736842105,
+      "flag_recall": 0.9818181818181818,
+      "flag_fpr": 0.09523809523809523,
+      "exact": 0.8947368421052632
+    },
+    "classifier": {
+      "n": 76,
+      "urgent_n": 38,
+      "urgent_recall": 0.6578947368421053,
+      "urgent_fpr": 0.10526315789473684,
+      "flag_recall": 0.8727272727272727,
+      "flag_fpr": 0.047619047619047616,
+      "exact": 0.7763157894736842
+    }
+  },
+  "by_lang": {
+    "en": {
+      "n": 52,
+      "urgent_n": 25,
+      "urgent_recall": 0.92,
+      "urgent_fpr": 0.07407407407407407,
+      "flag_recall": 0.972972972972973,
+      "flag_fpr": 0.06666666666666667,
+      "exact": 0.9038461538461539
+    },
+    "ta": {
+      "n": 9,
+      "urgent_n": 5,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "tanglish": {
+      "n": 15,
+      "urgent_n": 8,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.42857142857142855,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.25,
+      "exact": 0.8
+    }
+  },
+  "by_category": {
+    "academic_news": {
+      "n": 2,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.5,
+      "exact": 0.5
+    },
+    "burden": {
+      "n": 2,
+      "urgent_n": 2,
+      "urgent_recall": 0.5,
+      "urgent_fpr": null,
+      "flag_recall": 0.5,
+      "flag_fpr": null,
+      "exact": 0.5
+    },
+    "direct_intent": {
+      "n": 10,
+      "urgent_n": 10,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "everyday_distress": {
+      "n": 6,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.16666666666666666,
+      "flag_recall": null,
+      "flag_fpr": 0.16666666666666666,
+      "exact": 0.8333333333333334
+    },
+    "goodbye": {
+      "n": 4,
+      "urgent_n": 4,
+      "urgent_recall": 0.75,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.75
+    },
+    "hopelessness": {
+      "n": 6,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "indirect": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "joke_hyperbole": {
+      "n": 7,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "lyrics_quote": {
+      "n": 2,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.5,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.5
+    },
+    "method_seeking": {
+      "n": 2,
+      "urgent_n": 2,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "negation": {
+      "n": 4,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.5,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.5
+    },
+    "neutral": {
+      "n": 6,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "passive": {
+      "n": 10,
+      "urgent_n": 10,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "plan_means": {
+      "n": 7,
+      "urgent_n": 7,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "remission": {
+      "n": 1,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "self_harm": {
+      "n": 2,
+      "urgent_n": 2,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "third_party": {
+      "n": 4,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.25,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.75
+    }
+  },
+  "confusion": {
+    "none": {
+      "none": 19,
+      "elevated": 1,
+      "urgent": 1
+    },
+    "elevated": {
+      "urgent": 4,
+      "elevated": 13
+    },
+    "urgent": {
+      "urgent": 36,
+      "elevated": 1,
+      "none": 1
+    }
+  },
+  "misses": [
+    {
+      "id": "ho-09",
+      "label": "urgent",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "goodbye"
+    },
+    {
+      "id": "ho-18",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "en",
+      "category": "burden"
+    },
+    {
+      "id": "ho-39",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "ho-45",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "lyrics_quote"
+    },
+    {
+      "id": "ho-53",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "negation"
+    },
+    {
+      "id": "ho-54",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "third_party"
+    },
+    {
+      "id": "ho-61",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "academic_news"
+    },
+    {
+      "id": "ho-75",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "everyday_distress"
+    }
+  ]
+}

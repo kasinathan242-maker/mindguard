@@ -28,6 +28,9 @@ class Settings(BaseSettings):
 
     auth_rate_limit_per_minute: int = 30
 
+    # Layer 2 of the safety engine; see app/safety/engine.py.
+    safety_classifier: Literal["embedding", "hashed", "none"] = "embedding"
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, value: object) -> object:

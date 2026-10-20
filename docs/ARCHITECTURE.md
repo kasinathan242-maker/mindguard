@@ -70,6 +70,15 @@ The browser only ever talks to one origin. nginx serves the built PWA and revers
   "Need help now?" dialog, the questionnaire and the result screen. It renders the bundled copy
   immediately and swaps in the API's version when it arrives.
 
+## Safety engine
+
+`app/safety/engine.assess(text)` runs before any LLM call and returns `none`, `elevated` or
+`urgent` plus the detector and matched rule IDs, never the text. Layer 1 is the versioned
+multilingual rule file `patterns.yaml`; layer 2 is a sentence-encoder classifier
+(`SAFETY_CLASSIFIER=embedding`, with a dependency-free `hashed` fallback). The two are
+OR-combined. The classifier is loaded once in the app lifespan. Method, metrics and limitations:
+[SAFETY.md](SAFETY.md).
+
 ## Frontend (`apps/web`)
 
 - Feature folders under `src/features/*`, shared primitives in `src/components/ui`, and

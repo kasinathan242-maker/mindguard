@@ -1,0 +1,280 @@
+{
+  "rules_version": 4,
+  "classifier_version": "e5s-1",
+  "examples": 70,
+  "labels": {
+    "urgent": 36,
+    "elevated": 14,
+    "none": 20
+  },
+  "languages": {
+    "en": 49,
+    "ta": 9,
+    "tanglish": 12
+  },
+  "overall": {
+    "rules": {
+      "n": 70,
+      "urgent_n": 36,
+      "urgent_recall": 0.75,
+      "urgent_fpr": 0.0,
+      "flag_recall": 0.8,
+      "flag_fpr": 0.0,
+      "exact": 0.8428571428571429
+    },
+    "combined": {
+      "n": 70,
+      "urgent_n": 36,
+      "urgent_recall": 0.9166666666666666,
+      "urgent_fpr": 0.058823529411764705,
+      "flag_recall": 0.96,
+      "flag_fpr": 0.05,
+      "exact": 0.9285714285714286
+    },
+    "classifier": {
+      "n": 70,
+      "urgent_n": 36,
+      "urgent_recall": 0.6944444444444444,
+      "urgent_fpr": 0.058823529411764705,
+      "flag_recall": 0.86,
+      "flag_fpr": 0.05,
+      "exact": 0.8
+    }
+  },
+  "by_lang": {
+    "en": {
+      "n": 49,
+      "urgent_n": 25,
+      "urgent_recall": 0.92,
+      "urgent_fpr": 0.0,
+      "flag_recall": 0.9714285714285714,
+      "flag_fpr": 0.0,
+      "exact": 0.9591836734693877
+    },
+    "ta": {
+      "n": 9,
+      "urgent_n": 5,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "tanglish": {
+      "n": 12,
+      "urgent_n": 6,
+      "urgent_recall": 0.8333333333333334,
+      "urgent_fpr": 0.3333333333333333,
+      "flag_recall": 0.875,
+      "flag_fpr": 0.25,
+      "exact": 0.75
+    }
+  },
+  "by_category": {
+    "academic_news": {
+      "n": 2,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "burden": {
+      "n": 2,
+      "urgent_n": 2,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "direct_intent": {
+      "n": 11,
+      "urgent_n": 11,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "everyday_distress": {
+      "n": 4,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "goodbye": {
+      "n": 4,
+      "urgent_n": 4,
+      "urgent_recall": 0.5,
+      "urgent_fpr": null,
+      "flag_recall": 0.5,
+      "flag_fpr": null,
+      "exact": 0.5
+    },
+    "hopelessness": {
+      "n": 5,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "indirect": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "joke_hyperbole": {
+      "n": 7,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "lyrics_quote": {
+      "n": 1,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "method_seeking": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "negation": {
+      "n": 3,
+      "urgent_n": 1,
+      "urgent_recall": 0.0,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.6666666666666666
+    },
+    "neutral": {
+      "n": 7,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.14285714285714285,
+      "flag_recall": null,
+      "flag_fpr": 0.14285714285714285,
+      "exact": 0.8571428571428571
+    },
+    "passive": {
+      "n": 10,
+      "urgent_n": 10,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "plan_means": {
+      "n": 5,
+      "urgent_n": 5,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "remission": {
+      "n": 1,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "self_harm": {
+      "n": 1,
+      "urgent_n": 1,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "third_party": {
+      "n": 5,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.2,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.8
+    }
+  },
+  "confusion": {
+    "none": {
+      "none": 19,
+      "urgent": 1
+    },
+    "elevated": {
+      "elevated": 13,
+      "urgent": 1
+    },
+    "urgent": {
+      "urgent": 33,
+      "none": 2,
+      "elevated": 1
+    }
+  },
+  "misses": [
+    {
+      "id": "hb-10",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "en",
+      "category": "goodbye"
+    },
+    {
+      "id": "hb-35",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "tanglish",
+      "category": "goodbye"
+    },
+    {
+      "id": "hb-36",
+      "label": "urgent",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "hb-49",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "third_party"
+    },
+    {
+      "id": "hb-70",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "neutral"
+    }
+  ]
+}

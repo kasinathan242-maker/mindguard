@@ -1,0 +1,413 @@
+{
+  "rules_version": 4,
+  "classifier_version": "e5s-1",
+  "examples": 317,
+  "labels": {
+    "urgent": 162,
+    "elevated": 74,
+    "none": 81
+  },
+  "languages": {
+    "en": 208,
+    "ta": 39,
+    "tanglish": 70
+  },
+  "overall": {
+    "rules": {
+      "n": 317,
+      "urgent_n": 162,
+      "urgent_recall": 0.9938271604938271,
+      "urgent_fpr": 0.012903225806451613,
+      "flag_recall": 0.9957627118644068,
+      "flag_fpr": 0.012345679012345678,
+      "exact": 0.9873817034700315
+    },
+    "combined": {
+      "n": 317,
+      "urgent_n": 162,
+      "urgent_recall": 0.9938271604938271,
+      "urgent_fpr": 0.12258064516129032,
+      "flag_recall": 0.9957627118644068,
+      "flag_fpr": 0.07407407407407407,
+      "exact": 0.9242902208201893
+    },
+    "classifier": {
+      "n": 317,
+      "urgent_n": 162,
+      "urgent_recall": 0.6172839506172839,
+      "urgent_fpr": 0.10967741935483871,
+      "flag_recall": 0.8135593220338984,
+      "flag_fpr": 0.06172839506172839,
+      "exact": 0.7129337539432177
+    }
+  },
+  "by_lang": {
+    "en": {
+      "n": 208,
+      "urgent_n": 99,
+      "urgent_recall": 0.98989898989899,
+      "urgent_fpr": 0.11926605504587157,
+      "flag_recall": 0.9933333333333333,
+      "flag_fpr": 0.06896551724137931,
+      "exact": 0.9134615384615384
+    },
+    "ta": {
+      "n": 39,
+      "urgent_n": 27,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "tanglish": {
+      "n": 70,
+      "urgent_n": 36,
+      "urgent_recall": 1.0,
+      "urgent_fpr": 0.17647058823529413,
+      "flag_recall": 1.0,
+      "flag_fpr": 0.10526315789473684,
+      "exact": 0.9142857142857143
+    }
+  },
+  "by_category": {
+    "academic_news": {
+      "n": 8,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.125,
+      "exact": 0.875
+    },
+    "burden": {
+      "n": 10,
+      "urgent_n": 10,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "direct_intent": {
+      "n": 48,
+      "urgent_n": 48,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "everyday_distress": {
+      "n": 21,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.047619047619047616,
+      "flag_recall": null,
+      "flag_fpr": 0.14285714285714285,
+      "exact": 0.8571428571428571
+    },
+    "goodbye": {
+      "n": 16,
+      "urgent_n": 16,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "hopelessness": {
+      "n": 21,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.19047619047619047,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.8095238095238095
+    },
+    "indirect": {
+      "n": 19,
+      "urgent_n": 19,
+      "urgent_recall": 0.9473684210526315,
+      "urgent_fpr": null,
+      "flag_recall": 0.9473684210526315,
+      "flag_fpr": null,
+      "exact": 0.9473684210526315
+    },
+    "joke_hyperbole": {
+      "n": 28,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.03571428571428571,
+      "flag_recall": null,
+      "flag_fpr": 0.07142857142857142,
+      "exact": 0.9285714285714286
+    },
+    "lyrics_quote": {
+      "n": 11,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.2727272727272727,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.7272727272727273
+    },
+    "method_seeking": {
+      "n": 8,
+      "urgent_n": 8,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "negation": {
+      "n": 19,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.47368421052631576,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.5263157894736842
+    },
+    "neutral": {
+      "n": 24,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": null,
+      "flag_fpr": 0.0,
+      "exact": 1.0
+    },
+    "passive": {
+      "n": 23,
+      "urgent_n": 23,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "plan_means": {
+      "n": 28,
+      "urgent_n": 28,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "remission": {
+      "n": 5,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.2,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 0.8
+    },
+    "self_harm": {
+      "n": 10,
+      "urgent_n": 10,
+      "urgent_recall": 1.0,
+      "urgent_fpr": null,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    },
+    "third_party": {
+      "n": 18,
+      "urgent_n": 0,
+      "urgent_recall": null,
+      "urgent_fpr": 0.0,
+      "flag_recall": 1.0,
+      "flag_fpr": null,
+      "exact": 1.0
+    }
+  },
+  "confusion": {
+    "none": {
+      "none": 75,
+      "elevated": 4,
+      "urgent": 2
+    },
+    "elevated": {
+      "elevated": 57,
+      "urgent": 17
+    },
+    "urgent": {
+      "urgent": 161,
+      "none": 1
+    }
+  },
+  "misses": [
+    {
+      "id": "en-ng-02",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-03",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-05",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-06",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-07",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-08",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-09",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-ng-12",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "negation"
+    },
+    {
+      "id": "en-lq-05",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "lyrics_quote"
+    },
+    {
+      "id": "en-lq-08",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "lyrics_quote"
+    },
+    {
+      "id": "en-hp-12",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "hopelessness"
+    },
+    {
+      "id": "en-hp-13",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "hopelessness"
+    },
+    {
+      "id": "en-rm-03",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "en",
+      "category": "remission"
+    },
+    {
+      "id": "tg-ng-02",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "negation"
+    },
+    {
+      "id": "tg-lq-01",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "lyrics_quote"
+    },
+    {
+      "id": "tg-hp-03",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "hopelessness"
+    },
+    {
+      "id": "tg-hp-04",
+      "label": "elevated",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "hopelessness"
+    },
+    {
+      "id": "en-jk-09",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "joke_hyperbole"
+    },
+    {
+      "id": "en-ac-08",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "academic_news"
+    },
+    {
+      "id": "en-ed-02",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "everyday_distress"
+    },
+    {
+      "id": "en-ed-03",
+      "label": "none",
+      "predicted": "elevated",
+      "lang": "en",
+      "category": "everyday_distress"
+    },
+    {
+      "id": "tg-jk-06",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "joke_hyperbole"
+    },
+    {
+      "id": "tg-ed-04",
+      "label": "none",
+      "predicted": "urgent",
+      "lang": "tanglish",
+      "category": "everyday_distress"
+    },
+    {
+      "id": "mx-08",
+      "label": "urgent",
+      "predicted": "none",
+      "lang": "en",
+      "category": "indirect"
+    }
+  ]
+}

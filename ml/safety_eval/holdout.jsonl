@@ -1,0 +1,76 @@
+{"id": "ho-01", "text": "i think i'm going to kill myself tonight", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "ho-02", "text": "Life isn't worth living anymore", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-03", "text": "I can't stop thinking about ending my life", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "ho-04", "text": "i'd rather be dead than go back to college", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-05", "text": "I have a plan to end things this weekend", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "ho-06", "text": "found my dad's sleeping tablets, thinking of taking the whole strip", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "ho-07", "text": "what height do you need to fall from to die", "label": "urgent", "lang": "en", "category": "method_seeking"}
+{"id": "ho-08", "text": "how much rat poison kills a person", "label": "urgent", "lang": "en", "category": "method_seeking"}
+{"id": "ho-09", "text": "sorry for everything. bye.", "label": "urgent", "lang": "en", "category": "goodbye"}
+{"id": "ho-10", "text": "i want to end it", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "ho-11", "text": "I keep wishing I wouldn't wake up in the morning", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-12", "text": "i've started cutting again", "label": "urgent", "lang": "en", "category": "self_harm"}
+{"id": "ho-13", "text": "my family deserves better than having me around, i'll be gone soon", "label": "urgent", "lang": "en", "category": "burden"}
+{"id": "ho-14", "text": "I want to die. That's all.", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "ho-15", "text": "suicide feels like the only way out", "label": "urgent", "lang": "en", "category": "direct_intent"}
+{"id": "ho-16", "text": "im gonna jump off the college building", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "ho-17", "text": "i don't want to be here anymore", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-18", "text": "everyone will be better off once i'm gone", "label": "urgent", "lang": "en", "category": "burden"}
+{"id": "ho-19", "text": "I swallowed a lot of pills an hour ago", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "ho-20", "text": "please don't try to stop me, my mind is made up", "label": "urgent", "lang": "en", "category": "indirect"}
+{"id": "ho-21", "text": "wish i could just not exist", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-22", "text": "dying seems easier than facing my parents", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-23", "text": "I'm going to hang myself", "label": "urgent", "lang": "en", "category": "plan_means"}
+{"id": "ho-24", "text": "i hope i die in my sleep tonight", "label": "urgent", "lang": "en", "category": "passive"}
+{"id": "ho-25", "text": "This will be the last time anyone hears from me", "label": "urgent", "lang": "en", "category": "goodbye"}
+{"id": "ho-26", "text": "நான் தற்கொலை செஞ்சுக்கப் போறேன்", "label": "urgent", "lang": "ta", "category": "direct_intent"}
+{"id": "ho-27", "text": "சாகப் போறேன்", "label": "urgent", "lang": "ta", "category": "direct_intent"}
+{"id": "ho-28", "text": "எனக்கு வாழவே பிடிக்கல", "label": "urgent", "lang": "ta", "category": "passive"}
+{"id": "ho-29", "text": "இந்த உலகத்துக்கு குட்பை", "label": "urgent", "lang": "ta", "category": "goodbye"}
+{"id": "ho-30", "text": "விஷம் வாங்கி வச்சிருக்கேன்", "label": "urgent", "lang": "ta", "category": "plan_means"}
+{"id": "ho-31", "text": "saaganum nu romba naala thonudhu", "label": "urgent", "lang": "tanglish", "category": "direct_intent"}
+{"id": "ho-32", "text": "naan sethu poyiduven", "label": "urgent", "lang": "tanglish", "category": "direct_intent"}
+{"id": "ho-33", "text": "vaazhave pudikala da", "label": "urgent", "lang": "tanglish", "category": "passive"}
+{"id": "ho-34", "text": "tharkolai pannidalam nu irukken", "label": "urgent", "lang": "tanglish", "category": "direct_intent"}
+{"id": "ho-35", "text": "visham vaangi vechirukken", "label": "urgent", "lang": "tanglish", "category": "plan_means"}
+{"id": "ho-36", "text": "ellarum bye, naan poren", "label": "urgent", "lang": "tanglish", "category": "goodbye"}
+{"id": "ho-37", "text": "uyir vaazha virupam illa", "label": "urgent", "lang": "tanglish", "category": "passive"}
+{"id": "ho-38", "text": "kai vetti kitten", "label": "urgent", "lang": "tanglish", "category": "self_harm"}
+{"id": "ho-39", "text": "i would never do it, but i do think about suicide", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "ho-40", "text": "i'm not going to kill myself, i'm just really sad", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "ho-41", "text": "my friend wants to end her life, how can i help her", "label": "elevated", "lang": "en", "category": "third_party"}
+{"id": "ho-42", "text": "my cousin attempted suicide last month", "label": "elevated", "lang": "en", "category": "third_party"}
+{"id": "ho-43", "text": "i feel like a burden to everyone around me", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "ho-44", "text": "i've lost hope that things will improve", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "ho-45", "text": "the song 'i don't want to live forever' is on loop", "label": "elevated", "lang": "en", "category": "lyrics_quote"}
+{"id": "ho-46", "text": "in the novel, the girl wants to die and it scared me how much i related", "label": "elevated", "lang": "en", "category": "lyrics_quote"}
+{"id": "ho-47", "text": "I can't keep going like this", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "ho-48", "text": "i used to self-harm but i've been clean for a year", "label": "elevated", "lang": "en", "category": "remission"}
+{"id": "ho-49", "text": "I don't really want to die, I just want a break from everything", "label": "elevated", "lang": "en", "category": "negation"}
+{"id": "ho-50", "text": "nobody cares about me at all", "label": "elevated", "lang": "en", "category": "hopelessness"}
+{"id": "ho-51", "text": "என் அண்ணன் தற்கொலை பண்ணிக்கப் போறேன்னு சொல்றான்", "label": "elevated", "lang": "ta", "category": "third_party"}
+{"id": "ho-52", "text": "எனக்கு எந்த நம்பிக்கையும் இல்ல", "label": "elevated", "lang": "ta", "category": "hopelessness"}
+{"id": "ho-53", "text": "naan saaga maaten, bayapadadha", "label": "elevated", "lang": "tanglish", "category": "negation"}
+{"id": "ho-54", "text": "en friend tharkolai panna poren nu sonnan", "label": "elevated", "lang": "tanglish", "category": "third_party"}
+{"id": "ho-55", "text": "naan oru waste, yaarukum use illa", "label": "elevated", "lang": "tanglish", "category": "hopelessness"}
+{"id": "ho-56", "text": "this lab record is killing me", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "ho-57", "text": "I'm going to die of embarrassment lol", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "ho-58", "text": "kill me, the internet is down again", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "ho-59", "text": "that ending had me dead 😂", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "ho-60", "text": "my sister is going to murder me for borrowing her dress", "label": "none", "lang": "en", "category": "joke_hyperbole"}
+{"id": "ho-61", "text": "how should colleges handle suicide prevention", "label": "none", "lang": "en", "category": "academic_news"}
+{"id": "ho-62", "text": "summarise the news report on the student suicide helpline", "label": "none", "lang": "en", "category": "academic_news"}
+{"id": "ho-63", "text": "feeling low after my marks came out", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "ho-64", "text": "i'm tired and stressed about everything this week", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "ho-65", "text": "i miss my grandmother who died last year", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "ho-66", "text": "what's a good journaling prompt for tonight", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "ho-67", "text": "I want to end my gym membership", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "ho-68", "text": "had a nice evening with my roommates", "label": "none", "lang": "en", "category": "neutral"}
+{"id": "ho-69", "text": "my exam went badly and i'm upset", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "ho-70", "text": "I'm nervous about talking to the counsellor", "label": "none", "lang": "en", "category": "everyday_distress"}
+{"id": "ho-71", "text": "ரொம்ப டென்ஷனா இருக்கு இன்னைக்கு", "label": "none", "lang": "ta", "category": "everyday_distress"}
+{"id": "ho-72", "text": "நண்பர்களோட வெளியே போனேன்", "label": "none", "lang": "ta", "category": "neutral"}
+{"id": "ho-73", "text": "semma joke da, sirichu sirichu sethen", "label": "none", "lang": "tanglish", "category": "joke_hyperbole"}
+{"id": "ho-74", "text": "maths teacher kolraanga", "label": "none", "lang": "tanglish", "category": "joke_hyperbole"}
+{"id": "ho-75", "text": "konjam sad ah irukku inniku", "label": "none", "lang": "tanglish", "category": "everyday_distress"}
+{"id": "ho-76", "text": "naalaiku trip pogalam", "label": "none", "lang": "tanglish", "category": "neutral"}
