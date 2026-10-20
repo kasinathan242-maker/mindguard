@@ -18,6 +18,7 @@ from app.checkins.models import Checkin
 from app.consent.models import Consent
 from app.core.crypto import decrypt
 from app.core.deps import SessionDep, SettingsDep
+from app.integrations.wearables import WearableSample
 from app.safety.models import SafetyEvent
 
 router = APIRouter(prefix="/privacy", tags=["privacy"])
@@ -38,6 +39,9 @@ async def export(user: CurrentUser, session: SessionDep, settings: SettingsDep) 
     chats = (await session.scalars(select(ChatSession).where(ChatSession.user_id == uid))).all()
     events = (await session.scalars(select(SafetyEvent).where(SafetyEvent.user_id == uid))).all()
     audit = (await session.scalars(select(AuditLog).where(AuditLog.user_id == uid))).all()
+    wearables = (
+        await session.scalars(select(WearableSample).where(WearableSample.user_id == uid))
+    ).all()
 
     chat_out = []
     for chat in chats:
@@ -111,6 +115,10 @@ async def export(user: CurrentUser, session: SessionDep, settings: SettingsDep) 
                 "created_at": _iso(e.created_at),
             }
             for e in events
+        ],
+        "wearables": [
+            {"day": s.day.isoformat(), "metric": s.metric, "value": s.value, "source": s.source}
+            for s in wearables
         ],
         "audit_log": [{"action": a.action, "created_at": _iso(a.created_at)} for a in audit],
     }

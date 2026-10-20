@@ -14,6 +14,7 @@ from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
+from app.integrations.wearables import router as wearables_router
 from app.privacy.router import router as privacy_router
 from app.reports.router import router as reports_router
 from app.safety import engine as safety_engine
@@ -65,5 +66,6 @@ def create_app(
     api.include_router(checkins_router)
     api.include_router(privacy_router)
     api.include_router(reports_router)
+    api.include_router(wearables_router)
     app.include_router(api)
     return app

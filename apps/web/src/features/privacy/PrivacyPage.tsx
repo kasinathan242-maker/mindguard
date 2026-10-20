@@ -9,6 +9,7 @@ import { ApiError } from '@/lib/api';
 import { useConsents, useSession, useUpdateConsents, useUpgrade } from '@/lib/session';
 import { ConsentRow } from './ConsentRow';
 import { DataControls } from './DataControls';
+import { WearableImport } from './WearableImport';
 
 function ConsentsSection() {
   const { t } = useTranslation();
@@ -167,6 +168,16 @@ export function PrivacyPage() {
           {t('privacyPage.accountTitle')}
         </h2>
         <AccountSection />
+      </section>
+
+      <section aria-labelledby="wearables-title" className="mt-12">
+        <h2
+          id="wearables-title"
+          className="mb-5 font-display text-2xl font-semibold tracking-tight"
+        >
+          {t('wearables.title')}
+        </h2>
+        <WearableImport />
       </section>
 
       <section aria-labelledby="data-title" className="mt-12">

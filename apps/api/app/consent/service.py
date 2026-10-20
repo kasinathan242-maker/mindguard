@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.audit.service import record
@@ -45,6 +45,15 @@ async def apply_consents(
         else:
             row.revoked_at = now
             record(session, user_id, f"consent.revoke.{scope}")
+            await _erase_scope_data(session, user_id, scope)
+
+
+async def _erase_scope_data(session: AsyncSession, user_id: uuid.UUID, scope: str) -> None:
+    """Withdrawing consent also removes the data that consent covered."""
+    if scope == "wearables":
+        from app.integrations.wearables import WearableSample  # avoids an import cycle
+
+        await session.execute(delete(WearableSample).where(WearableSample.user_id == user_id))
 
 
 async def list_consents(session: AsyncSession, user_id: uuid.UUID) -> ConsentsResponse:

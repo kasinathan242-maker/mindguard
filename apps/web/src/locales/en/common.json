@@ -382,5 +382,14 @@
     "diagnosis": "Diagnosis",
     "noDiagnosis": "Not provided. MindGuard is a screening and support tool.",
     "download": "Download PDF to share"
+  },
+  "wearables": {
+    "title": "Health data import",
+    "intro": "Upload daily sleep, steps and resting heart rate exported from your phone or watch. Only daily totals are stored, and switching off the consent deletes them.",
+    "label": "Choose a CSV file",
+    "format": "Columns: day, sleep_minutes, steps, resting_hr (one row per day, YYYY-MM-DD).",
+    "needsConsent": "Switch on \"Health data import\" above to use this.",
+    "imported_one": "Imported {{count}} day.",
+    "imported_other": "Imported {{count}} days."
   }
 }

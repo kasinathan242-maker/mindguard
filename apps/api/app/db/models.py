@@ -7,6 +7,7 @@ from app.chat.models import ChatMessage, ChatSession
 from app.checkins.models import Checkin
 from app.consent.models import Consent
 from app.db.base import Base
+from app.integrations.wearables import WearableSample
 from app.safety.models import SafetyEvent
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "RefreshToken",
     "SafetyEvent",
     "User",
+    "WearableSample",
 ]

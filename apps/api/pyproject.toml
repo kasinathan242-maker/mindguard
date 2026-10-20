@@ -21,6 +21,7 @@ dependencies = [
     "cryptography>=46",
     "httpx>=0.28,<0.29",
     "reportlab>=4.4",
+    "python-multipart>=0.0.20",
 ]
 
 [dependency-groups]
