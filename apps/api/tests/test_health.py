@@ -1,9 +1,12 @@
 import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
+from pydantic import SecretStr
 from redis.exceptions import ConnectionError as RedisConnectionError
 
+from app.core.config import Settings
 from app.core.resources import Resources
+from app.main import create_app
 
 
 async def test_health_reports_ok_when_dependencies_respond(client: AsyncClient) -> None:
@@ -36,10 +39,9 @@ async def test_health_degrades_when_redis_is_down(
 
 
 async def test_api_docs_are_hidden_in_production() -> None:
-    from app.core.config import Settings
-    from app.main import create_app
-
-    prod = create_app(Settings(app_env="production"))
+    prod = create_app(
+        Settings(app_env="production", jwt_secret=SecretStr("x" * 48), cookie_secure=True)
+    )
     paths = {getattr(route, "path", "") for route in prod.routes}
 
     assert "/api/docs" not in paths

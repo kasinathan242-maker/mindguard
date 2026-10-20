@@ -1,37 +1,152 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import '@fontsource-variable/noto-sans-tamil';
 
-@theme {
-  --font-display: 'Fraunces', ui-serif, Georgia, serif;
-  --font-sans: 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-  --color-canvas: #f6f1ea;
-  --color-surface: #fffaf3;
-  --color-ink: #2b2620;
-  --color-ink-soft: #4a433b;
-  --color-ink-muted: #6e655b;
-  --color-accent: #2f6b5e;
+/*
+  Design tokens. One accent (deep sage green); crisis red appears only inside the crisis card.
+  Radius rule: interactive controls are full pills, containers use the 28px/22px double bezel,
+  form inputs are 16px.
+*/
+:root {
+  --canvas: #f1f4f0;
+  --surface: #fafbf9;
+  --surface-sunk: #e4e9e3;
+  --ink: #16201b;
+  --ink-soft: #35413b;
+  --ink-muted: #56625b;
+  --line: rgb(22 32 27 / 0.1);
+  --accent: #276651;
+  --accent-ink: #f3f8f5;
+  --accent-soft: #d5e5dc;
+  --focus: #276651;
+  --shadow: 22 32 27;
+  --crisis: #b42318;
+  --crisis-ink: #ffffff;
+  --crisis-soft: #fdecea;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --canvas: #0e1311;
+    --surface: #151c19;
+    --surface-sunk: #0a0e0c;
+    --ink: #e7eee9;
+    --ink-soft: #c1ccc5;
+    --ink-muted: #95a39b;
+    --line: rgb(231 238 233 / 0.1);
+    --accent: #86cbb0;
+    --accent-ink: #0b1d16;
+    --accent-soft: #1c3128;
+    --focus: #86cbb0;
+    --shadow: 0 0 0;
+    --crisis: #f97066;
+    --crisis-ink: #1f0604;
+    --crisis-soft: #3a1714;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --canvas: #0e1311;
+  --surface: #151c19;
+  --surface-sunk: #0a0e0c;
+  --ink: #e7eee9;
+  --ink-soft: #c1ccc5;
+  --ink-muted: #95a39b;
+  --line: rgb(231 238 233 / 0.1);
+  --accent: #86cbb0;
+  --accent-ink: #0b1d16;
+  --accent-soft: #1c3128;
+  --focus: #86cbb0;
+  --shadow: 0 0 0;
+  --crisis: #f97066;
+  --crisis-ink: #1f0604;
+  --crisis-soft: #3a1714;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-display:
+    'Bricolage Grotesque Variable', 'Noto Sans Tamil Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    'Plus Jakarta Sans Variable', 'Noto Sans Tamil Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-crisis: var(--crisis);
+  --color-crisis-ink: var(--crisis-ink);
+  --color-crisis-soft: var(--crisis-soft);
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
   html {
-    color-scheme: light dark;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--color-canvas);
-    color: var(--color-ink);
+    min-height: 100dvh;
+    background-color: var(--canvas);
+    color: var(--ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --color-canvas: #1a1815;
-      --color-surface: #23201c;
-      --color-ink: #f1ebe2;
-      --color-ink-soft: #d6cec3;
-      --color-ink-muted: #a69c90;
-      --color-accent: #7cc2b0;
+  :lang(ta) body {
+    line-height: 1.7;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
     }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility shadow-soft {
+  box-shadow:
+    0 1px 2px rgb(var(--shadow) / 0.04),
+    0 12px 40px -12px rgb(var(--shadow) / 0.14);
+}
+
+@utility bezel-highlight {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
+
+  @variant dark {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
   }
 }

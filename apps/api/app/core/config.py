@@ -1,8 +1,10 @@
 from functools import lru_cache
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Self
 
-from pydantic import field_validator
+from pydantic import SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+
+DEV_JWT_SECRET = "dev-only-insecure-jwt-secret-do-not-use-in-production"  # noqa: S105
 
 
 class Settings(BaseSettings):
@@ -19,12 +21,30 @@ class Settings(BaseSettings):
 
     cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:5173"]
 
+    jwt_secret: SecretStr = SecretStr(DEV_JWT_SECRET)
+    access_token_ttl_minutes: int = 15
+    refresh_token_ttl_days: int = 30
+    cookie_secure: bool = False
+
+    auth_rate_limit_per_minute: int = 30
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, value: object) -> object:
         if isinstance(value, str):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
+
+    @model_validator(mode="after")
+    def _refuse_insecure_production(self) -> Self:
+        if not self.is_production:
+            return self
+        secret = self.jwt_secret.get_secret_value()
+        if secret == DEV_JWT_SECRET or len(secret) < 32:
+            raise ValueError("JWT_SECRET must be set to a random value of 32+ characters")
+        if not self.cookie_secure:
+            raise ValueError("COOKIE_SECURE must be true in production (HTTPS only)")
+        return self
 
     @property
     def is_production(self) -> bool:

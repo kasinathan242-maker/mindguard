@@ -19,6 +19,17 @@ jobs:
     defaults:
       run:
         working-directory: apps/api
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: mindguard
+          POSTGRES_PASSWORD: mindguard
+          POSTGRES_DB: mindguard
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mindguard" --health-interval 5s --health-timeout 3s
+          --health-retries 20
     steps:
       - uses: actions/checkout@v5
       - uses: astral-sh/setup-uv@v7
@@ -30,6 +41,14 @@ jobs:
       - run: uv run ruff format --check .
       - run: uv run mypy
       - run: uv run pytest
+      - name: Migrations apply cleanly and match the models
+        env:
+          DATABASE_URL: postgresql+asyncpg://mindguard:mindguard@localhost:5432/mindguard
+        run: |
+          uv run alembic upgrade head
+          uv run alembic check
+          uv run alembic downgrade base
+          uv run alembic upgrade head
       - name: Dependency audit
         run: |
           uv export --frozen --no-dev --no-emit-project -o "$RUNNER_TEMP/requirements.txt"
@@ -57,7 +76,7 @@ jobs:
       - run: npm audit --omit=dev --audit-level=high
 
   compose:
-    name: Docker Compose smoke test
+    name: Docker Compose stack + E2E
     runs-on: ubuntu-latest
     needs: [api, web]
     steps:
@@ -65,6 +84,22 @@ jobs:
       - run: cp .env.example .env
       - run: docker compose up -d --build --wait --wait-timeout 180
       - run: curl --fail --silent http://localhost:8080/api/v1/health | tee /dev/stderr | grep -q '"status":"ok"'
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - name: End-to-end tests (Playwright + axe-core)
+        working-directory: apps/web
+        run: |
+          npm ci --no-fund
+          npx playwright install --with-deps chromium
+          npx playwright test
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
       - if: failure()
         run: docker compose logs
       - if: always()

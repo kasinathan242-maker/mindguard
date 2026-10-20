@@ -41,13 +41,34 @@ The browser only ever talks to one origin. nginx serves the built PWA and revers
   `emotion`, `voice`, `mood`, `reports`, `wellness`, `integrations`, `privacy`. Each owns its
   models, schemas, service functions and router.
 
+## Sessions and consent
+
+- **Anonymous first.** `POST /auth/anonymous` creates a user with no email, after an 18+
+  confirmation and `core` consent in the same request. `POST /auth/upgrade` later attaches an
+  email and argon2id password hash to the same row, so every record keeps its `user_id`.
+- **Tokens.** A 15-minute HS256 access JWT lives in an httpOnly `SameSite=Strict` cookie scoped to
+  `/api`. A 30-day opaque refresh token lives in a second cookie scoped to `/api/v1/auth`; only its
+  SHA-256 digest is stored. Every refresh rotates the token within a family, and presenting an
+  already-rotated token revokes the whole family.
+- **Consent.** One row per user and scope holds the current state; `audit_log` records every grant
+  and revoke. Endpoints that depend on optional data use the `require_consent(scope)` dependency,
+  which returns `403 {"code": "consent_required"}` until the scope is granted.
+- **Rate limiting.** Credential and session-creation endpoints share a Redis fixed-window limiter
+  keyed by a hash of the client IP.
+
 ## Frontend (`apps/web`)
 
 - Feature folders under `src/features/*`, shared primitives in `src/components/ui`, and
   infrastructure (API client, i18n) in `src/lib`.
 - TanStack Query owns server state; the API client always sends credentials and raises a typed
   `ApiError`.
-- `react-i18next` with `en` and `ta` locales from day one.
+- `react-i18next` with `en` and `ta` locales from day one; a unit test keeps their keys identical.
+- `apiFetch` retries once after a silent `/auth/refresh` when a request returns 401, sharing one
+  refresh between concurrent callers.
+- Design tokens are CSS variables (light, dark, and a manual override via `data-theme`); fonts are
+  self-hosted. Motion uses `motion/react` and always honours `prefers-reduced-motion`.
+- Playwright E2E runs against the Compose stack at 360 px and desktop widths, with an axe-core
+  WCAG 2.2 AA scan on every screen it visits.
 
 ## Runtime topology (Docker Compose)
 

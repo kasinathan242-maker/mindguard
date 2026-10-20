@@ -1,5 +1,8 @@
-"""ORM models. Every table is registered here so Alembic autogenerate sees it."""
+"""ORM models. Every table is imported here so Alembic autogenerate and tests see it."""
 
+from app.audit.models import AuditLog
+from app.auth.models import RefreshToken, User
+from app.consent.models import Consent
 from app.db.base import Base
 
-__all__ = ["Base"]
+__all__ = ["AuditLog", "Base", "Consent", "RefreshToken", "User"]

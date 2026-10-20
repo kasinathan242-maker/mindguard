@@ -1,5 +1,207 @@
 {
   "appName": "MindGuard AI",
+  "loading": "Loading…",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "nav": {
+    "skip": "Skip to content",
+    "howItWorks": "How it works",
+    "privacy": "Privacy",
+    "signIn": "Sign in",
+    "language": "Language",
+    "themeDark": "Switch to dark theme",
+    "themeLight": "Switch to light theme",
+    "home": "MindGuard AI home"
+  },
+  "breathing": {
+    "in": "Breathe in",
+    "holdFull": "Hold",
+    "out": "Breathe out",
+    "holdEmpty": "Hold",
+    "pause": "Pause",
+    "play": "Resume",
+    "description": "Box breathing guide: breathe in for four seconds, hold for four, breathe out for four, hold for four.",
+    "caption": "Try it now. Box breathing, four seconds each."
+  },
+  "landing": {
+    "hero": {
+      "title": "Check in with yourself, privately.",
+      "subtitle": "Validated wellbeing check-ins, a companion that listens, and real help when you need it. No sign-up needed.",
+      "cta": "Start anonymously",
+      "secondary": "How it works"
+    },
+    "honest": {
+      "title": "Clear about what this is.",
+      "isTitle": "MindGuard is",
+      "is": [
+        "A self-check using the PHQ-9 and GAD-7, two questionnaires used by doctors worldwide.",
+        "A chat companion that adjusts its tone to how you're feeling.",
+        "A mood tracker with trends and a summary you can download.",
+        "A toolkit for breathing, grounding, journaling and mindfulness.",
+        "A safety net that connects you to real people, fast."
+      ],
+      "notTitle": "MindGuard is not",
+      "not": [
+        "A diagnosis. Scores describe how you've been feeling, nothing more.",
+        "A therapist or an emergency service. It points you to both.",
+        "Watching you. Every data source stays off until you switch it on, and you can delete it."
+      ]
+    },
+    "how": {
+      "eyebrow": "How it works",
+      "title": "Start with a few questions. The rest is up to you.",
+      "answer": {
+        "title": "Answer",
+        "body": "Nine questions about the last two weeks. It takes about three minutes."
+      },
+      "talk": {
+        "title": "Talk",
+        "body": "Chat, or record a short voice note, if you want to. Both are optional."
+      },
+      "connect": {
+        "title": "Connect",
+        "body": "Import sleep and step data from a file. Optional too."
+      },
+      "review": {
+        "title": "Review",
+        "body": "See your scores, your patterns, and next steps that fit."
+      },
+      "sampleLead": "Over the last 2 weeks, how often have you been bothered by:",
+      "sampleItem": "Little interest or pleasure in doing things",
+      "sampleOptions": ["Not at all", "Several days", "More than half the days", "Nearly every day"]
+    },
+    "privacy": {
+      "title": "Your data stays yours.",
+      "anon": {
+        "title": "Anonymous by default",
+        "body": "No name, email or phone number needed to begin."
+      },
+      "encrypted": {
+        "title": "Encrypted at rest",
+        "body": "Chat messages, journal entries and notes are encrypted before they are stored."
+      },
+      "off": {
+        "title": "Off until you say yes",
+        "body": "Voice, health data, reminders and cloud AI each need their own separate yes."
+      },
+      "erase": {
+        "title": "Export or delete, anytime",
+        "body": "Download everything you've saved, or erase your account for good."
+      }
+    },
+    "help": {
+      "title": "If you are not safe right now",
+      "body": "Please reach a person now. These lines are free and open 24 hours a day.",
+      "telemanas": "Tele-MANAS",
+      "telemanasDetail": "Free, 24x7, in many Indian languages",
+      "emergency": "Emergency",
+      "emergencyDetail": "Police, fire and ambulance",
+      "call": "Call {{number}}"
+    },
+    "final": {
+      "title": "Ready when you are.",
+      "body": "It takes about three minutes, and you can stop at any point."
+    },
+    "footer": {
+      "disclaimer": "MindGuard AI is a screening and support tool. It does not diagnose, and it is not an emergency service.",
+      "made": "Built for students and young adults in India."
+    }
+  },
+  "onboarding": {
+    "age": {
+      "title": "Before we begin",
+      "question": "Are you 18 or older?",
+      "why": "MindGuard is designed for adults. We ask so we can point younger people to support made for them.",
+      "yes": "Yes, I'm 18 or older",
+      "no": "No, I'm under 18"
+    },
+    "under18": {
+      "title": "Thank you for telling us.",
+      "body": "MindGuard is built for adults for now, so we can't set up an account for you. You still deserve support, and these people are ready to help.",
+      "telemanas": "Tele-MANAS is free, open 24x7, and talks with people of any age.",
+      "trusted": "A parent, teacher, school counsellor or another adult you trust is a good person to talk to.",
+      "emergency": "In an emergency, call 112.",
+      "back": "Back to home"
+    },
+    "consent": {
+      "title": "Choose what MindGuard can use",
+      "intro": "Only the first item is needed. Everything else stays off unless you switch it on, and you can change your mind anytime in Privacy.",
+      "coreRequired": "Required",
+      "mustAgree": "Please switch on the first item to continue.",
+      "submit": "Continue anonymously",
+      "haveAccount": "Already have an account?"
+    }
+  },
+  "scopes": {
+    "core": {
+      "label": "Store my check-in answers and scores",
+      "body": "Needed to show your results and trends. Stored against an anonymous ID, not your name."
+    },
+    "chat_history": {
+      "label": "Keep chat history",
+      "body": "Save conversations for 30 days so you can come back to them. When off, each chat ends when you close it."
+    },
+    "voice": {
+      "label": "Voice check-ins",
+      "body": "Analyse short voice notes for tone. Audio is processed in memory and never saved."
+    },
+    "wearables": {
+      "label": "Health data import",
+      "body": "Use sleep, steps and resting heart rate from files you upload."
+    },
+    "cloud_llm": {
+      "label": "Cloud AI replies",
+      "body": "Allow a cloud AI service to write chat replies. Names, phone numbers and emails are removed first."
+    },
+    "reminders": {
+      "label": "Reminders",
+      "body": "Gentle notifications on this device to check in or take a breath."
+    }
+  },
+  "login": {
+    "title": "Welcome back",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "failed": "Email or password is incorrect.",
+    "tooMany": "Too many attempts. Please wait a minute and try again.",
+    "newHere": "New here?",
+    "start": "Start anonymously"
+  },
+  "app": {
+    "nav": {
+      "label": "Main",
+      "home": "Home",
+      "privacy": "Privacy"
+    },
+    "signOut": "Sign out",
+    "home": {
+      "greeting": "Good to see you.",
+      "anonTitle": "You're using MindGuard anonymously",
+      "anonBody": "Your data is tied to this browser. Add an email and password to keep it if you switch devices or clear your browser.",
+      "anonCta": "Save my account",
+      "breatheTitle": "Take a slow breath",
+      "breatheBody": "One round of box breathing takes sixteen seconds."
+    }
+  },
+  "privacyPage": {
+    "title": "Privacy",
+    "intro": "See and change what MindGuard can use. Changes take effect straight away.",
+    "consentsTitle": "What MindGuard can use",
+    "required": "Required",
+    "saved": "Saved",
+    "saveError": "Couldn't save that change. Please try again.",
+    "accountTitle": "Your account",
+    "anonymous": "Anonymous account",
+    "upgradeIntro": "Add an email and password so you can sign in on any device. Everything you've saved stays with you.",
+    "email": "Email",
+    "password": "Password",
+    "passwordHint": "At least 10 characters. A short phrase works well.",
+    "upgradeSubmit": "Save my account",
+    "upgraded": "Your account is saved. You can now sign in with {{email}}.",
+    "signedInAs": "Signed in as {{email}}",
+    "emailTaken": "An account with this email already exists.",
+    "invalid": "Please check your email and use a password of at least 10 characters."
+  },
   "status": {
     "title": "Service status",
     "checking": "Checking services…",

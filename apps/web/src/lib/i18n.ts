@@ -9,13 +9,21 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 const STORAGE_KEY = 'mindguard.locale';
 
 function initialLocale(): Locale {
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'en' || stored === 'ta') return stored;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'en' || stored === 'ta') return stored;
+  } catch {
+    // Storage unavailable (private mode); fall back to the browser language.
+  }
   return navigator.language.toLowerCase().startsWith('ta') ? 'ta' : 'en';
 }
 
 export function setLocale(locale: Locale): void {
-  localStorage.setItem(STORAGE_KEY, locale);
+  try {
+    localStorage.setItem(STORAGE_KEY, locale);
+  } catch {
+    // Not persisted; still applied for this visit.
+  }
   void i18n.changeLanguage(locale);
 }
 
