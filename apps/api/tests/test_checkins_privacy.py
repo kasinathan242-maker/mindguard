@@ -124,3 +124,25 @@ async def test_retention_removes_old_chat_and_notes_only(app: FastAPI, client: A
         notes = sorted(str(n) for n in (await session.scalars(select(Checkin.note_enc))).all())
         assert notes == ["None", "v1:b"]
         assert len((await session.scalars(select(ChatMessage))).all()) == 1
+
+
+async def test_demo_seed_creates_synthetic_history(app: FastAPI, client: AsyncClient) -> None:
+    import random
+
+    from app.demo_seed import DAYS, DEMO_EMAIL, DEMO_PASSWORD, seed
+
+    resources: Resources = app.state.resources
+    async with resources.sessionmaker() as session:
+        await seed(session, app.state.settings, random.Random(1))
+        await seed(session, app.state.settings, random.Random(1))  # idempotent
+
+    login = await client.post(
+        "/api/v1/auth/login", json={"email": DEMO_EMAIL, "password": DEMO_PASSWORD}
+    )
+    assert login.status_code == 200
+    checkins = (await client.get("/api/v1/checkins")).json()
+    assert len(checkins) == DAYS
+    notes = [c["note"] for c in checkins if c["note"]]
+    assert notes
+    assert all(n.startswith("Synthetic demo note") for n in notes)
+    assert len((await client.get("/api/v1/assessments/history")).json()) == 10

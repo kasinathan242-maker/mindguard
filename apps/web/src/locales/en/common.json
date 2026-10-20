@@ -361,5 +361,16 @@
     "minutes_one": "{{count}} minute",
     "minutes_other": "{{count}} minutes",
     "timerDone": "Done. Notice how you feel."
+  },
+  "mood": {
+    "title": "How you've been feeling",
+    "range": "Time range",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "empty": "Check in on a few days to see your pattern here.",
+    "summary": "{{count}} check-ins, average mood {{average}} out of 5.",
+    "mood": "Mood",
+    "energy": "Energy",
+    "legend": "Solid line: mood. Dashed line: energy. Patterns, not causes."
   }
 }

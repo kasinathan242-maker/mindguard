@@ -4,6 +4,7 @@ import { Bezel } from '@/components/ui/Bezel';
 import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { CheckinCard } from '@/features/checkin/CheckinCard';
+import { MoodChart } from '@/features/checkin/MoodChart';
 import { useSession } from '@/lib/session';
 
 export function HomePage() {
@@ -18,8 +19,11 @@ export function HomePage() {
         </h1>
       </Reveal>
 
-      <Reveal className="md:col-span-12" delay={0.03}>
+      <Reveal className="md:col-span-6" delay={0.03}>
         <CheckinCard />
+      </Reveal>
+      <Reveal className="md:col-span-6" delay={0.05}>
+        <MoodChart />
       </Reveal>
 
       {user?.is_anonymous && (
