@@ -9,6 +9,7 @@ interface Summary {
   latest: { type: string; total: number; max_score: number; band: string }[];
   mood: { checkins: number; average_mood: number | null; average_sleep_hours: number | null };
   next_step: string | null;
+  patterns: { metric: string; points: number; correlation: number | null; strength: string }[];
 }
 
 export function SummaryCard() {
@@ -68,6 +69,27 @@ export function SummaryCard() {
           <p className="mt-1 text-sm text-ink-soft">{t('summary.noDiagnosis')}</p>
         </section>
       </div>
+      <section aria-labelledby="patterns-title">
+        <h3 id="patterns-title" className="text-sm font-semibold text-accent">
+          {t('summary.patternsTitle')}
+        </h3>
+        <ul className="mt-1 grid gap-1 text-sm text-ink-soft">
+          {data.patterns.map((p) => (
+            <li key={p.metric}>
+              {p.correlation === null
+                ? t('summary.patternNeedsData', {
+                    metric: t(`summary.metrics.${p.metric}`),
+                    count: p.points,
+                  })
+                : t(p.correlation >= 0 ? 'summary.patternUp' : 'summary.patternDown', {
+                    metric: t(`summary.metrics.${p.metric}`),
+                    strength: t(`summary.strength.${p.strength}`),
+                  })}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-1 text-xs text-ink-muted">{t('summary.patternNote')}</p>
+      </section>
       <p className="text-sm font-medium text-ink">{t('assessments.result.notDiagnosis')}</p>
       <Button variant="secondary" className="justify-self-start" onClick={() => void download()}>
         {t('summary.download')}

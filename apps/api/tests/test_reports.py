@@ -33,3 +33,26 @@ async def test_pdf_download(client: AsyncClient) -> None:
 
 async def test_reports_need_a_session(client: AsyncClient) -> None:
     assert (await client.get("/api/v1/reports/screening.pdf")).status_code == 401
+
+
+def test_patterns_hidden_below_14_days_and_signed_correctly() -> None:
+    from datetime import date, timedelta
+
+    from app.reports.patterns import mood_patterns
+
+    days = [date(2026, 9, 1) + timedelta(days=i) for i in range(20)]
+    mood = {d: float(1 + i % 5) for i, d in enumerate(days)}
+    sleep = {d: 4.0 + (i % 5) for i, d in enumerate(days)}  # rises with mood
+    few = dict.fromkeys(days[:10], 5.0)
+    patterns = {p.metric: p for p in mood_patterns(mood, {"sleep_hours": sleep, "steps": few})}
+    assert patterns["sleep_hours"].correlation == 1.0
+    assert patterns["sleep_hours"].strength == "strong"
+    assert patterns["steps"].correlation is None
+    assert patterns["steps"].strength == "not enough data"
+
+
+async def test_summary_includes_patterns(client: AsyncClient) -> None:
+    await start_anonymous(client)
+    data = (await client.get("/api/v1/insights/summary")).json()
+    assert {p["metric"] for p in data["patterns"]} == {"sleep_hours", "steps"}
+    assert all(p["strength"] == "not enough data" for p in data["patterns"])

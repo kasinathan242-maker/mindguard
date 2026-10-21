@@ -132,7 +132,8 @@ async def send_message(
     chat = await _owned_session(session, user, session_id)
     stores_history = await has_consent(session, user.id, "chat_history")
     key = settings.field_encryption_key.get_secret_value()
-    safety = assess(body.content)
+    # Model inference is CPU-bound; keep it off the event loop.
+    safety = await run_in_threadpool(assess, body.content)
 
     if safety.is_urgent:
         record_safety_event(

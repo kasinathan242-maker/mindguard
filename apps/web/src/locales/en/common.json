@@ -393,7 +393,23 @@
     "checkins_other": "{{count}} check-ins, average mood {{mood}} out of 5",
     "diagnosis": "Diagnosis",
     "noDiagnosis": "Not provided. MindGuard is a screening and support tool.",
-    "download": "Download PDF to share"
+    "download": "Download PDF to share",
+    "patternsTitle": "Patterns you might notice",
+    "patternNeedsData": "{{metric}}: needs at least 14 days together with mood (you have {{count}}).",
+    "patternUp": "Your mood tends to be higher on days with more {{metric}} ({{strength}} pattern).",
+    "patternDown": "Your mood tends to be lower on days with more {{metric}} ({{strength}} pattern).",
+    "patternNote": "Patterns, not causes. Many things affect how you feel.",
+    "metrics": {
+      "sleep_hours": "sleep",
+      "steps": "steps"
+    },
+    "strength": {
+      "none": "no clear",
+      "weak": "weak",
+      "moderate": "moderate",
+      "strong": "strong",
+      "not enough data": "unclear"
+    }
   },
   "wearables": {
     "title": "Health data import",

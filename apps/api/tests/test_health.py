@@ -51,3 +51,14 @@ async def test_api_docs_are_hidden_in_production() -> None:
 
     assert "/api/docs" not in paths
     assert "/api/openapi.json" not in paths
+
+
+async def test_api_responses_carry_security_headers(client: AsyncClient) -> None:
+    response = await client.get("/api/v1/health")
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["cache-control"] == "no-store"
+    assert "frame-ancestors 'none'" in response.headers["content-security-policy"]
+    assert "strict-transport-security" not in response.headers  # only with HTTPS cookies
+
+    resources = await client.get("/api/v1/safety/resources")
+    assert "max-age=3600" in resources.headers["cache-control"]

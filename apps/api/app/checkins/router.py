@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, Query, status
+from fastapi.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 
@@ -60,7 +61,7 @@ async def create_checkin(
     note = (body.note or "").strip() or None
     level: Literal["none", "elevated", "urgent"] = "none"
     if note:
-        safety = assess(note)
+        safety = await run_in_threadpool(assess, note)
         level = safety.level
         if level != "none":
             record_safety_event(

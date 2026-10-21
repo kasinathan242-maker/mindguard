@@ -27,6 +27,8 @@ from app.checkins.models import Checkin
 from app.consent.deps import require_consent
 from app.core.deps import SessionDep
 from app.db.types import utcnow
+from app.integrations.wearables import WearableSample
+from app.reports.patterns import Pattern, daily_mean, mood_patterns
 from app.safety.resources import localised_resources
 
 router = APIRouter(tags=["reports"])
@@ -79,6 +81,7 @@ class Summary(BaseModel):
     trend: list[TrendPoint]
     mood: MoodSummary
     next_step: str | None
+    patterns: list[Pattern]
     resources: list[str]
     disclaimer: str
 
@@ -134,9 +137,27 @@ async def build_summary(session: SessionDep, user: User, days: int = 30) -> Summ
             average_sleep_hours=mean(sleeps),
         ),
         next_step=NEXT_STEPS[worst_step] if worst_step else None,
+        patterns=await _patterns(session, user),
         resources=[f"{r.name}: {r.display_number}" for r in localised_resources("en")],
         disclaimer=DISCLAIMER,
     )
+
+
+async def _patterns(session: SessionDep, user: User) -> list[Pattern]:
+    """Uses up to 90 days. Sleep comes from check-ins and imported wearable data."""
+    checkins = (await session.scalars(select(Checkin).where(Checkin.user_id == user.id))).all()
+    mood = daily_mean([(c.created_at.date(), float(c.mood)) for c in checkins])
+    sleep = daily_mean(
+        [(c.created_at.date(), float(c.sleep_hours)) for c in checkins if c.sleep_hours is not None]
+    )
+    samples = (
+        await session.scalars(select(WearableSample).where(WearableSample.user_id == user.id))
+    ).all()
+    for s in samples:
+        if s.metric == "sleep_minutes" and s.day not in sleep:
+            sleep[s.day] = s.value / 60
+    steps = {s.day: s.value for s in samples if s.metric == "steps"}
+    return mood_patterns(mood, {"sleep_hours": sleep, "steps": steps})
 
 
 @router.get("/insights/summary")

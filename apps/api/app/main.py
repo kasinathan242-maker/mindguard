@@ -12,6 +12,7 @@ from app.chat.router import router as chat_router
 from app.checkins.router import router as checkins_router
 from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
+from app.core.headers import security_headers
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
 from app.emotion.service import load_optional_emotion_model
@@ -51,6 +52,7 @@ def create_app(
     app.state.provider_factory = default_provider
     app.state.emotion_model = None
 
+    app.middleware("http")(security_headers(hsts=settings.cookie_secure))
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
