@@ -1,40 +1,42 @@
 # Design System: MindGuard AI (Google Stitch Specification)
 
-> Semantic Design System and Visual Architecture specification for Google Stitch screen generation and frontend engineering. Encodes an Awwwards-tier, restorative sanctuary aesthetic for mental wellbeing with zero AI generic clichés.
+> Semantic Design System and Visual Architecture specification for Google Stitch screen generation and frontend engineering. Encodes an Awwwards-tier, restorative clinical clarity aesthetic for mental wellbeing with zero AI generic clichés. Strictly zero green.
 
 ---
 
 ## 1. Visual Theme & Atmosphere
-- **Atmosphere:** Restorative Serenity & Clinical Architecture. A tactile, private sanctuary for the mind that balances deep medical trust with warm, organic calm.
-- **Density Dial:** `4 / 10` (Art Gallery Airy & Deliberate). Generous macro-whitespace (`py-28` to `py-36`) that allows sensitive mental health information to breathe without feeling sparse or clinical.
+- **Atmosphere:** Restorative Clarity & Nordic Twilight Architecture. A deeply calming, private digital sanctuary that pairs pristine medical trust with crisp, modern serenity.
+- **Color Philosophy:** 100% Zero-Green. Replaced with an authoritative, reassuring Nordic Twilight Cobalt & Arctic Slate palette.
+- **Density Dial:** `4 / 10` (Art Gallery Airy & Deliberate). Generous macro-whitespace (`py-28` to `py-36`) that allows sensitive mental health information to breathe without feeling sparse.
 - **Variance Dial:** `8 / 10` (Asymmetrical Bento & Split-Screen Rhythm). Offset cards, dynamic bento grids, and layered hardware bezels that deliberately eliminate boring, repetitive corporate card rows.
 - **Motion Dial:** `6 / 10` (Kinetic Weight & Somatic Spring Physics). Perpetual somatic micro-interactions (e.g. rhythmic box-breathing orb with 4-7-8 timing, magnetic pill buttons, smooth staggered entry waterfalls).
 
 ---
 
-## 2. Color Palette & Roles
+## 2. Color Palette & Roles (Strictly Zero Green)
 
-Strict, high-contrast, restorative botanical palette. The "AI Purple/Blue Neon" aesthetic is strictly BANNED. Pure black (`#000000`) is never used.
+Strict, high-contrast, restorative Nordic Sapphire and Arctic Slate palette. The "AI Purple/Blue Neon" aesthetic is strictly BANNED. Pure black (`#000000`) is never used.
 
-### Light Mode (Warm Sanctuary)
-- **Canvas Oatmeal** (`#FBF9F5`) — Primary background surface. Warm, natural paper tone that minimizes eye strain and reduces cortisol.
-- **Porcelain Surface** (`#FFFFFF`) — Card and container fill. Clean, pure elevated resting surface.
-- **Surface Sunk** (`#F0EDE6`) — Recessed containers, input fields, and nested bezel trays.
-- **Forest Ink** (`#141E18`) — Primary text. Ultra-deep botanical charcoal with high legibility (14.2:1 contrast ratio against canvas).
-- **Muted Sage** (`#4E5F55`) — Secondary text, subtitles, and explanatory guidance.
-- **Whisper Line** (`rgba(20, 30, 24, 0.08)`) — 1px hairline structural dividers and outer bezels.
-- **Botanical Emerald Accent** (`#1D5A46`) — Primary interactive accent for CTAs, active states, and focus rings. High-agency, restorative green.
-- **Accent Soft** (`#E2ECE6`) — Tonal pill badges, active selections, and highlight halos.
-- **Crisis Crimson** (`#BA1A1A`) — Restricted exclusively to crisis emergency interventions and safety cards. Never used for standard UI buttons.
+### Light Mode (Nordic Sanctuary)
+- **Canvas Pearl** (`#F8FAFC`) — Primary background surface. Crisp, calming white-slate tone that maximizes cognitive ease and focus.
+- **Porcelain Surface** (`#FFFFFF`) — Elevated card and container fill.
+- **Surface Sunk** (`#F1F5F9`) — Recessed containers, input fields, and nested bezel trays.
+- **Midnight Slate Ink** (`#0F172A`) — Primary display and body text (15.2:1 contrast ratio against canvas).
+- **Muted Steel** (`#64748B`) — Secondary text, subtitles, and explanatory guidance.
+- **Whisper Line** (`rgba(15, 23, 42, 0.08)`) — 1px hairline structural dividers and outer bezels.
+- **Nordic Cobalt Accent** (`#2563EB`) — Primary interactive accent for CTAs, active states, and focus rings. High-agency, restorative sapphire.
+- **Arctic Soft** (`#EFF6FF`) — Tonal pill badges, active selections, and highlight halos.
+- **Crisis Crimson** (`#DC2626`) — Restricted exclusively to crisis emergency interventions and safety cards. Never used for standard UI buttons.
 
-### Dark Mode (Deep Obsidian Forest)
-- **Obsidian Canvas** (`#0B110E`) — Deepest OLED botanical charcoal background (not `#000000`).
-- **Dark Surface** (`#131B17`) — Elevated card plates.
-- **Dark Sunk** (`#080D0B`) — Recessed trays and nested double bezels.
-- **Luminous Ink** (`#E8EFEA`) — Primary display text.
-- **Luminous Muted** (`#98AAA0`) — Secondary text and labels.
-- **Dark Line** (`rgba(232, 239, 234, 0.08)`) — Delicate glass hairlines.
-- **Dark Accent Emerald** (`#4ADE80`) — Crisp, luminous mint accent for high visibility in dark mode.
+### Dark Mode (Deep Midnight Obsidian)
+- **Obsidian Canvas** (`#0B0F19`) — Deepest OLED midnight space charcoal (not `#000000`).
+- **Dark Surface** (`#111827`) — Elevated card plates.
+- **Dark Sunk** (`#080C14`) — Recessed trays and nested double bezels.
+- **Luminous Cloud Ink** (`#F8FAFC`) — Primary display text.
+- **Luminous Muted** (`#94A3B8`) — Secondary text and labels.
+- **Dark Line** (`rgba(241, 245, 249, 0.08)`) — Delicate glass hairlines.
+- **Luminous Sky Cobalt Accent** (`#38BDF8`) — Crisp, luminous cyan-sapphire accent for high visibility in dark mode.
+- **Dark Accent Soft** (`#0C2340`) — Tinted inner trays and pills in dark mode.
 
 ---
 
@@ -54,15 +56,15 @@ Typography pairs humanistic, editorial warmth with crisp, technical precision. G
 ### A. The "Double-Bezel" Hardware Architecture
 Cards never float flatly against the canvas. Every container uses a physical, machined enclosure:
 - **Outer Shell:** Tinted tray (`p-1.5`, `rounded-[2rem]`, `bg-ink/[0.03]` in light, `bg-white/[0.03]` in dark) with a hairline outer ring (`ring-1 ring-line`).
-- **Inner Core:** Concentric inner plate (`rounded-[calc(2rem-0.375rem)]`, `bg-surface`) featuring an inner specular highlight (`shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]` in light mode, `rgba(255,255,255,0.08)` in dark mode).
+- **Inner Core:** Concentric inner plate (`rounded-[calc(2rem-0.375rem)]`, `bg-surface`) featuring an inner specular highlight (`shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]` in light mode, `rgba(255,255,255,0.1)` in dark mode).
 
 ### B. Nested Island Buttons & CTAs
 - **Primary CTAs:** Fully rounded pill (`rounded-full`, `px-6 py-3.5`). Tactile spring feedback on active press (`active:scale-[0.97]`).
-- **Trailing Icon Capsule:** Action arrows never sit naked beside text. They are nested inside an internal circular capsule (`size-8 rounded-full bg-accent-ink/15`) flush with the button's right inner padding that translates diagonally on hover (`group-hover:translate-x-1 group-hover:-translate-y-px`).
+- **Trailing Icon Capsule:** Action arrows never sit naked beside text. They are nested inside an internal circular capsule (`size-8 rounded-full bg-accent-ink/15`) flush with the button's right inner padding that translates diagonally on hover (`group-hover:translate-x-0.5`).
 
 ### C. Floating Island Navigation
 - Floating glass pill detached from the top edge (`mt-4 sm:mt-6`, `mx-auto`, `w-max`, `max-w-5xl`, `rounded-full`).
-- Layered with heavy frosted backdrop (`backdrop-blur-2xl bg-surface/80 ring-1 ring-line`).
+- Layered with heavy frosted backdrop (`backdrop-blur-2xl bg-surface/85 ring-1 ring-line`).
 - Live crisis button (`Need Help?`) integrated directly into the pill for immediate, friction-free emergency access.
 
 ### D. Somatic Breathing Engine
@@ -97,11 +99,12 @@ All motion simulates physical weight and mass rather than artificial linear slid
 
 ## 7. Anti-Patterns (Explicitly Banned)
 
-1. ❌ **No Emojis Anywhere** — Replace with ultra-crisp line icons (Phosphor Light / Bold).
-2. ❌ **No Inter or Default System Fonts** — Force `Bricolage Grotesque` and `Plus Jakarta Sans`.
-3. ❌ **No Generic Symmetrical 3-Card Grids** — Use asymmetric Bento or 2-column zig-zag.
-4. ❌ **No Neon or AI-Purple Glows** — Retain natural botanical emerald and oatmeal neutrals.
-5. ❌ **No Pure Black (`#000000`)** — Use deep botanical charcoal `#0B110E`.
-6. ❌ **No AI Copywriting Clichés** — Ban words like "Seamless", "Elevate", "Next-Gen", "Revolutionize", "Unleash".
-7. ❌ **No Placeholder Filler Text** — No "Scroll to explore", no bouncing chevrons.
-8. ❌ **No Overlapping Text/Images** — Every element maintains its own clear spatial zone.
+1. ❌ **No Green of Any Kind** — Replaced with Nordic Twilight Cobalt `#2563EB` and Arctic Slate.
+2. ❌ **No Emojis Anywhere** — Replace with ultra-crisp line icons (Phosphor Light / Bold).
+3. ❌ **No Inter or Default System Fonts** — Force `Bricolage Grotesque` and `Plus Jakarta Sans`.
+4. ❌ **No Generic Symmetrical 3-Card Grids** — Use asymmetric Bento or 2-column zig-zag.
+5. ❌ **No Neon or AI-Purple Glows** — Retain pure Nordic Sapphire and clean Arctic neutrals.
+6. ❌ **No Pure Black (`#000000`)** — Use deep space midnight obsidian `#0B0F19`.
+7. ❌ **No AI Copywriting Clichés** — Ban words like "Seamless", "Elevate", "Next-Gen", "Revolutionize", "Unleash".
+8. ❌ **No Placeholder Filler Text** — No "Scroll to explore", no bouncing chevrons.
+9. ❌ **No Overlapping Text/Images** — Every element maintains its own clear spatial zone.

@@ -6,66 +6,66 @@
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
 /*
-  Design tokens. One accent (deep sage green); crisis red appears only inside the crisis card.
+  Design tokens. One accent (Nordic Twilight Cobalt); crisis red appears only inside the crisis card.
   Radius rule: interactive controls are full pills, containers use the 28px/22px double bezel,
   form inputs are 16px.
 */
 :root {
-  --canvas: #fbf9f5;
+  --canvas: #f8fafc;
   --surface: #ffffff;
-  --surface-sunk: #f0ede6;
-  --ink: #141e18;
-  --ink-soft: #38463e;
-  --ink-muted: #607166;
-  --line: rgb(20 30 24 / 0.08);
-  --accent: #1d5a46;
-  --accent-ink: #f4faf6;
-  --accent-soft: #e2ece6;
-  --focus: #1d5a46;
-  --shadow: 20 30 24;
-  --crisis: #ba1a1a;
+  --surface-sunk: #f1f5f9;
+  --ink: #0f172a;
+  --ink-soft: #334155;
+  --ink-muted: #64748b;
+  --line: rgb(15 23 42 / 0.08);
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+  --accent-soft: #eff6ff;
+  --focus: #2563eb;
+  --shadow: 15 23 42;
+  --crisis: #dc2626;
   --crisis-ink: #ffffff;
-  --crisis-soft: #fdecea;
+  --crisis-soft: #fef2f2;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --canvas: #0b110e;
-    --surface: #131b17;
-    --surface-sunk: #080d0b;
-    --ink: #e8efea;
-    --ink-soft: #b8c7bf;
-    --ink-muted: #889b91;
-    --line: rgb(232 239 234 / 0.08);
-    --accent: #4ade80;
-    --accent-ink: #07170e;
-    --accent-soft: #142e20;
-    --focus: #4ade80;
+    --canvas: #0b0f19;
+    --surface: #111827;
+    --surface-sunk: #080c14;
+    --ink: #f8fafc;
+    --ink-soft: #cbd5e1;
+    --ink-muted: #94a3b8;
+    --line: rgb(241 245 249 / 0.08);
+    --accent: #38bdf8;
+    --accent-ink: #031024;
+    --accent-soft: #0c2340;
+    --focus: #38bdf8;
     --shadow: 0 0 0;
-    --crisis: #f97066;
+    --crisis: #f87171;
     --crisis-ink: #1f0604;
-    --crisis-soft: #3a1714;
+    --crisis-soft: #381210;
     color-scheme: dark;
   }
 }
 
 :root[data-theme='dark'] {
-  --canvas: #0b110e;
-  --surface: #131b17;
-  --surface-sunk: #080d0b;
-  --ink: #e8efea;
-  --ink-soft: #b8c7bf;
-  --ink-muted: #889b91;
-  --line: rgb(232 239 234 / 0.08);
-  --accent: #4ade80;
-  --accent-ink: #07170e;
-  --accent-soft: #142e20;
-  --focus: #4ade80;
+  --canvas: #0b0f19;
+  --surface: #111827;
+  --surface-sunk: #080c14;
+  --ink: #f8fafc;
+  --ink-soft: #cbd5e1;
+  --ink-muted: #94a3b8;
+  --line: rgb(241 245 249 / 0.08);
+  --accent: #38bdf8;
+  --accent-ink: #031024;
+  --accent-soft: #0c2340;
+  --focus: #38bdf8;
   --shadow: 0 0 0;
-  --crisis: #f97066;
+  --crisis: #f87171;
   --crisis-ink: #1f0604;
-  --crisis-soft: #3a1714;
+  --crisis-soft: #381210;
   color-scheme: dark;
 }
 

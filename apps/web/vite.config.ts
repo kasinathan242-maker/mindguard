@@ -18,8 +18,8 @@ export default defineConfig({
         short_name: 'MindGuard',
         description:
           'Private wellbeing check-ins, a supportive companion, and fast routes to help.',
-        theme_color: '#276651',
-        background_color: '#f1f4f0',
+        theme_color: '#2563eb',
+        background_color: '#f8fafc',
         display: 'standalone',
         start_url: '/app',
         icons: [{ src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],

@@ -133,9 +133,9 @@ export function ScoreChart({ results }: ScoreChartProps) {
                 type="monotone"
                 dataKey="gad7"
                 name={t('assessments.instruments.GAD7.name')}
-                stroke="#4a7c82"
+                stroke="#6366f1"
                 strokeWidth={2.5}
-                dot={{ r: 4, fill: '#4a7c82' }}
+                dot={{ r: 4, fill: '#6366f1' }}
                 activeDot={{ r: 6 }}
                 connectNulls
               />
