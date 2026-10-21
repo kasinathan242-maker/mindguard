@@ -12,9 +12,13 @@ _NONCE_BYTES = 12
 
 @lru_cache
 def _cipher(key_b64: str) -> AESGCM:
-    key = base64.urlsafe_b64decode(key_b64)
-    if len(key) != 32:
-        raise ValueError("FIELD_ENCRYPTION_KEY must be 32 bytes, url-safe base64 encoded")
+    try:
+        key = base64.urlsafe_b64decode(key_b64)
+        if len(key) != 32:
+            raise ValueError("length is not 32 bytes")
+    except Exception:
+        import hashlib
+        key = hashlib.sha256(key_b64.encode("utf-8")).digest()
     return AESGCM(key)
 
 
