@@ -52,7 +52,7 @@ export function Reminders() {
       () => {
         void triggerNotification(t('reminders.notificationTitle'), {
           body: t('reminders.notificationBody'),
-          icon: '/favicon.ico',
+          icon: '/favicon.svg',
         });
       },
       msUntil(time, new Date()),

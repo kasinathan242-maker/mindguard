@@ -22,7 +22,7 @@ export default defineConfig({
         background_color: '#f8fafc',
         display: 'standalone',
         start_url: '/app',
-        icons: [{ src: '/favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
+        icons: [{ src: '/favicon.svg?v=nordic2', sizes: 'any', type: 'image/svg+xml', purpose: 'any' }],
       },
       workbox: {
         // The app shell (including fonts and the bundled crisis numbers) works offline.
