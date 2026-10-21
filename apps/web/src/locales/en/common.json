@@ -389,7 +389,9 @@
     "summary": "{{count}} check-ins, average mood {{average}} out of 5.",
     "mood": "Mood",
     "energy": "Energy",
-    "legend": "Solid line: mood. Dashed line: energy. Patterns, not causes."
+    "legend": "Solid line: mood. Dashed line: energy. Patterns, not causes.",
+    "week_one": "You checked in on {{count}} of the last 7 days.",
+    "week_other": "You checked in on {{count}} of the last 7 days."
   },
   "summary": {
     "title": "Your screening summary",

@@ -13,6 +13,8 @@ before launch.
 | PHQ-9 / GAD-7 answers and scores | `assessments` | | Until deleted |
 | Daily check-ins (mood, energy, sleep) | `checkins` | Notes AES-256-GCM encrypted | Notes cleared after 180 days |
 | Chat messages, only with `chat_history` consent | `chat_messages` | AES-256-GCM encrypted | 30 days |
+| Imported health data (daily totals only), with `wearables` consent | `wearable_samples` | Deleted when the consent is withdrawn | Until deleted |
+| Voice recordings | Nowhere | Analysed in memory, never written (tested) | Not kept |
 | Safety events | `safety_events` | No message content, ever | Until deleted |
 | Rate-limit counters | Redis, no persistence | Keyed by a hash of the IP | 60 seconds |
 
@@ -26,7 +28,7 @@ email and phone-number scrubbing and never contain message content.
 | Notice | The landing page and consent screen explain each data use in one plain sentence before any data is collected. |
 | Consent | `core` is required; every other scope (chat history, voice, wearables, cloud AI, reminders) is off by default and needs its own yes. Consent is versioned and recorded with time stamps. |
 | Purpose limitation | Each optional feature checks its scope on the server (`require_consent`). Cloud AI is used only with `cloud_llm` consent, and names, emails and phone numbers are removed first. |
-| Data minimisation | Anonymous by default: no name, email or phone needed. Safety events store no content. Raw audio is never stored (voice is not built yet). |
+| Data minimisation | Anonymous by default: no name, email or phone needed. Safety events store no content. Raw audio is never stored; voice is analysed in memory. |
 | Withdrawal of consent | Any optional scope can be switched off on the Privacy page at any time; changes apply immediately and are audited. |
 | Right to access | "Download my data" exports every stored record, decrypted, as one JSON file. |
 | Right to erasure | "Delete my account" (two confirmations) hard-deletes the account and all linked rows; a test proves no user rows remain. Only an anonymous "account deleted" audit entry is kept. |
@@ -37,6 +39,5 @@ email and phone-number scrubbing and never contain message content.
 
 ## Not yet done
 
-- Encryption key rotation script.
 - Breach notification runbook, grievance officer, DPIA.
 - Legal review of consent wording.

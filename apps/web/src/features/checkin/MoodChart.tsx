@@ -42,6 +42,12 @@ export function MoodChart() {
     .filter((c) => new Date(c.created_at).getTime() >= cutoff)
     .reverse()
     .map((c) => ({ date: format.format(new Date(c.created_at)), mood: c.mood, energy: c.energy }));
+  const weekStart = now - 7 * 86_400_000;
+  const daysThisWeek = new Set(
+    (data ?? [])
+      .filter((c) => new Date(c.created_at).getTime() >= weekStart)
+      .map((c) => new Date(c.created_at).toDateString()),
+  ).size;
   const average = points.length
     ? (points.reduce((sum, p) => sum + p.mood, 0) / points.length).toFixed(1)
     : null;
@@ -78,7 +84,8 @@ export function MoodChart() {
       ) : (
         <>
           <p className="mt-2 text-sm text-ink-soft">
-            {t('mood.summary', { count: points.length, average })}
+            {t('mood.summary', { count: points.length, average })}{' '}
+            {t('mood.week', { count: daysThisWeek })}
           </p>
           <div className="mt-4 h-56" aria-hidden>
             <ResponsiveContainer width="100%" height="100%">

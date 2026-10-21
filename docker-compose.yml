@@ -40,7 +40,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-mindguard}:${POSTGRES_PASSWORD:-mindguard-dev-only}@db:5432/${POSTGRES_DB:-mindguard}
       REDIS_URL: redis://redis:6379/0
-      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
+      OLLAMA_BASE_URL: http://ollama:11434
     depends_on:
       db:
         condition: service_healthy

@@ -1,3 +1,4 @@
+import pytest
 from fastapi import FastAPI
 from httpx import AsyncClient
 from sqlalchemy import func, select
@@ -146,3 +147,26 @@ async def test_demo_seed_creates_synthetic_history(app: FastAPI, client: AsyncCl
     assert notes
     assert all(n.startswith("Synthetic demo note") for n in notes)
     assert len((await client.get("/api/v1/assessments/history")).json()) == 10
+
+
+async def test_key_rotation_reencrypts_everything(app: FastAPI, client: AsyncClient) -> None:
+    import base64
+    import os
+
+    from cryptography.exceptions import InvalidTag
+
+    from app.core.crypto import decrypt
+    from app.core.rotate_key import rotate
+
+    await start_anonymous(client)
+    await client.post("/api/v1/checkins", json={"mood": 3, "energy": 3, "note": "rotate me"})
+    old = app.state.settings.field_encryption_key.get_secret_value()
+    new = base64.urlsafe_b64encode(os.urandom(32)).decode()
+    resources: Resources = app.state.resources
+    async with resources.sessionmaker() as session:
+        assert await rotate(session, old, new) == 1
+        stored = (await session.scalars(select(Checkin.note_enc))).one()
+    assert stored is not None
+    assert decrypt(stored, new) == "rotate me"
+    with pytest.raises(InvalidTag):
+        decrypt(stored, old)
