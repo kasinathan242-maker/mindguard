@@ -20,7 +20,8 @@
     "pause": "Pause",
     "play": "Resume",
     "description": "Box breathing guide: breathe in for four seconds, hold for four, breathe out for four, hold for four.",
-    "caption": "Try it now. Box breathing, four seconds each."
+    "caption": "Try it now. Box breathing, four seconds each.",
+    "description478": "4-7-8 breathing guide: breathe in for four seconds, hold for seven, breathe out slowly for eight."
   },
   "landing": {
     "hero": {
@@ -372,7 +373,12 @@
     "timerTitle": "Mindful minutes",
     "minutes_one": "{{count}} minute",
     "minutes_other": "{{count}} minutes",
-    "timerDone": "Done. Notice how you feel."
+    "timerDone": "Done. Notice how you feel.",
+    "pattern": "Breathing pattern",
+    "patterns": {
+      "box": "Box 4-4-4-4",
+      "478": "4-7-8"
+    }
   },
   "mood": {
     "title": "How you've been feeling",
@@ -429,5 +435,18 @@
     "stop": "Stop and analyse",
     "micBlocked": "Microphone access was blocked.",
     "result": "{{seconds}} seconds. Typical pitch {{pitch}} Hz, pauses {{pauses}}% of the time."
+  },
+  "reminders": {
+    "title": "Reminders",
+    "label": "Remind me each day at",
+    "save": "Turn on reminder",
+    "off": "Turn off",
+    "set": "Reminder set for {{time}} each day.",
+    "none": "No reminder set.",
+    "needsConsent": "Switch on \"Reminders\" in Privacy to use this.",
+    "unsupported": "This browser does not support notifications.",
+    "note": "Reminders show while MindGuard is open on this device. The time is stored only on this device.",
+    "notificationTitle": "A moment for you",
+    "notificationBody": "How are you feeling? A quick check-in or a slow breath can help."
   }
 }

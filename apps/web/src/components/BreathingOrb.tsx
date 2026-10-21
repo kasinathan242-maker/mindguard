@@ -3,41 +3,45 @@ import { motion, useReducedMotion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type BreathPhase = 'in' | 'holdFull' | 'out' | 'holdEmpty';
-
-const BOX_PHASES: BreathPhase[] = ['in', 'holdFull', 'out', 'holdEmpty'];
-const PHASE_SECONDS = 4;
+import { PATTERNS, type BreathPattern } from './breathing';
 
 interface BreathingOrbProps {
   /** Starts paused when false. */
   autoPlay?: boolean;
   size?: 'md' | 'lg';
+  pattern?: BreathPattern;
   /** Announce each phase to screen readers (use on the dedicated exercise screen only). */
   announce?: boolean;
+  /** Short vibration at each phase change, where the device supports it. */
+  haptics?: boolean;
 }
 
-/** Box breathing (4-4-4-4): the orb grows on the in-breath, rests, shrinks, rests. */
+/** The orb grows on the in-breath, rests, shrinks on the out-breath. */
 export function BreathingOrb({
   autoPlay = true,
   size = 'lg',
+  pattern = 'box',
   announce = false,
+  haptics = false,
 }: BreathingOrbProps) {
   const { t } = useTranslation();
   const reduce = useReducedMotion();
   const [playing, setPlaying] = useState(autoPlay);
   const [index, setIndex] = useState(0);
+  const phases = PATTERNS[pattern];
+  const [phase, seconds] = phases[index % phases.length] ?? ['in', 4];
 
   useEffect(() => {
     if (!playing) return;
-    const timer = window.setInterval(() => {
-      setIndex((i) => (i + 1) % BOX_PHASES.length);
-    }, PHASE_SECONDS * 1000);
+    const timer = window.setTimeout(() => {
+      setIndex((i) => (i + 1) % phases.length);
+      if (haptics && typeof navigator.vibrate === 'function') navigator.vibrate(40);
+    }, seconds * 1000);
     return () => {
-      window.clearInterval(timer);
+      window.clearTimeout(timer);
     };
-  }, [playing]);
+  }, [playing, index, seconds, phases.length, haptics]);
 
-  const phase = BOX_PHASES[index] ?? 'in';
   const expanded = phase === 'in' || phase === 'holdFull';
   const dimension = size === 'lg' ? 'size-56 sm:size-64' : 'size-40';
 
@@ -52,14 +56,14 @@ export function BreathingOrb({
               ? { scale: 1, opacity: 1 }
               : { scale: expanded ? 1.12 : 0.88, opacity: expanded ? 1 : 0.7 }
           }
-          transition={{ duration: PHASE_SECONDS, ease: [0.37, 0, 0.63, 1] }}
+          transition={{ duration: seconds, ease: [0.37, 0, 0.63, 1] }}
         />
         <motion.div
           aria-hidden
           className="absolute inset-[14%] rounded-full bg-[radial-gradient(circle_at_40%_35%,color-mix(in_oklab,var(--accent)_55%,var(--surface)),var(--accent))] shadow-soft"
           initial={false}
           animate={reduce ? { scale: 1 } : { scale: expanded ? 1 : 0.62 }}
-          transition={{ duration: PHASE_SECONDS, ease: [0.37, 0, 0.63, 1] }}
+          transition={{ duration: seconds, ease: [0.37, 0, 0.63, 1] }}
         />
       </div>
       <p
@@ -67,8 +71,11 @@ export function BreathingOrb({
         className="min-h-8 font-display text-2xl font-medium text-ink"
       >
         {t(`breathing.${phase}`)}
+        <span className="ml-2 text-base text-ink-muted tabular-nums">{seconds}s</span>
       </p>
-      <p className="sr-only">{t('breathing.description')}</p>
+      <p className="sr-only">
+        {t(pattern === 'box' ? 'breathing.description' : 'breathing.description478')}
+      </p>
       <button
         type="button"
         onClick={() => {

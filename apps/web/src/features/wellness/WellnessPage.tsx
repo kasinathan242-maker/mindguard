@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BreathingOrb } from '@/components/BreathingOrb';
+import type { BreathPattern } from '@/components/breathing';
 import { Bezel } from '@/components/ui/Bezel';
 import { Button } from '@/components/ui/Button';
 import { VoiceCard } from '@/features/voice/VoiceCard';
+import { cn } from '@/lib/cn';
+import { Reminders } from './Reminders';
 
 function Timer() {
   const { t } = useTranslation();
@@ -50,6 +53,7 @@ function Timer() {
 
 export function WellnessPage() {
   const { t } = useTranslation();
+  const [pattern, setPattern] = useState<BreathPattern>('box');
   const grounding = t('crisis.groundingSteps', { returnObjects: true }) as string[];
   const prompts = t('wellness.prompts', { returnObjects: true }) as string[];
 
@@ -63,7 +67,29 @@ export function WellnessPage() {
       </div>
       <Bezel coreClassName="flex flex-col items-center gap-2 p-6 text-center">
         <h2 className="font-display text-xl font-semibold">{t('wellness.breathingTitle')}</h2>
-        <BreathingOrb size="md" autoPlay={false} announce />
+        <div
+          role="group"
+          aria-label={t('wellness.pattern')}
+          className="flex gap-1 rounded-full bg-surface-sunk p-1"
+        >
+          {(['box', '478'] as const).map((p) => (
+            <button
+              key={p}
+              type="button"
+              aria-pressed={pattern === p}
+              onClick={() => {
+                setPattern(p);
+              }}
+              className={cn(
+                'min-h-9 rounded-full px-3 text-sm font-semibold',
+                pattern === p ? 'bg-surface text-ink shadow-soft' : 'text-ink-muted',
+              )}
+            >
+              {t(`wellness.patterns.${p}`)}
+            </button>
+          ))}
+        </div>
+        <BreathingOrb key={pattern} size="md" pattern={pattern} autoPlay={false} announce haptics />
       </Bezel>
       <Bezel coreClassName="p-6">
         <h2 className="font-display text-xl font-semibold">{t('wellness.groundingTitle')}</h2>
@@ -90,6 +116,10 @@ export function WellnessPage() {
       <Bezel coreClassName="p-6">
         <h2 className="mb-3 font-display text-xl font-semibold">{t('wellness.timerTitle')}</h2>
         <Timer />
+      </Bezel>
+      <Bezel coreClassName="p-6 md:col-span-2">
+        <h2 className="mb-3 font-display text-xl font-semibold">{t('reminders.title')}</h2>
+        <Reminders />
       </Bezel>
     </div>
   );
