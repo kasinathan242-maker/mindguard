@@ -121,7 +121,7 @@ flowchart TD
 ### 1. Launch the Stack
 ```bash
 # Clone the repository
-git clone https://github.com/Kasinathan006/mindguard.git
+git clone https://github.com/kasinathan242-maker/mindguard.git
 cd mindguard
 
 # Start services (PostgreSQL, Redis, API, and Web PWA)
