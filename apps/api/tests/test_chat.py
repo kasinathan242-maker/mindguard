@@ -13,6 +13,7 @@ from app.chat.router import filter_reply
 from app.core.config import Settings
 from app.core.crypto import decrypt, encrypt
 from app.core.resources import Resources
+from app.emotion.model import EmotionResult
 from app.safety.models import SafetyEvent
 from tests.helpers import start_anonymous
 
@@ -197,3 +198,35 @@ def test_field_encryption_round_trip_and_randomness() -> None:
     first, second = encrypt("note", KEY), encrypt("note", KEY)
     assert first != second
     assert decrypt(first, KEY) == "note"
+
+
+class FakeEmotion:
+    def predict(self, text: str) -> EmotionResult:
+        return EmotionResult("fear", 0.81)
+
+
+async def test_emotion_guides_tone_and_is_reported_as_a_guess(
+    app: FastAPI, client: AsyncClient, spy: SpyProvider
+) -> None:
+    app.state.emotion_model = FakeEmotion()
+    chat = await new_chat(client, {"core": True, "chat_history": True})
+    response = await client.post(
+        f"/api/v1/chat/sessions/{chat}/messages", json={"content": "exam tomorrow"}
+    )
+    assert ("emotion", {"label": "fear", "confidence": 0.81}) in events(response.text)
+    assert "grounding" in spy.calls[0][0]
+    resources: Resources = app.state.resources
+    async with resources.sessionmaker() as session:
+        row = (await session.scalars(select(ChatMessage).where(ChatMessage.role == "user"))).one()
+    assert (row.emotion_label, row.emotion_confidence) == ("fear", 0.81)
+
+
+async def test_urgent_messages_skip_emotion_too(
+    app: FastAPI, client: AsyncClient, spy: SpyProvider
+) -> None:
+    app.state.emotion_model = FakeEmotion()
+    chat = await new_chat(client)
+    response = await client.post(
+        f"/api/v1/chat/sessions/{chat}/messages", json={"content": "I want to kill myself"}
+    )
+    assert not any(e == "emotion" for e, _ in events(response.text))

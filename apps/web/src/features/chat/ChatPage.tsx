@@ -28,6 +28,8 @@ export function ChatPage() {
   const [busy, setBusy] = useState(false);
   const [failed, setFailed] = useState(false);
   const [pinned, setPinned] = useState(false);
+  const [emotion, setEmotion] = useState<string | null>(null);
+  const [emotionAnswered, setEmotionAnswered] = useState(false);
   const nextId = useRef(0);
   const end = useRef<HTMLDivElement>(null);
 
@@ -60,6 +62,10 @@ export function ChatPage() {
       for await (const evt of sendMessage(chat.id, content, chat.stores_history ? [] : history)) {
         if (evt.type === 'safety') {
           if (evt.level !== 'none') setPinned(true);
+        } else if (evt.type === 'emotion') {
+          const known = !['uncertain', 'unsupported', 'neutral'].includes(evt.label);
+          setEmotion(known ? evt.label : null);
+          setEmotionAnswered(false);
         } else if (evt.type === 'crisis') {
           setMessages((prev) => [...prev, { id: nextId.current++, role: 'crisis', content: '' }]);
         } else if (evt.type === 'token') {
@@ -125,6 +131,34 @@ export function ChatPage() {
           <div ref={end} />
         </div>
       </Bezel>
+
+      {emotion && !emotionAnswered && (
+        <div
+          role="status"
+          className="flex flex-wrap items-center gap-2 self-start rounded-full bg-surface-sunk px-4 py-2 text-sm text-ink-soft"
+        >
+          <span>{t('chat.emotionGuess', { emotion: t(`chat.emotions.${emotion}`) })}</span>
+          <span className="text-ink-muted">{t('chat.emotionAsk')}</span>
+          <button
+            type="button"
+            className="min-h-9 rounded-full px-3 font-semibold text-accent"
+            onClick={() => {
+              setEmotionAnswered(true);
+            }}
+          >
+            {t('chat.yes')}
+          </button>
+          <button
+            type="button"
+            className="min-h-9 rounded-full px-3 font-semibold text-ink-soft"
+            onClick={() => {
+              setEmotionAnswered(true);
+            }}
+          >
+            {t('chat.notReally')}
+          </button>
+        </div>
+      )}
 
       {failed && (
         <p role="alert" className="text-sm font-medium text-crisis">

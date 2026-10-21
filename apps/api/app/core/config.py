@@ -43,6 +43,8 @@ class Settings(BaseSettings):
 
     # Layer 2 of the safety engine; see app/safety/engine.py.
     safety_classifier: Literal["embedding", "hashed", "none"] = "embedding"
+    # Experimental text emotion model (Phase 5); see ml/model_cards/text_emotion.md.
+    emotion_enabled: bool = True
 
     @field_validator("cors_origins", mode="before")
     @classmethod

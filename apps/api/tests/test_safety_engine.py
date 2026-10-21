@@ -115,6 +115,11 @@ def test_docker_image_bakes_the_encoder_the_head_was_trained_on() -> None:
     assert f"ARG ENCODER={ENCODER}" in dockerfile
     assert f"ARG ENCODER_REVISION={ENCODER_REVISION}" in dockerfile
 
+    from app.emotion.model import MODEL, REVISION
+
+    assert f"ARG EMOTION_MODEL={MODEL}" in dockerfile
+    assert f"ARG EMOTION_REVISION={REVISION}" in dockerfile
+
 
 @pytest.mark.model
 def test_embedding_classifier_generalises_beyond_patterns() -> None:

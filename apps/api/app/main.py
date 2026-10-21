@@ -14,6 +14,7 @@ from app.consent.router import router as consent_router
 from app.core.config import Settings, get_settings
 from app.core.logging import configure_logging
 from app.core.resources import ResourcesFactory, default_resources
+from app.emotion.service import load_optional_emotion_model
 from app.integrations.wearables import router as wearables_router
 from app.privacy.router import router as privacy_router
 from app.reports.router import router as reports_router
@@ -33,6 +34,7 @@ def create_app(
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
         safety_engine.configure(settings.safety_classifier)
+        app.state.emotion_model = load_optional_emotion_model(settings.emotion_enabled)
         async with resources_factory(settings) as resources:
             app.state.resources = resources
             yield
@@ -47,6 +49,7 @@ def create_app(
     )
     app.state.settings = settings
     app.state.provider_factory = default_provider
+    app.state.emotion_model = None
 
     app.add_middleware(
         CORSMiddleware,

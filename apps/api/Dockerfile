@@ -15,13 +15,16 @@ COPY pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev --no-install-project
 
-# The safety classifier's sentence encoder, pinned to a revision and baked into the image so
+# The safety encoder and the emotion model, pinned to revisions and baked into the image so
 # containers never download at runtime and work fully offline. Keep in sync with
 # app/safety/download_models.py (a test checks this).
 ENV HF_HOME=/app/.hf
 ARG ENCODER=intfloat/multilingual-e5-small
 ARG ENCODER_REVISION=614241f622f53c4eeff9890bdc4f31cfecc418b3
+ARG EMOTION_MODEL=SamLowe/roberta-base-go_emotions
+ARG EMOTION_REVISION=d75048347613a25d77de8cf6412eaae9fa7b26be
 RUN /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${ENCODER}', revision='${ENCODER_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'sentencepiece.bpe.model'])" \
+    && /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${EMOTION_MODEL}', revision='${EMOTION_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'vocab.json', 'merges.txt'])" \
     && chmod -R a+rX /app/.hf
 ENV HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1

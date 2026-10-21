@@ -31,8 +31,19 @@ SAFE_FALLBACK = (
 )
 
 
-def build_system_prompt(*, elevated: bool, recent_mood: int | None) -> str:
+EMOTION_HINTS = {
+    "fear": "They may be feeling anxious. Offer a short grounding or breathing step.",
+    "sadness": "They may be feeling sad. Lead with validation before any suggestion.",
+    "anger": "They may be feeling frustrated. Acknowledge it calmly without arguing.",
+}
+
+
+def build_system_prompt(
+    *, elevated: bool, recent_mood: int | None, emotion: str | None = None
+) -> str:
     prompt = BASE_SYSTEM_PROMPT
+    if emotion in EMOTION_HINTS:
+        prompt += "\n" + EMOTION_HINTS[emotion]
     if recent_mood in MOOD_HINTS:
         prompt += "\n" + MOOD_HINTS[recent_mood]
     if elevated:

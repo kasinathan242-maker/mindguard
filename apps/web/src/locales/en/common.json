@@ -332,7 +332,19 @@
     "send": "Send",
     "pinnedLabel": "Support resources",
     "pinned": "If things feel heavy, free 24x7 support is one tap away: Tele-MANAS 14416, or 112 in an emergency. Use \"Need help now?\" at the top.",
-    "disclaimer": "MindGuard can make mistakes and does not give medical advice."
+    "disclaimer": "MindGuard can make mistakes and does not give medical advice.",
+    "emotionGuess": "I'm guessing you might be feeling {{emotion}}.",
+    "emotionAsk": "Is this right?",
+    "yes": "Yes",
+    "notReally": "Not really",
+    "emotions": {
+      "anger": "frustrated",
+      "disgust": "put off",
+      "fear": "anxious",
+      "joy": "good",
+      "sadness": "low",
+      "surprise": "surprised"
+    }
   },
   "checkin": {
     "title": "Today's check-in",

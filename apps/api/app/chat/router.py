@@ -12,6 +12,7 @@ from datetime import timedelta
 from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import delete, select
@@ -35,6 +36,7 @@ from app.core.crypto import decrypt, encrypt
 from app.core.deps import SessionDep, SettingsDep
 from app.core.rate_limit import rate_limit
 from app.db.types import utcnow
+from app.emotion.service import EmotionPredictor
 from app.safety.engine import assess
 from app.safety.rules import evaluate_rules
 from app.safety.service import record_safety_event
@@ -172,7 +174,13 @@ async def send_message(
     if provider.name == "anthropic":
         turns = [Turn(t.role, strip_pii(t.content)) for t in turns]
 
-    system = build_system_prompt(elevated=elevated, recent_mood=recent_mood)
+    emotion_model: EmotionPredictor | None = request.app.state.emotion_model
+    emotion = (
+        await run_in_threadpool(emotion_model.predict, body.content) if emotion_model else None
+    )
+    system = build_system_prompt(
+        elevated=elevated, recent_mood=recent_mood, emotion=emotion.label if emotion else None
+    )
     parts = [part async for part in provider.stream(system, turns)]
     reply, replaced = filter_reply("".join(parts).strip())
 
@@ -184,6 +192,8 @@ async def send_message(
                 session_id=chat.id,
                 role="user",
                 content_enc=encrypt(body.content, key),
+                emotion_label=emotion.label if emotion else None,
+                emotion_confidence=emotion.confidence if emotion else None,
                 created_at=now,
             )
         )
@@ -199,6 +209,8 @@ async def send_message(
 
     async def events() -> AsyncIterator[str]:
         yield _sse("safety", {"level": safety.level})
+        if emotion:
+            yield _sse("emotion", {"label": emotion.label, "confidence": emotion.confidence})
         for word in reply.split(" "):
             yield _sse("token", {"text": word + " "})
         yield _sse("done", {"filtered": replaced})

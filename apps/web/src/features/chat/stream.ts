@@ -4,6 +4,7 @@ export type ChatEvent =
   | { type: 'safety'; level: SafetyLevel }
   | { type: 'token'; text: string }
   | { type: 'crisis' }
+  | { type: 'emotion'; label: string }
   | { type: 'done'; filtered: boolean };
 
 /** Parse one Server-Sent Events block ("event: x\ndata: {...}"). */
@@ -22,6 +23,8 @@ export function parseEvent(block: string): ChatEvent | null {
       return { type: 'token', text: String(payload.text) };
     case 'crisis':
       return { type: 'crisis' };
+    case 'emotion':
+      return { type: 'emotion', label: String(payload.label) };
     case 'done':
       return { type: 'done', filtered: Boolean(payload.filtered) };
     default:
