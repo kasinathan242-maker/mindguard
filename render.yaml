@@ -47,7 +47,6 @@ services:
   - type: web
     name: mindguard-app
     runtime: static
-    region: oregon
     buildCommand: cd apps/web && npm install && npm run build
     staticPublishPath: ./apps/web/dist
     routes:
