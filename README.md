@@ -253,5 +253,8 @@ mindguard/
 
 ## License
 
-This project is licensed under the MIT License.
-PHQ-9 and GAD-7 screeners are in the public domain via the Pfizer PHQ Screeners program ("no permission required to reproduce, translate, display or distribute").
+**Copyright © 2026 Kasinathan M. All rights reserved.**
+
+This software, source code, design architecture, custom offline models, and associated documentation are the proprietary property of **Kasinathan M**. Unauthorized copying, modification, distribution, sublicensing, or deployment of this project, in whole or in part, via any medium is strictly prohibited without explicit prior written permission from the author.
+
+PHQ-9 and GAD-7 screeners are reproduced in accordance with the Pfizer PHQ Screeners public clinical use provisions ("no permission required to reproduce, translate, display or distribute").
