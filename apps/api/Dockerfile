@@ -23,9 +23,14 @@ ARG ENCODER=intfloat/multilingual-e5-small
 ARG ENCODER_REVISION=614241f622f53c4eeff9890bdc4f31cfecc418b3
 ARG EMOTION_MODEL=SamLowe/roberta-base-go_emotions
 ARG EMOTION_REVISION=d75048347613a25d77de8cf6412eaae9fa7b26be
-RUN /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${ENCODER}', revision='${ENCODER_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'sentencepiece.bpe.model'])" \
-    && /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${EMOTION_MODEL}', revision='${EMOTION_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'vocab.json', 'merges.txt'])" \
-    && chmod -R a+rX /app/.hf
+ARG PREBAKE_MODELS=false
+RUN if [ "$PREBAKE_MODELS" = "true" ]; then \
+      /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${ENCODER}', revision='${ENCODER_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'sentencepiece.bpe.model'])" \
+      && /app/.venv/bin/python -c "from huggingface_hub import snapshot_download; snapshot_download('${EMOTION_MODEL}', revision='${EMOTION_REVISION}', allow_patterns=['config.json', 'model.safetensors', 'tokenizer.json', 'tokenizer_config.json', 'special_tokens_map.json', 'vocab.json', 'merges.txt'])" \
+      && chmod -R a+rX /app/.hf; \
+    else \
+      mkdir -p /app/.hf; \
+    fi
 ENV HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1
 
