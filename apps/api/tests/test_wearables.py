@@ -64,3 +64,19 @@ async def test_non_csv_uploads_are_refused(client: AsyncClient) -> None:
         files={"file": ("x.exe", b"MZ", "application/x-msdownload")},
     )
     assert response.status_code == 415
+
+
+async def test_health_connect_json_import(client: AsyncClient) -> None:
+    await start_anonymous(client, {"core": True, "wearables": True})
+    json_data = (
+        b'[{"day": "2026-10-05", "steps": 7500, "sleep_minutes": 460, "resting_hr": 62},'
+        b' {"day": "2026-10-06", "steps": 8200}]'
+    )
+    files = {"file": ("export.json", json_data, "application/json")}
+    res = await client.post("/api/v1/integrations/wearables/import", files=files)
+    assert res.status_code == 200
+    assert res.json() == {"days": 2, "values": 4}
+
+    values = (await client.get("/api/v1/integrations/wearables")).json()
+    assert len(values) == 4
+

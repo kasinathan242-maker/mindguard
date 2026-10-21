@@ -215,7 +215,20 @@
     "deleteConfirm1": "Yes, I want to delete it",
     "deleteFinalWarning": "Last step: everything will be erased permanently.",
     "deleteConfirm2": "Delete everything now",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "grievanceTitle": "Grievance redressal & DPDP rights",
+    "grievanceIntro": "Under India's Digital Personal Data Protection Act, 2023, you have full control over your digital personal data.",
+    "rightsList": [
+      "Right to access your stored data and download a full export at any time.",
+      "Right to erasure: permanently delete your account and all associated records with two confirmations.",
+      "Right to withdraw consent for any optional data use immediately without penalty.",
+      "Right to grievance redressal with guaranteed response times."
+    ],
+    "officerLabel": "Data Protection & Grievance Officer",
+    "officerName": "N. Kasinathan",
+    "officerEmail": "grievance@mindguard.in",
+    "officerSla": "24 hours acknowledgement • 30 days resolution",
+    "escalationNote": "If unresolved, you have the statutory right to appeal directly to the Data Protection Board of India (DPBI)."
   },
   "status": {
     "title": "Service status",

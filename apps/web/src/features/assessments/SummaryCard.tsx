@@ -13,7 +13,7 @@ interface Summary {
 }
 
 export function SummaryCard() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [error, setError] = useState(false);
   const { data } = useQuery({
     queryKey: ['summary'],
@@ -22,7 +22,8 @@ export function SummaryCard() {
 
   const download = async () => {
     setError(false);
-    const response = await fetch('/api/v1/reports/screening.pdf', { credentials: 'include' });
+    const locale = i18n.language === 'ta' ? 'ta' : 'en';
+    const response = await fetch(`/api/v1/reports/screening.pdf?locale=${locale}`, { credentials: 'include' });
     if (!response.ok) {
       setError(true);
       return;
@@ -30,7 +31,7 @@ export function SummaryCard() {
     const url = URL.createObjectURL(await response.blob());
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'mindguard-screening-summary.pdf';
+    link.download = `mindguard-screening-summary-${locale}.pdf`;
     link.click();
     URL.revokeObjectURL(url);
   };

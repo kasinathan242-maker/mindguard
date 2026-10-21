@@ -14,6 +14,25 @@ function readTime(): string | null {
   }
 }
 
+async function triggerNotification(title: string, options: NotificationOptions): Promise<void> {
+  if ('serviceWorker' in navigator) {
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      if (typeof reg.showNotification === 'function') {
+        await reg.showNotification(title, options);
+        return;
+      }
+    } catch {
+      // Fallback to window Notification constructor
+    }
+  }
+  try {
+    new Notification(title, options);
+  } catch {
+    // Blocked or mobile browser requiring ServiceWorker
+  }
+}
+
 /**
  * A gentle daily reminder while MindGuard is open (tab or installed app). The time stays on
  * this device; nothing is sent to the server. Background push needs a push service and is not
@@ -31,8 +50,9 @@ export function Reminders() {
     if (!granted || !time || !supported || Notification.permission !== 'granted') return;
     const id = window.setTimeout(
       () => {
-        new Notification(t('reminders.notificationTitle'), {
+        void triggerNotification(t('reminders.notificationTitle'), {
           body: t('reminders.notificationBody'),
+          icon: '/favicon.ico',
         });
       },
       msUntil(time, new Date()),

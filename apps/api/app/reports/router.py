@@ -41,14 +41,31 @@ BAND_LABELS = {
     "moderately_severe": "Moderately severe",
     "severe": "Severe",
 }
+BAND_LABELS_TA = {
+    "minimal": "Minimal (மிகக் குறைவு)",
+    "mild": "Mild (லேசானது)",
+    "moderate": "Moderate (மிதமானது)",
+    "moderately_severe": "Moderately severe (ஓரளவு கடுமையானது)",
+    "severe": "Severe (கடுமையானது)",
+}
 NEXT_STEPS = {
     "self_care": "Keep looking after yourself and check in again in two weeks.",
     "talk_to_someone": "Consider talking with a counsellor or someone you trust.",
     "consult_professional": "Please consider seeing a doctor, psychologist or counsellor soon.",
 }
+NEXT_STEPS_TA = {
+    "self_care": "Keep looking after yourself and check in again in two weeks. (உங்களைத் தொடர்ந்து கவனித்துக்கொள்ளுங்கள்.)",
+    "talk_to_someone": "Consider talking with a counsellor or someone you trust. (ஒரு ஆலோசகர் அல்லது நீங்கள் நம்பும் ஒருவரிடம் பேசுங்கள்.)",
+    "consult_professional": "Please consider seeing a doctor, psychologist or counsellor soon. (விரைவில் ஒரு மருத்துவர் அல்லது ஆலோசகரிடம் பேசுங்கள்.)",
+}
 DISCLAIMER = (
     "This is a screening summary, not a diagnosis. Questionnaire scores describe how the person "
     "has been feeling over the last two weeks. MindGuard AI does not diagnose any condition."
+)
+DISCLAIMER_TA = (
+    "This is a screening summary, not a diagnosis. Questionnaire scores describe how the person "
+    "has been feeling over the last two weeks. MindGuard AI does not diagnose any condition. "
+    "(இது ஒரு சுய மதிப்பீட்டு சுருக்கம், நோயறிதல் அல்ல. MindGuard AI எந்த நோயறிதலையும் வழங்காது.)"
 )
 
 
@@ -86,7 +103,7 @@ class Summary(BaseModel):
     disclaimer: str
 
 
-async def build_summary(session: SessionDep, user: User, days: int = 30) -> Summary:
+async def build_summary(session: SessionDep, user: User, days: int = 30, locale: str = "en") -> Summary:
     rows = (
         await session.scalars(
             select(Assessment).where(Assessment.user_id == user.id).order_by(Assessment.created_at)
@@ -125,6 +142,11 @@ async def build_summary(session: SessionDep, user: User, days: int = 30) -> Summ
     def mean(values: list[float]) -> float | None:
         return round(sum(values) / len(values), 1) if values else None
 
+    is_ta = (locale == "ta")
+    next_steps_dict = NEXT_STEPS_TA if is_ta else NEXT_STEPS
+    disclaimer_text = DISCLAIMER_TA if is_ta else DISCLAIMER
+    res_locale = "ta" if is_ta else "en"
+
     return Summary(
         generated_at=utcnow(),
         latest=scores,
@@ -136,10 +158,10 @@ async def build_summary(session: SessionDep, user: User, days: int = 30) -> Summ
             average_energy=mean([float(c.energy) for c in checkins]),
             average_sleep_hours=mean(sleeps),
         ),
-        next_step=NEXT_STEPS[worst_step] if worst_step else None,
+        next_step=next_steps_dict[worst_step] if worst_step else None,
         patterns=await _patterns(session, user),
-        resources=[f"{r.name}: {r.display_number}" for r in localised_resources("en")],
-        disclaimer=DISCLAIMER,
+        resources=[f"{r.name}: {r.display_number}" for r in localised_resources(res_locale)],
+        disclaimer=disclaimer_text,
     )
 
 
@@ -161,32 +183,54 @@ async def _patterns(session: SessionDep, user: User) -> list[Pattern]:
 
 
 @router.get("/insights/summary")
-async def summary(user: CoreUser, session: SessionDep) -> Summary:
-    return await build_summary(session, user)
+async def summary(user: CoreUser, session: SessionDep, locale: str = "en") -> Summary:
+    return await build_summary(session, user, locale=locale)
 
 
-def render_pdf(data: Summary) -> bytes:
+def render_pdf(data: Summary, locale: str = "en") -> bytes:
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(
         buffer, pagesize=A4, leftMargin=18 * mm, rightMargin=18 * mm, title="Screening summary"
     )
     styles = getSampleStyleSheet()
+
+    is_ta = (locale == "ta")
+    band_labels = BAND_LABELS_TA if is_ta else BAND_LABELS
+    title_text = "MindGuard AI: screening summary (சுய மதிப்பீட்டு சுருக்கம்)" if is_ta else "MindGuard AI: screening summary"
+    h1_text = "1. Questionnaire scores (validated instruments / கேள்வித்தாள் முடிவுகள்)" if is_ta else "1. Questionnaire scores (validated instruments)"
+    table_headers = ["Questionnaire / கேள்வித்தாள்", "Score / மதிப்பெண்", "Range / வரம்பு", "Date / தேதி"] if is_ta else ["Questionnaire", "Score", "Range", "Date"]
+    h2_text = f"2. Self-reported check-ins (last {data.mood.days} days / சுய தினசரிப் பதிவுகள்)" if is_ta else f"2. Self-reported check-ins (last {data.mood.days} days)"
+    h3_text = "3. Diagnosis (நோயறிதல்)" if is_ta else "3. Diagnosis"
+    diag_body = (
+        "Not provided. MindGuard AI is a screening and support tool. "
+        "(வழங்கப்படவில்லை. MindGuard AI ஒரு சுய மதிப்பீட்டுக் கருவி மட்டுமே.)"
+        if is_ta
+        else "Not provided. MindGuard AI is a screening and support tool."
+    )
+    next_step_h = "Suggested next step (பரிந்துரைக்கப்பட்ட அடுத்த படி)" if is_ta else "Suggested next step"
+    support_h = "Free support in India (இந்தியாவில் இலவச உதவி மையங்கள்)" if is_ta else "Free support in India"
+    empty_q = (
+        "No questionnaires completed yet. (இன்னும் மதிப்பீடுகள் எடுக்கப்படவில்லை.)"
+        if is_ta
+        else "No questionnaires completed yet."
+    )
+
     story: list[object] = [
-        Paragraph("MindGuard AI: screening summary", styles["Title"]),
+        Paragraph(title_text, styles["Title"]),
         Paragraph(f"Generated {data.generated_at:%d %b %Y}", styles["Normal"]),
         Spacer(1, 6 * mm),
-        Paragraph(DISCLAIMER, styles["Italic"]),
+        Paragraph(data.disclaimer, styles["Italic"]),
         Spacer(1, 6 * mm),
-        Paragraph("1. Questionnaire scores (validated instruments)", styles["Heading2"]),
+        Paragraph(h1_text, styles["Heading2"]),
     ]
     if data.latest:
         table = Table(
-            [["Questionnaire", "Score", "Range", "Date"]]
+            [table_headers]
             + [
                 [
                     s.name,
                     f"{s.total} / {s.max_score}",
-                    BAND_LABELS.get(s.band, s.band),
+                    band_labels.get(s.band, s.band),
                     f"{s.date:%d %b %Y}",
                 ]
                 for s in data.latest
@@ -206,26 +250,29 @@ def render_pdf(data: Summary) -> bytes:
         history = ", ".join(f"{p.type} {p.total} ({p.date:%d %b})" for p in data.trend)
         story += [Spacer(1, 3 * mm), Paragraph(f"Score history: {history}", styles["Normal"])]
     else:
-        story.append(Paragraph("No questionnaires completed yet.", styles["Normal"]))
+        story.append(Paragraph(empty_q, styles["Normal"]))
 
     m = data.mood
+    checkin_body = (
+        f"{m.checkins} check-ins. Average mood {m.average_mood or '-'} / 5, average energy "
+        f"{m.average_energy or '-'} / 5, average sleep {m.average_sleep_hours or '-'} hours. "
+        "These are the person's own ratings, not a clinical measure."
+    )
+    if is_ta:
+        checkin_body += " (இவை பயனரின் சொந்த மதிப்பீடுகள், மருத்துவ அளவீடு அல்ல.)"
+
     story += [
         Spacer(1, 5 * mm),
-        Paragraph(f"2. Self-reported check-ins (last {m.days} days)", styles["Heading2"]),
-        Paragraph(
-            f"{m.checkins} check-ins. Average mood {m.average_mood or '-'} / 5, average energy "
-            f"{m.average_energy or '-'} / 5, average sleep {m.average_sleep_hours or '-'} hours. "
-            "These are the person's own ratings, not a clinical measure.",
-            styles["Normal"],
-        ),
+        Paragraph(h2_text, styles["Heading2"]),
+        Paragraph(checkin_body, styles["Normal"]),
         Spacer(1, 5 * mm),
-        Paragraph("3. Diagnosis", styles["Heading2"]),
-        Paragraph("Not provided. MindGuard AI is a screening and support tool.", styles["Normal"]),
+        Paragraph(h3_text, styles["Heading2"]),
+        Paragraph(diag_body, styles["Normal"]),
         Spacer(1, 5 * mm),
-        Paragraph("Suggested next step", styles["Heading2"]),
+        Paragraph(next_step_h, styles["Heading2"]),
         Paragraph(data.next_step or "Complete a self-check to get a suggestion.", styles["Normal"]),
         Spacer(1, 5 * mm),
-        Paragraph("Free support in India", styles["Heading2"]),
+        Paragraph(support_h, styles["Heading2"]),
         *[Paragraph(r, styles["Normal"]) for r in data.resources],
     ]
     doc.build(story)
@@ -233,10 +280,12 @@ def render_pdf(data: Summary) -> bytes:
 
 
 @router.get("/reports/screening.pdf")
-async def screening_pdf(user: CoreUser, session: SessionDep) -> Response:
-    pdf = render_pdf(await build_summary(session, user))
+async def screening_pdf(user: CoreUser, session: SessionDep, locale: str = "en") -> Response:
+    summary_data = await build_summary(session, user, locale=locale)
+    pdf = render_pdf(summary_data, locale=locale)
+    filename = "mindguard-screening-summary-ta.pdf" if locale == "ta" else "mindguard-screening-summary.pdf"
     return Response(
         content=pdf,
         media_type="application/pdf",
-        headers={"Content-Disposition": 'attachment; filename="mindguard-screening-summary.pdf"'},
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
     )

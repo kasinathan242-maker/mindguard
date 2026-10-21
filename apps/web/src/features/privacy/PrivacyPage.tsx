@@ -9,6 +9,7 @@ import { ApiError } from '@/lib/api';
 import { useConsents, useSession, useUpdateConsents, useUpgrade } from '@/lib/session';
 import { ConsentRow } from './ConsentRow';
 import { DataControls } from './DataControls';
+import { GrievanceSection } from './GrievanceSection';
 import { WearableImport } from './WearableImport';
 
 function ConsentsSection() {
@@ -185,6 +186,13 @@ export function PrivacyPage() {
           {t('privacyPage.dataTitle')}
         </h2>
         <DataControls />
+      </section>
+
+      <section aria-labelledby="grievance-title" className="mt-12">
+        <h2 id="grievance-title" className="mb-5 font-display text-2xl font-semibold tracking-tight">
+          {t('privacyPage.grievanceTitle')}
+        </h2>
+        <GrievanceSection />
       </section>
     </div>
   );

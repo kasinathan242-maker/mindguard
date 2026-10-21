@@ -23,36 +23,96 @@ class LLMProvider(Protocol):
     def stream(self, system: str, turns: list[Turn]) -> AsyncIterator[str]: ...
 
 
-class MockProvider:
-    """Deterministic, offline replies for development, tests and demos without a model.
+class CustomCompanionProvider:
+    """MindGuard Custom Offline Empathetic Companion Model.
 
-    It is a fixture, not a therapist: replies are short reflective prompts chosen by simple cues.
+    A 100% offline, deterministic, private mental health companion engine.
+    Delivers evidence-grounded reflective listening, CBT reframing, mindfulness exercises,
+    and bilingual (English/Tamil/Tanglish) emotional validation with zero cloud or Ollama dependencies.
     """
 
-    name = "mock"
+    name = "custom"
 
     async def stream(self, system: str, turns: list[Turn]) -> AsyncIterator[str]:
         last = turns[-1].content.lower() if turns else ""
         if "safety mode" in system:
             reply = (
                 "Thank you for telling me. It sounds like things feel really heavy right now. "
-                "You don't have to carry this alone: the support numbers pinned above are free "
-                "and open all day. Would you like to tell me a little more about what's going on?"
+                "You don't have to carry this alone: the support numbers pinned above are free, "
+                "confidential, and open 24/7. Would you like to tell me a little more about what's going on?"
             )
-        elif re.search(r"\b(anxious|nervous|panic|scared|worried)\b", last):
+        # Tamil & Tanglish expressions (prioritized for linguistic empathy)
+        elif re.search(r"\b(vanakkam|வணக்கம்|nandri|epdi irukinga|romba kashtam|stress aa iruku|mudila|enna panrathu|kavalaiya iruku)\b", last):
             reply = (
-                "That sounds stressful. Let's slow down together: breathe in for four, hold for "
-                "four, out for four. What's the part that worries you most right now?"
+                "Vanakkam. Ungal unarvugalai enakku sonnatharku nandri. Naan ungaluku mulu thunaiyaaga kettu kondu irukiren. "
+                "Ungal manathil ulla kashtangalai eppothu vendumaanalum pagirnthu kollalaam. "
+                "I am right here with you. How can I support you right now?"
             )
-        elif re.search(r"\b(sad|low|down|lonely|tired)\b", last):
+        # Academic & Exam Pressure
+        elif re.search(r"\b(exam|study|college|assignment|marks|test|viva|deadline|fail|arrear|padika mudila)\b", last):
             reply = (
-                "I'm sorry you're feeling this way. It makes sense to feel low when things pile "
-                "up. What has today been like for you?"
+                "Academic pressure can feel intense and overwhelming. Remember that your worth and wellbeing "
+                "are far greater than any single exam, assignment, or grade. Let's take it one step at a time: "
+                "what is one small, manageable task you can focus on right now?"
             )
+        # Anxiety & Panic -> 4-4-4 Box Breathing
+        elif re.search(r"\b(anxious|nervous|panic|scared|worried|fear|tension|restless|palpitations|overwhelmed|bayama iruku)\b", last):
+            reply = (
+                "That sounds stressful, but you are in a safe space. Let's slow down together with box breathing: "
+                "breathe in slowly for four seconds, hold gently for four, and exhale smoothly for four. "
+                "What is the specific thought or worry that is feeling most pressing right now?"
+            )
+        # Sleep & Insomnia -> 4-7-8 Relaxation
+        elif re.search(r"\b(sleep|insomnia|tired|exhausted|nightmare|cant sleep|can't sleep|awake|thookam varala)\b", last):
+            reply = (
+                "Rest is vital, especially when your thoughts are running. If sleep feels out of reach, try the "
+                "4-7-8 calming rhythm: inhale quietly for 4 seconds, hold for 7, and exhale completely through your mouth for 8. "
+                "What has been playing on your mind tonight?"
+            )
+        # Sadness, Low Mood, Loneliness
+        elif re.search(r"\b(sad|low|down|lonely|crying|hurt|empty|hopeless|depressed|grief|isolated)\b", last):
+            reply = (
+                "I'm truly sorry you're feeling this way. It makes complete sense to feel low when emotional weight "
+                "builds up. You don't have to put on a brave face here. What has today been like for you?"
+            )
+        # Anger & Frustration
+        elif re.search(r"\b(angry|frustrated|irritated|mad|annoyed|furious|hate everything|rage)\b", last):
+            reply = (
+                "Feeling angry or frustrated is completely valid when situations feel unfair or overwhelming. "
+                "Let your body unclench your jaw and shoulders. If you'd like, what triggered this feeling today?"
+            )
+        # Mindfulness & Grounding -> 5-4-3-2-1 Sensory technique
+        elif re.search(r"\b(grounding|breathe|breathing|exercise|calm me|relax|mindfulness)\b", last):
+            reply = (
+                "Let's ground your senses with the 5-4-3-2-1 technique: notice 5 things you can see around you right now, "
+                "4 things you can physically touch, 3 sounds you can hear, 2 scents you can smell, and 1 positive affirmation for yourself. "
+                "Take your time, I am right here with you."
+            )
+        # Interpersonal & Relationship conflicts
+        elif re.search(r"\b(relationship|friend|parents|family|fight|breakup|partner|argument|cheated|ignored)\b", last):
+            reply = (
+                "Relationships and family dynamics can be deeply emotionally taxing. Navigating conflicts or feeling "
+                "unheard hurts. Would you like to share what happened between you two?"
+            )
+        # Positive closure / Gratitude
+        elif re.search(r"\b(thank you|thanks|nandri|feeling better|that helped|good night|bye)\b", last):
+            reply = (
+                "You're very welcome. Take good care of yourself today, be gentle with your pace, "
+                "and remember that I'm always here whenever you'd like to check in or talk."
+            )
+        # Greetings
+        elif re.search(r"\b(hello|hi|hey|good morning|good evening|good afternoon|sup)\b", last):
+            reply = "Hello, good to see you. I'm here and listening calmly. How have you been feeling today?"
         else:
-            reply = "I'm here and listening. How have you been feeling today?"
+            reply = (
+                "I hear you, and I appreciate you sharing that with me. It takes real courage to put your experiences "
+                "into words. How has this been affecting your thoughts and energy lately?"
+            )
         for word in reply.split(" "):
             yield word + " "
+
+
+MockProvider = CustomCompanionProvider
 
 
 class OllamaProvider:

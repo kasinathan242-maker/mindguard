@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Bezel } from '@/components/ui/Bezel';
 import { ButtonLink } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
+import { ScoreChart } from './ScoreChart';
 import { SummaryCard } from './SummaryCard';
 import { useAssessmentHistory, type AssessmentResult, type InstrumentType } from './api';
 
@@ -118,16 +119,20 @@ export function AssessmentsPage() {
 
       <SummaryCard />
 
-      <section aria-labelledby="history-title">
-        <h2 id="history-title" className="mb-5 font-display text-2xl font-semibold tracking-tight">
+      <section aria-labelledby="history-title" className="grid gap-6">
+        <h2 id="history-title" className="font-display text-2xl font-semibold tracking-tight">
           {t('assessments.historyTitle')}
         </h2>
         {history.isError ? (
           <p className="text-crisis">{t('errorGeneric')}</p>
         ) : (
-          <History results={results} />
+          <>
+            <ScoreChart results={results} />
+            <History results={results} />
+          </>
         )}
       </section>
     </div>
   );
 }
+

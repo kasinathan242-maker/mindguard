@@ -31,6 +31,28 @@ async def test_pdf_download(client: AsyncClient) -> None:
     assert "attachment" in response.headers["content-disposition"]
 
 
+async def test_pdf_download_tamil(client: AsyncClient) -> None:
+    await start_anonymous(client)
+    await client.post("/api/v1/assessments/PHQ9", json={"answers": [1, 2, 1, 2, 1, 1, 1, 1, 0]})
+    await client.post("/api/v1/checkins", json={"mood": 3, "energy": 3, "sleep_hours": 7})
+
+    response = await client.get("/api/v1/reports/screening.pdf?locale=ta")
+
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "application/pdf"
+    assert response.content.startswith(b"%PDF")
+    assert "mindguard-screening-summary-ta.pdf" in response.headers["content-disposition"]
+
+
+async def test_summary_tamil(client: AsyncClient) -> None:
+    await start_anonymous(client)
+    await client.post("/api/v1/assessments/PHQ9", json={"answers": [1, 2, 1, 2, 1, 1, 1, 1, 0]})
+
+    data = (await client.get("/api/v1/insights/summary?locale=ta")).json()
+    assert "பேசுங்கள்" in data["next_step"] or "ஆலோசகர்" in data["next_step"]
+    assert "சுய மதிப்பீட்டு சுருக்கம்" in data["disclaimer"]
+
+
 async def test_reports_need_a_session(client: AsyncClient) -> None:
     assert (await client.get("/api/v1/reports/screening.pdf")).status_code == 401
 

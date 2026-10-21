@@ -18,7 +18,7 @@
 # Changing this file changes safety behaviour: bump `version`, re-run
 #   uv run python ../../ml/safety_eval/evaluate.py
 # and update the metrics in docs/SAFETY.md.
-version: 4
+version: 5
 
 rules:
   # ---------------------------------------------------------------- English: urgent
@@ -45,7 +45,7 @@ rules:
   - {id: en.passive.wish_dead, level: urgent, category: passive, lang: en,
      pattern: '\bwish(?:ed)?\s+i\s+(?:was|were|had|could|would)\s+(?:just\s+)?(?:dead|die|died|never\s+been\s+born|not\s+been\s+born|never\s+born|disappear\s+forever|stop\s+existing|not\s+wake\s+up|never\s+wake\s+up)\b'}
   - {id: en.passive.sleep_forever, level: urgent, category: passive, lang: en,
-     pattern: '\b(?:sleep|go\s+to\s+sleep|fall\s+asleep)\s+and\s+(?:never|not)\s+wake\s+up\b'}
+     pattern: '\b(?:sleep|go\s+to\s+sleep|fall\s+asleep)\s+and\s+(?:never|not)\s+(?:wake\s+up|come\s+back)\b'}
   - {id: en.passive.tired_of_living, level: urgent, category: passive, lang: en,
      pattern: '\b(?:tired|sick|done)\s+(?:of|with)\s+(?:living|being\s+alive|life|existing)\b'}
   - {id: en.passive.no_reason_to_live, level: urgent, category: passive, lang: en,
@@ -65,7 +65,7 @@ rules:
   - {id: en.self_harm.wrists, level: urgent, category: self_harm, lang: en, downgradable: false,
      pattern: '\b(?:slit|slitting|slash|slashing|cut|cutting)\s+(?:open\s+)?my\s+(?:wrists?|veins?|arms?|thighs?)\b'}
   - {id: en.means.overdose, level: urgent, category: means, lang: en, downgradable: false,
-     pattern: '\b(?:take|taking|swallow|swallowing|eat|eating|pop|popping)\s+(?:all|every|the\s+whole)\s+(?:of\s+)?(?:the\s+|my\s+|these\s+|those\s+)?(?:pills|tablets|medicines?|meds|strip|bottle)\b|\b(?:overdose|overdosing|overdosed|od\s+on)\b|\b(?:how\s+many|enough)\s+(?:of\s+my\s+|of\s+these\s+)?(?:pills|tablets|sleeping\s+pills|paracetamol|crocin|dolo)\s+(?:to|would|will|does\s+it\s+take|do\s+i\s+need)\b'}
+     pattern: '\b(?:take|taking|swallow|swallowing|eat|eating|pop|popping)\s+(?:all|every|the\s+whole)\s+(?:of\s+)?(?:the\s+|my\s+|these\s+|those\s+)?(?:pills|tablets|medicines?|meds|strip|bottle)\b|\b(?:overdose|overdosing|overdosed|od\s+on)\b|\b(?:how\s+many|enough)\s+(?:of\s+my\s+|of\s+these\s+)?(?:pills|tablets|sleeping\s+pills|paracetamol|crocin|dolo)\s+(?:to|would|will|does\s+it\s+take|do\s+i\s+need)\b|\b(?:would|will|is|are|could)\s+(?:\d+|thirty|forty|fifty|\w+)\s+(?:\w+\s+)?(?:pills|tablets|sleeping\s+(?:tablets|pills)|meds)\s+(?:be\s+)?enough\b'}
   - {id: en.means.hanging, level: urgent, category: means, lang: en, downgradable: false,
      pattern: '\bhang(?:ing)?\s+myself\b|\b(?:rope|noose|dupatta)\b.{0,40}\b(?:ready|tied|ceiling|fan|neck)\b'}
   - {id: en.means.jump, level: urgent, category: means, lang: en, downgradable: false,
@@ -159,7 +159,7 @@ rules:
   - {id: ta.self_harm.cut, level: urgent, category: self_harm, lang: ta, downgradable: false,
      pattern: 'கையை\s*(?:அறுத்து|அறுக்க|வெட்டி|கிழித்து|அறுத்துக்)|என்னை\s*நானே\s*காயப்படுத்த'}
   - {id: ta.goodbye, level: urgent, category: goodbye, lang: ta, downgradable: false,
-     pattern: '(?:இது|இதுதான்|இதான்)\s*(?:என்\s*)?கடைசி\s*(?:மெசேஜ்|செய்தி)|(?:எல்லாருக்கும்|எல்லோருக்கும்|உலகத்துக்கு|இந்த\s*உலகத்துக்கு)\s*(?:குட்பை|பை|விடை)|நாளைக்கு\s*நான்\s*இருக்க\s*மாட்டேன்'}
+     pattern: '(?:இது|இதுதான்|இதான்)\s*(?:என்\s*)?கடைசி\s*(?:மெசேஜ்|செய்தி)|(?:எல்லாருக்கும்|எல்லோருக்கும்|உலகத்துக்கு|இந்த\s*உலகத்துக்கு)\s*(?:குட்பை|பை|விடை)|நாளைக்கு\s*நான்\s*இருக்க\s*மாட்டேன்|(?:என்\s*)?கடைசி\s*(?:மூச்சு|நாள்)'}
   - {id: ta.burden.without_me, level: urgent, category: burden, lang: ta,
      pattern: 'நான்\s*இல்லாம(?:ல்)?\s*(?:எல்லாரும்|எல்லோரும்|என்\s*குடும்பம்|வீட்டில்)\s*(?:நல்லா|சந்தோஷமா|நிம்மதியா|மகிழ்ச்சியா)'}
 
@@ -192,7 +192,7 @@ rules:
   - {id: tg.self_harm, level: urgent, category: self_harm, lang: tanglish, downgradable: false,
      pattern: '\bkai(?:ya|yai|a)?\s*(?:aruthu|arukka|aruthukka|vetti|vettikka|kizhichu)\w*\b'}
   - {id: tg.goodbye, level: urgent, category: goodbye, lang: tanglish, downgradable: false,
-     pattern: '\bell(?:a|o)r(?:u|o)?(?:kk?um)?\s*(?:bye|goodbye|gudbye)\b|\bidhu\s*(?:dhan|thaan|than|tha)\s*en\s*(?:kadaisi|last)\s*(?:message|msg)\b|\bnaalaik?ku\s*naan\s*irukka\s*maa?tt?en\b'}
+     pattern: '\bell(?:a|o)r(?:u|o)?(?:kk?um)?\s*(?:bye|goodbye|gudbye)\b|\bidhu\s*(?:dhan|thaan|than|tha)\s*en\s*(?:kadaisi|last)\s*(?:message|msg)\b|\bnaalaik?ku\s*naan\s*irukka\s*maa?tt?en\b|\b(?:en\s+)?kadaisi\s+(?:naal|moochu|naalu)\b'}
   - {id: tg.burden, level: urgent, category: burden, lang: tanglish,
      pattern: '\bnaan\s*illa(?:ma|mal|me)\s*(?:ellarum|ellorum|ellaarum|en\s*family|veetla|amma\s*appa)\s*(?:nalla|santhosama|happy|nimmadhiya|nimmathiya)\b'}
 

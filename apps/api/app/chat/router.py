@@ -22,6 +22,7 @@ from app.chat.models import ChatMessage, ChatSession
 from app.chat.prompts import SAFE_FALLBACK, build_system_prompt
 from app.chat.providers import (
     AnthropicProvider,
+    CustomCompanionProvider,
     LLMProvider,
     MockProvider,
     OllamaProvider,
@@ -51,11 +52,13 @@ _FORBIDDEN_REPLY_CATEGORIES = {"means", "method_seeking", "intent", "self_harm",
 
 
 def default_provider(settings: Settings, cloud_allowed: bool) -> LLMProvider:
+    if settings.llm_provider in ("custom", "mock"):
+        return CustomCompanionProvider()
     if settings.llm_provider == "ollama":
         return OllamaProvider(settings.ollama_base_url, settings.llm_model)
     if settings.llm_provider == "anthropic" and cloud_allowed and settings.anthropic_api_key:
         return AnthropicProvider(settings.anthropic_api_key.get_secret_value(), settings.llm_model)
-    return MockProvider()
+    return CustomCompanionProvider()
 
 
 def _chat_limit(request: Request) -> int:

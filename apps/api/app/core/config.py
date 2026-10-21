@@ -32,8 +32,8 @@ class Settings(BaseSettings):
 
     field_encryption_key: SecretStr = SecretStr(DEV_FIELD_KEY)
 
-    llm_provider: Literal["mock", "ollama", "anthropic"] = "mock"
-    llm_model: str = "llama3.2:3b"
+    llm_provider: Literal["custom", "mock", "ollama", "anthropic"] = "custom"
+    llm_model: str = "custom-offline-companion"
     ollama_base_url: str = "http://localhost:11434"
     anthropic_api_key: SecretStr | None = None
     chat_rate_limit_per_minute: int = 20

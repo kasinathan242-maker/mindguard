@@ -182,9 +182,31 @@ async def test_chats_are_private_and_deletable(client: AsyncClient, app: FastAPI
     assert gone.status_code == 404
 
 
-async def test_mock_provider_is_supportive_and_offline() -> None:
-    parts = [p async for p in MockProvider().stream("base", [Turn("user", "I feel anxious")])]
-    assert "breathe" in "".join(parts)
+async def test_custom_companion_provider_is_supportive_and_offline() -> None:
+    # Anxiety & panic
+    parts = [p async for p in MockProvider().stream("base", [Turn("user", "I feel anxious and overwhelmed")])]
+    text = "".join(parts)
+    assert "breathe" in text and "box breathing" in text
+
+    # Academic & exam stress
+    parts = [p async for p in MockProvider().stream("base", [Turn("user", "I am terrified I will fail my college exam")])]
+    text = "".join(parts)
+    assert "Academic pressure" in text and "wellbeing" in text
+
+    # Sleep & insomnia
+    parts = [p async for p in MockProvider().stream("base", [Turn("user", "I have terrible insomnia, thookam varala")])]
+    text = "".join(parts)
+    assert "4-7-8" in text
+
+    # Tamil / Tanglish support
+    parts = [p async for p in MockProvider().stream("base", [Turn("user", "Vanakkam, romba kashtam aa iruku")])]
+    text = "".join(parts)
+    assert "Vanakkam" in text and "Nandri" in text or "nandri" in text
+
+    # Safety mode holding
+    parts = [p async for p in MockProvider().stream("safety mode: active", [Turn("user", "I feel like giving up")])]
+    text = "".join(parts)
+    assert "support numbers pinned above" in text
 
 
 def test_pii_is_stripped_before_cloud_calls() -> None:
