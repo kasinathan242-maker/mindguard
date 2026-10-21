@@ -11,19 +11,19 @@
   form inputs are 16px.
 */
 :root {
-  --canvas: #f1f4f0;
-  --surface: #fafbf9;
-  --surface-sunk: #e4e9e3;
-  --ink: #16201b;
-  --ink-soft: #35413b;
-  --ink-muted: #56625b;
-  --line: rgb(22 32 27 / 0.1);
-  --accent: #276651;
-  --accent-ink: #f3f8f5;
-  --accent-soft: #d5e5dc;
-  --focus: #276651;
-  --shadow: 22 32 27;
-  --crisis: #b42318;
+  --canvas: #fbf9f5;
+  --surface: #ffffff;
+  --surface-sunk: #f0ede6;
+  --ink: #141e18;
+  --ink-soft: #38463e;
+  --ink-muted: #607166;
+  --line: rgb(20 30 24 / 0.08);
+  --accent: #1d5a46;
+  --accent-ink: #f4faf6;
+  --accent-soft: #e2ece6;
+  --focus: #1d5a46;
+  --shadow: 20 30 24;
+  --crisis: #ba1a1a;
   --crisis-ink: #ffffff;
   --crisis-soft: #fdecea;
   color-scheme: light;
@@ -31,17 +31,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --canvas: #0e1311;
-    --surface: #151c19;
-    --surface-sunk: #0a0e0c;
-    --ink: #e7eee9;
-    --ink-soft: #c1ccc5;
-    --ink-muted: #95a39b;
-    --line: rgb(231 238 233 / 0.1);
-    --accent: #86cbb0;
-    --accent-ink: #0b1d16;
-    --accent-soft: #1c3128;
-    --focus: #86cbb0;
+    --canvas: #0b110e;
+    --surface: #131b17;
+    --surface-sunk: #080d0b;
+    --ink: #e8efea;
+    --ink-soft: #b8c7bf;
+    --ink-muted: #889b91;
+    --line: rgb(232 239 234 / 0.08);
+    --accent: #4ade80;
+    --accent-ink: #07170e;
+    --accent-soft: #142e20;
+    --focus: #4ade80;
     --shadow: 0 0 0;
     --crisis: #f97066;
     --crisis-ink: #1f0604;
@@ -51,17 +51,17 @@
 }
 
 :root[data-theme='dark'] {
-  --canvas: #0e1311;
-  --surface: #151c19;
-  --surface-sunk: #0a0e0c;
-  --ink: #e7eee9;
-  --ink-soft: #c1ccc5;
-  --ink-muted: #95a39b;
-  --line: rgb(231 238 233 / 0.1);
-  --accent: #86cbb0;
-  --accent-ink: #0b1d16;
-  --accent-soft: #1c3128;
-  --focus: #86cbb0;
+  --canvas: #0b110e;
+  --surface: #131b17;
+  --surface-sunk: #080d0b;
+  --ink: #e8efea;
+  --ink-soft: #b8c7bf;
+  --ink-muted: #889b91;
+  --line: rgb(232 239 234 / 0.08);
+  --accent: #4ade80;
+  --accent-ink: #07170e;
+  --accent-soft: #142e20;
+  --focus: #4ade80;
   --shadow: 0 0 0;
   --crisis: #f97066;
   --crisis-ink: #1f0604;
@@ -144,9 +144,13 @@
 }
 
 @utility bezel-highlight {
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.7),
+    0 4px 24px -6px rgb(var(--shadow) / 0.06);
 
   @variant dark {
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 0.1),
+      0 4px 24px -6px rgb(0 0 0 / 0.4);
   }
 }

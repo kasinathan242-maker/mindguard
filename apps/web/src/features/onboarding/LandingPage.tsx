@@ -34,7 +34,7 @@ function SiteHeader() {
     <header className="fixed inset-x-0 top-3 z-30 px-3 sm:top-5 sm:px-6">
       <nav
         aria-label={t('app.nav.label')}
-        className="mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full bg-surface/80 py-1.5 pr-1.5 pl-3 shadow-soft ring-1 ring-line backdrop-blur-xl"
+        className="mx-auto flex max-w-5xl items-center justify-between gap-2 rounded-full bg-surface/85 py-2 pr-2 pl-4 shadow-soft ring-1 ring-line backdrop-blur-2xl"
       >
         <Logo />
         <div className="hidden items-center gap-1 md:flex">
@@ -92,6 +92,16 @@ function Hero() {
   return (
     <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-28 pb-8 sm:px-6 md:min-h-[88dvh] md:grid-cols-[1.15fr_0.85fr] md:pt-24">
       <motion.div variants={heroStagger} initial={initial} animate="show" className="max-w-xl">
+        <motion.div
+          variants={heroItem}
+          className="mb-6 inline-flex items-center gap-2.5 rounded-full bg-accent-soft/80 px-4 py-1.5 text-xs font-semibold tracking-[0.14em] text-accent uppercase ring-1 ring-accent/20 backdrop-blur-md"
+        >
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex size-2 rounded-full bg-accent" />
+          </span>
+          <span>100% Private · Zero Tracking · Offline AI</span>
+        </motion.div>
         <motion.h1
           variants={heroItem}
           className="font-display text-[clamp(2.4rem,6vw,4.25rem)] leading-[1.04] font-semibold tracking-tight text-balance text-ink"
