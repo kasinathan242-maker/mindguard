@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bezel } from '@/components/ui/Bezel';
+import { API_BASE } from '@/lib/api';
 import { useConsents } from '@/lib/session';
 
 export function WearableImport() {
@@ -14,7 +15,7 @@ export function WearableImport() {
     if (!file) return;
     const form = new FormData();
     form.append('file', file);
-    const response = await fetch('/api/v1/integrations/wearables/import', {
+    const response = await fetch(`${API_BASE}/api/v1/integrations/wearables/import`, {
       method: 'POST',
       credentials: 'include',
       body: form,

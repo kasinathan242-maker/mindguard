@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     access_token_ttl_minutes: int = 15
     refresh_token_ttl_days: int = 30
     cookie_secure: bool = False
+    cookie_samesite: Literal["lax", "strict", "none"] = "strict"
 
     auth_rate_limit_per_minute: int = 30
 

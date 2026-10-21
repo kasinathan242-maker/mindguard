@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Bezel } from '@/components/ui/Bezel';
 import { Button } from '@/components/ui/Button';
+import { API_BASE } from '@/lib/api';
 
 export function DataControls() {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export function DataControls() {
 
   const download = async () => {
     setError(false);
-    const response = await fetch('/api/v1/privacy/export', { credentials: 'include' });
+    const response = await fetch(`${API_BASE}/api/v1/privacy/export`, { credentials: 'include' });
     if (!response.ok) {
       setError(true);
       return;
@@ -29,7 +30,7 @@ export function DataControls() {
 
   const remove = async () => {
     setError(false);
-    const response = await fetch('/api/v1/privacy/account', {
+    const response = await fetch(`${API_BASE}/api/v1/privacy/account`, {
       method: 'DELETE',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

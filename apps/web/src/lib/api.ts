@@ -19,7 +19,8 @@ export class ApiError extends Error {
   }
 }
 
-const BASE = '/api/v1';
+export const API_BASE = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '');
+export const BASE = `${API_BASE}/api/v1`;
 
 // Requests that must never trigger a silent refresh-and-retry.
 const NO_REFRESH = new Set(['/auth/refresh', '/auth/login', '/auth/register', '/auth/anonymous']);

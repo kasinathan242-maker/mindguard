@@ -35,7 +35,7 @@ def _set_session_cookies(
         path="/api",
         httponly=True,
         secure=settings.cookie_secure,
-        samesite="strict",
+        samesite=settings.cookie_samesite,
     )
     response.set_cookie(
         REFRESH_COOKIE,
@@ -44,14 +44,18 @@ def _set_session_cookies(
         path=REFRESH_COOKIE_PATH,
         httponly=True,
         secure=settings.cookie_secure,
-        samesite="strict",
+        samesite=settings.cookie_samesite,
     )
 
 
 def _clear_session_cookies(response: Response, settings: Settings) -> None:
     for name, path in ((ACCESS_COOKIE, "/api"), (REFRESH_COOKIE, REFRESH_COOKIE_PATH)):
         response.delete_cookie(
-            name, path=path, httponly=True, secure=settings.cookie_secure, samesite="strict"
+            name,
+            path=path,
+            httponly=True,
+            secure=settings.cookie_secure,
+            samesite=settings.cookie_samesite,
         )
 
 

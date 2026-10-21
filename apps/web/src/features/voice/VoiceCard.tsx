@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bezel } from '@/components/ui/Bezel';
 import { Button } from '@/components/ui/Button';
-import { apiFetch } from '@/lib/api';
+import { API_BASE, apiFetch } from '@/lib/api';
 import { useConsents } from '@/lib/session';
 import { toWav16k } from './wav';
 
@@ -47,7 +47,7 @@ export function VoiceCard() {
         setRecording(false);
         const form = new FormData();
         form.append('file', await toWav16k(new Blob(chunks)), 'checkin.wav');
-        const response = await fetch('/api/v1/voice/analyze', {
+        const response = await fetch(`${API_BASE}/api/v1/voice/analyze`, {
           method: 'POST',
           credentials: 'include',
           body: form,

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Bezel } from '@/components/ui/Bezel';
 import { Button } from '@/components/ui/Button';
-import { apiFetch } from '@/lib/api';
+import { API_BASE, apiFetch } from '@/lib/api';
 
 interface Summary {
   latest: { type: string; total: number; max_score: number; band: string }[];
@@ -23,7 +23,7 @@ export function SummaryCard() {
   const download = async () => {
     setError(false);
     const locale = i18n.language === 'ta' ? 'ta' : 'en';
-    const response = await fetch(`/api/v1/reports/screening.pdf?locale=${locale}`, { credentials: 'include' });
+    const response = await fetch(`${API_BASE}/api/v1/reports/screening.pdf?locale=${locale}`, { credentials: 'include' });
     if (!response.ok) {
       setError(true);
       return;

@@ -1,3 +1,5 @@
+import { API_BASE } from '@/lib/api';
+
 export type SafetyLevel = 'none' | 'elevated' | 'urgent';
 
 export type ChatEvent =
@@ -38,7 +40,7 @@ export async function* sendMessage(
   content: string,
   history: { role: 'user' | 'assistant'; content: string }[],
 ): AsyncGenerator<ChatEvent> {
-  const response = await fetch(`/api/v1/chat/sessions/${sessionId}/messages`, {
+  const response = await fetch(`${API_BASE}/api/v1/chat/sessions/${sessionId}/messages`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
