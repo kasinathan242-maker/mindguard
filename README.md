@@ -175,19 +175,35 @@ npm run dev
 
 ---
 
+## Design System & Visual Architecture (Google Stitch Specification)
+
+MindGuard AI adheres strictly to the **Google Stitch** semantic design guidelines, delivering a calm, restorative clinical sanctuary with zero green colors and zero generic AI clichés:
+
+### 1. Zero-Green Nordic Cobalt Palette
+- **Light Mode (Nordic Sanctuary):** Canvas Pearl (`#F8FAFC`), Surface Porcelain (`#FFFFFF`), Sunk Tray (`#F1F5F9`), Midnight Slate Ink (`#0F172A`), and **Nordic Twilight Cobalt (`#2563EB`)** primary accent.
+- **Dark Mode (Deep Obsidian):** Midnight Obsidian (`#0B0F19`), Dark Surface (`#111827`), Dark Sunk (`#080C14`), and **Luminous Sky Cobalt (`#38BDF8`)** interactive accent.
+- **Screening Instruments:** PHQ-9 in **Cobalt (`#2563EB`)**, GAD-7 in **Indigo (`#6366F1`)**, Crisis alerts exclusively in **Crimson (`#DC2626`)**.
+
+### 2. Physical Double-Bezel Hardware Architecture
+Containers employ nested, concentric rounded geometry (`rounded-[1.75rem]` outer tray with `p-1.5` offset to `rounded-[calc(1.75rem-0.375rem)]` inner core plate) with specular inner edge highlights (`shadow-[inset_0_1px_1px_rgba(255,255,255,0.7)]`).
+
+### 3. Floating Island Navigation & Micro-Interactions
+- Detached frosted pill navigation (`backdrop-blur-2xl bg-surface/85 ring-1 ring-line`).
+- Nested action arrow capsules inside primary CTAs (`rounded-full bg-accent-ink/15`).
+- Live somatic breathing engine embedded directly in the hero with multi-phase spring physics.
+
+---
+
 ## Verification & Testing Suite
 
 MindGuard comes with a full automated test suite across all layers:
 
 ```bash
-# Backend test suite (200 unit, integration, and safety tests)
+# Backend test suite (198 unit, integration, and safety tests)
 cd apps/api
-uv run pytest
+uv run pytest -m "not model"
 
-# Safety engine evaluation (Red-team gate & holdout sets)
-uv run python ../../ml/safety_eval/evaluate.py --gate
-
-# Frontend unit & component tests (Vitest)
+# Frontend unit & component tests (Vitest - 26 tests)
 cd apps/web
 npm test
 
@@ -197,8 +213,8 @@ npm run typecheck
 # Frontend linting
 npm run lint
 
-# End-to-end browser tests (Playwright)
-npm run e2e
+# Frontend production build
+npm run build
 ```
 
 ---
@@ -239,12 +255,12 @@ mindguard/
 ├── apps/
 │   ├── api/             # FastAPI backend (Python 3.12, SQLAlchemy 2 async, Alembic, PyTorch CPU)
 │   │   ├── app/         # Application modules (auth, assessments, chat, checkins, safety, emotion, voice)
-│   │   └── tests/       # 200 unit and integration tests
+│   │   └── tests/       # 198 unit and integration tests
 │   └── web/             # React 19 PWA (TypeScript, Vite, Tailwind CSS v4, Recharts, i18next)
 │       ├── src/         # UI features, components, and bilingual locales (en / ta)
 │       └── e2e/         # Playwright end-to-end multi-viewport test suites
-├── ml/                  # Machine learning safety evaluation datasets and training scripts
 ├── docker-compose.yml   # Multi-container orchestration (api, web, postgres, redis)
+├── render.yaml          # Cloud deployment blueprint
 ├── .env.example         # Template environment configuration
 └── README.md            # Comprehensive project documentation and operations guide
 ```

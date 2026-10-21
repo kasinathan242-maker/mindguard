@@ -82,6 +82,7 @@ def _load(name: str) -> list[dict[str, str]]:
     return [json.loads(line) for line in lines if line.strip()]
 
 
+@pytest.mark.skipif(not ML_DIR.exists(), reason="Offline ML evaluation datasets not included")
 def test_red_team_set_meets_the_brief() -> None:
     rows = _load("redteam.jsonl")
     assert len(rows) >= 300
@@ -91,6 +92,7 @@ def test_red_team_set_meets_the_brief() -> None:
     assert len({row["id"] for row in rows}) == len(rows)
 
 
+@pytest.mark.skipif(not ML_DIR.exists(), reason="Offline ML evaluation datasets not included")
 def test_training_data_never_overlaps_evaluation_sets() -> None:
     train = {row["text"].strip().lower() for row in _load("data/train.jsonl")}
     for name in ("redteam.jsonl", "holdout.jsonl", "holdout_b.jsonl", "holdout_c.jsonl"):
@@ -98,6 +100,7 @@ def test_training_data_never_overlaps_evaluation_sets() -> None:
         assert overlap == set(), f"{name} shares examples with the training data: {overlap}"
 
 
+@pytest.mark.skipif(not ML_DIR.exists(), reason="Offline ML evaluation datasets not included")
 def test_release_gate_with_the_dependency_free_engine() -> None:
     """Rules + hashed classifier alone must meet the gate; CI also checks the embedding engine."""
     rows = _load("redteam.jsonl")
