@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { BreathingOrb } from '@/components/BreathingOrb';
 import { Bezel } from '@/components/ui/Bezel';
 import { Button } from '@/components/ui/Button';
+import { VoiceCard } from '@/features/voice/VoiceCard';
 
 function Timer() {
   const { t } = useTranslation();
@@ -83,6 +84,9 @@ export function WellnessPage() {
           ))}
         </ul>
       </Bezel>
+      <div className="md:col-span-2">
+        <VoiceCard />
+      </div>
       <Bezel coreClassName="p-6">
         <h2 className="mb-3 font-display text-xl font-semibold">{t('wellness.timerTitle')}</h2>
         <Timer />

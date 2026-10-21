@@ -22,6 +22,8 @@ dependencies = [
     "httpx>=0.28,<0.29",
     "reportlab>=4.4",
     "python-multipart>=0.0.20",
+    "librosa>=0.11",
+    "soundfile>=0.13",
 ]
 
 [dependency-groups]
@@ -66,7 +68,7 @@ files = ["app", "tests"]
 exclude = ["app/db/migrations/versions/"]
 
 [[tool.mypy.overrides]]
-module = ["fakeredis.*", "asgi_lifespan.*", "transformers.*", "reportlab.*"]
+module = ["fakeredis.*", "asgi_lifespan.*", "transformers.*", "reportlab.*", "librosa.*", "soundfile.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

@@ -45,6 +45,8 @@ class Settings(BaseSettings):
     safety_classifier: Literal["embedding", "hashed", "none"] = "embedding"
     # Experimental text emotion model (Phase 5); see ml/model_cards/text_emotion.md.
     emotion_enabled: bool = True
+    # Experimental voice check-ins (Phase 10); off unless explicitly enabled.
+    voice_enabled: bool = False
 
     @field_validator("cors_origins", mode="before")
     @classmethod

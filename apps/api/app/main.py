@@ -21,6 +21,7 @@ from app.privacy.router import router as privacy_router
 from app.reports.router import router as reports_router
 from app.safety import engine as safety_engine
 from app.safety.router import router as safety_router
+from app.voice.router import router as voice_router
 
 API_PREFIX = "/api/v1"
 
@@ -72,5 +73,6 @@ def create_app(
     api.include_router(privacy_router)
     api.include_router(reports_router)
     api.include_router(wearables_router)
+    api.include_router(voice_router)
     app.include_router(api)
     return app

@@ -419,5 +419,15 @@
     "needsConsent": "Switch on \"Health data import\" above to use this.",
     "imported_one": "Imported {{count}} day.",
     "imported_other": "Imported {{count}} days."
+  },
+  "voice": {
+    "title": "Voice check-in",
+    "badge": "Experimental",
+    "intro": "Speak for up to 30 seconds about your day. The audio is analysed in memory and never stored. These measures describe how your voice sounded, not how you feel, and are not a measure of depression.",
+    "needsConsent": "Switch on \"Voice check-ins\" in Privacy to use this.",
+    "record": "Start recording",
+    "stop": "Stop and analyse",
+    "micBlocked": "Microphone access was blocked.",
+    "result": "{{seconds}} seconds. Typical pitch {{pitch}} Hz, pauses {{pauses}}% of the time."
   }
 }
